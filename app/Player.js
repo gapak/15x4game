@@ -21,7 +21,7 @@ var Player = {
     money: 0,
     ideas: 0,
 
-    kindness: 70,
+    kindness: 1,
     generosity: 1,
     thoughtfulness: 1,
     innovativeness: 1,

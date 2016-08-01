@@ -12,6 +12,7 @@ function draw_all() {
 
 
     w("volunteers_indicator", Player.volunteers.toFixed(2));
+    w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
 
     var department_html = "";
@@ -79,9 +80,9 @@ function draw_all() {
 
 
     var skill_html = "";
-    ["writing", "drawing", "programming", "management"].forEach(function(skill) {
+    skills.forEach(function(skill) {
         skill_html += '<div class="flex-element flex-container-column" id="' + skill + '">';
-        skill_html += '<span id="' + skill + '_indicator">' + skill.capitalizeFirstLetter() + ': ' + Player[skill].toFixed(2) + '</span>';
+        skill_html += '<span id="' + skill + '_indicator">' + skill.capitalizeFirstLetter() + ': ' + Player[skill].toFixed(2) + '/60</span>';
         skill_html += '<button onclick="Player.selfStudy(\'' + skill + '\')">Self-study</button>';
         skill_html += '<button onclick="Player.books(\'' + skill + '\')">Books</button>';
         skill_html += '<button onclick="Player.work(\'' + skill + '\')">Work</button>';
@@ -93,7 +94,7 @@ function draw_all() {
 
 
     var resources_html = "";
-    ["likes", "design", "money", "ideas"].forEach(function(resource) {
+    resources.forEach(function(resource) {
         resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' +
             Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + '_indicator"></span></div>';
     });
