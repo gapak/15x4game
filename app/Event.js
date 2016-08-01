@@ -2,6 +2,7 @@
 
 var event_counter = 0;
 
+
 function Event(event_number, cost, lectures) {
     this.event_number = event_number;
     this.cost = cost;
@@ -47,30 +48,47 @@ Event.holdEvent = function(event_id) {
     if (Player.withdrawArray(events.db[event_id].cost)) {
         events.db[event_id].lectures.forEach(function(lecture, id, arr) {
             if (!lecture.is_performed) {
-                lecture.is_performed++;
                 Player.will++;
+                Player.revealSecret('will');
+                Player.revealSecret('skills');
             }
+            lecture.is_performed++;
+            Player.action_points += lecture.is_performed;
         });
 
-        Player.revealSecret('will');
-        Player.revealSecret('skills');
         events.db.splice(event_id, 1);
         this.invent();
         draw_all();
     }
 };
 
+
+var canceled_event_counter = 0;
 Event.cancelEvent = function(event_id) {
-    //console.log(event_id);
-    //console.log(events.db);
+    canceled_event_counter++;
+    Player.action_points += canceled_event_counter;
     events.db.splice(event_id, 1);
-    //console.log(events.db);
     this.invent();
-    //console.log(events.db);
     draw_all();
 };
 
-
 Event.invent = function () {
+    if (Player.action_points < 1) {
+        message("Not enough action points.");
+        return false;
+    }
+
     events.db.push(Event.generator());
 };
+
+
+Event.inventButton = function () {
+    if (Player.action_points < 1) {
+        message("Not enough action points.");
+        return false;
+    }
+    Player.action_points--;
+
+    this.invent();
+};
+

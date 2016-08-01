@@ -80,7 +80,7 @@ Gatherer.tick = function () {
   //  if (this.events.ticks < 7 && this.events.ticks + 1 >= 7 ) { badges.achieve("tick 1"); Event.invent(); }
     if (this.events.ticks < 30 && this.events.ticks + 1 >= 30 ) { badges.achieve("tick 1"); Player.revealSecret('upgrade_department'); }
     if (this.events.ticks < 356 && this.events.ticks + 1 >= 356 ) { badges.achieve("tick 2"); Player.revealSecret('cancel_event'); }
-    if (this.events.ticks < 356*100 && this.events.ticks + 1 >= 356*10 ) { badges.achieve("tick 3"); Player.revealSecret('invent'); }
+    if (this.events.ticks < 356*10 && this.events.ticks + 1 >= 356*10 ) { badges.achieve("tick 3"); Player.revealSecret('invent'); }
     if (this.events.ticks < 356*100 && this.events.ticks + 1 >= 356*100 ) { badges.achieve("tick 4"); }
     this.events.ticks++;
 };
