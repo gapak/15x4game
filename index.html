@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15x4 Share Your Knowledge</title>
+
+    <link href="css/all.css" rel="stylesheet" type="text/css" />
+
+    <script language="JavaScript" src="app/scratches.js"></script>
+    <script language="JavaScript" src="app/draw.js"></script>
+
+    <script language="JavaScript" src="app/Gatherer.js"></script>
+    <script language="JavaScript" src="app/Department.js"></script>
+    <script language="JavaScript" src="app/Player.js"></script>
+
+    <script language="JavaScript" src="app/Badge.js"></script>
+    <script language="JavaScript" src="app/badges.db.js"></script>
+
+    <script language="JavaScript" src="app/Startup.js"></script>
+    <script language="JavaScript" src="app/startups.db.js"></script>
+
+    <script language="JavaScript" src="app/Objective.js"></script>
+    <script language="JavaScript" src="app/objectives.db.js"></script>
+
+    <script language="JavaScript" src="app/Action.js"></script>
+    <script language="JavaScript" src="app/actions.db.js"></script>
+
+    <script language="JavaScript" src="app/Event.js"></script>
+    <script language="JavaScript" src="app/events.db.js"></script>
+
+    <script language="JavaScript" src="app/Lecture.js"></script>
+    <script language="JavaScript" src="app/lectures.db.js"></script>
+
+    <script language="JavaScript">
+
+
+
+
+
+    </script>
+
+
+</head>
+<body>
+
+<div class="container " id="welcome_container">
+    <span id="welcome_indicator">
+        You do not have to be a scientist to save the planet. Act wisely, and share your knowledge!
+    </span>
+</div>
+
+
+<div class="container " id="volunteers_container">
+    Volunteers: <span id="volunteers_indicator">0</span>
+    <button class = "init_secret"  id="seek_container" onclick="Player.seek()">Seek the volunteers</button>
+    <div id="volunteers"></div>
+</div>
+
+<div class="container init_secret" id="departments_container">
+    <hr>
+    Departments:
+    <div class="flex-container-row" id="departments">
+    </div>
+</div>
+
+<div class="container init_secret" id="resources_container">
+    <hr>
+    Resources:
+    <div class="flex-container-row" id="resources">
+    </div>
+</div>
+
+<div class="container init_secret" id="events_container">
+    <hr>
+    Events:
+    <button class = "init_secret"  id="invent_container" onclick="Event.invent()">Invent a New Event</button>
+    <div class="flex-container-row" id="events">
+    </div>
+</div>
+
+<div class="container init_secret" id="will_container" title="Points that you spend on the creation itself. They will not be able to get back.">
+    <hr>
+    <div id="your_will">Will: <span id="will_indicator">0</span></div>
+    <button class = "cheat" onclick="tick()">tick</button>
+</div>
+
+<div class="container init_secret" id="skills_container">
+    <hr>
+    Skills:
+    <div class="flex-container-row" id="skills">
+    </div>
+</div>
+
+<div class="container init_secret" id="actions_container">
+    <hr>
+    <div id="your_ap">Action Points: <span id="ap_indicator">0</span></div>
+    Actions:
+    <div id="actions"></div>
+</div>
+
+<div class="container init_secret" id="startups_container">
+    <hr>
+    Startups:
+    <div id="startups"></div>
+</div>
+
+<div class="container init_secret" id="objectives_container">
+    <hr>
+    Objectives:
+    <div id="objectives"></div>
+</div>
+
+<div class="container init_secret" id="badges_container">
+    <hr>
+    Badges:
+    <div id="badges"></div>
+</div>
+
+<div class="container init_secret" id="reputations_container">
+    <hr>
+    Reputation:
+    <div class="flex-container-row" id="reputations"></div>
+</div>
+
+<hr>
+
+
+
+
+
+
+
+<div class="init_secret" id="cancel_event_container"></div>
+<div class="init_secret" id="upgrade_department_container"></div>
+
+
+
+<script language="JavaScript">
+
+draw_all();
+
+var t = setInterval(tick,1000);
+Player.revealSecret('seek');
+events.db.push(Event.generator());
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+
+.cheat {
+    display: none;
+}
+
+.init_secret {
+    display: none;
+}
+
+.flex-container-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-element {
+    flex: 1;
+}

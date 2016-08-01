@@ -1,0 +1,5 @@
+
+
+var events = {};
+
+events.db = [];
