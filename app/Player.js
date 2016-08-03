@@ -5,6 +5,8 @@ var Player = {
     volunteers: 0,
     volunteers_memory: 0,
 
+    culture: 0,
+
     departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
 
     writing: 0,
@@ -30,7 +32,6 @@ var Player = {
 };
 
 Player.seek = function() {
-    this.revealSecret('departments');
     var inflow = 1 / ((0.1 * 0.5 * this.volunteers_memory * this.volunteers_memory) + 1);
 
     if (Math.floor(this.volunteers + inflow) != Math.floor(this.volunteers)) Gatherer.found();
@@ -56,6 +57,14 @@ Player.getUpgradeCostDepartment = function(department) {
     return this.departments[department].getUpgradeCost();
 };
 
+Player.getDepartmentEfficiency = function(department) {
+    return this.departments[department].getEfficiency();
+};
+
+Player.getDepartmentProductivity = function(department) {
+    return this.departments[department].getProductivity();
+};
+
 Player.harvest = function () {
     for (var key in Player.departments) {
         var department = Player.departments[key];
@@ -64,14 +73,6 @@ Player.harvest = function () {
             Player.reward(resources, this.getDepartmentProductivity(key), 1);
         }
     }
-};
-
-Player.getDepartmentEfficiency = function(department) {
-    return this.departments[department].getEfficiency();
-};
-
-Player.getDepartmentProductivity = function(department) {
-    return this.departments[department].getProductivity();
 };
 
 Player.revealSecret = function(secret) {
@@ -108,7 +109,7 @@ Player.learn = function(skill, quantity) {
 };
 
 Player.reward = function(resource, quantity, silent) {
-    if (quantity > 0) { 
+    if (quantity > 0 && resource != 'culture') {
         Player.revealSecret('resources'); 
         Player.revealSecret('events'); 
     }
@@ -124,14 +125,15 @@ Player.reward = function(resource, quantity, silent) {
     draw_all();
 };
 
-Player.withdraw = function(resource, quantity) {
+Player.withdraw = function(resource, quantity, silent) {
     if (this[resource] - quantity < 0) {
         return false;
     }
     this[resource] -= quantity;
-    message("Paid " + quantity.toFixed(2) + " of " + resource);
+    if (!silent) message("Paid " + quantity.toFixed(2) + " of " + resource);
     Gatherer.decrease(resource, quantity);
     draw_all();
+    return true;
 };
 
 Player.paid = function(resource, quantity) {
@@ -140,8 +142,6 @@ Player.paid = function(resource, quantity) {
     Gatherer.decrease(resource, quantity);
     draw_all();
 };
-
-
 
 Player.withdrawArray = function(array) {
   //  console.log(array);

@@ -14,6 +14,41 @@ function draw_all() {
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
+    w("culture_indicator", Player.culture.toFixed(2));
+
+    var culture_html = "";
+    for (var key in Civilization.buildings) {
+
+        var building = Civilization.buildings[key];
+        culture_html += '<div class="flex-element flex-container-row" id="' + key + '">';
+        culture_html += '<div class="flex-container-column">' + key.capitalizeFirstLetter() + '</div>';
+
+        if (building.types.indexOf('upgradable') != -1) {
+            culture_html += '<div class="' + secret_class + '">';
+            culture_html += ': <span id="' + key + 'level"> ' + building.level + ' </span>';
+
+            var upgrade_cost = building.getUpgradeCost();
+            for (var resource_name in upgrade_cost) break;
+            var price = upgrade_cost[resource_name];
+
+            culture_html += '<button onclick="Civilization.upgradeBuilding(\'' + key + '\');">Up: ' + price.toFixed(2) + ' ' + resource_name + ' </button>';
+            culture_html += '</div>';
+        }
+
+
+        if (building.types.indexOf('maintainable') != -1) {
+            culture_html += '<div>';
+            culture_html += 'Workers: <span id="' + key + '_volunteers"> ' + building.workers + '/' + (Civilization.buildings.teamwork.level+1) + '</span>';
+            culture_html += '<button class = "" onclick="Civilization.increaseBuilding(\'' + key + '\');">+</button>';
+            culture_html += '<button class = "" onclick="Civilization.decreaseBuilding(\'' + key + '\');">-</button>';
+            culture_html += '</div>';
+        }
+
+        culture_html += '</div>';
+    }
+    w("culture", culture_html);
+
+
 
     var department_html = "";
     for (var key in Player.departments) {
@@ -32,7 +67,7 @@ function draw_all() {
         department_html += '<button onclick="Player.upgradeDepartment(\'' + key + '\');">Up: ' + price.toFixed(2) + ' ' + resource_name + ' </button>';
         department_html += '</div>';
         department_html += '<div>';
-        department_html += 'Workers: <span id="' + key + '_volunteers"> ' + department.workers + ' </span>';
+        department_html += 'Workers: <span id="' + key + '_volunteers"> ' + department.workers + '/' + (Civilization.buildings.teamwork.level+1) + ' </span>';
         department_html += '<button class = "" onclick="Player.increaseDepartment(\'' + key + '\');">+</button>';
         department_html += '<button class = "" onclick="Player.decreaseDepartment(\'' + key + '\');">-</button>';
         department_html += '</div>';

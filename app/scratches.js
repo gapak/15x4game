@@ -55,5 +55,6 @@ function tick() {
     message("A new day.");
     Player.harvest();
     Gatherer.tick();
+    Civilization.tick();
     draw_all();
 }

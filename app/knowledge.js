@@ -13,3 +13,5 @@ var resources_limits = {'likes': 2000, 'design': 200, 'money': 20, 'ideas': 2};
 
 
 
+var culture_rate = 1;
+
