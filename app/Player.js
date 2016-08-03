@@ -110,19 +110,21 @@ Player.learn = function(skill, quantity) {
 };
 
 Player.reward = function(resource, quantity, silent) {
-    if (quantity > 0 && resource != 'culture') {
+    if (quantity > 0 && resource != 'culture') { 
         Player.revealSecret('resources'); 
         Player.revealSecret('events'); 
-    }
+    } else return false;
+
+    var limited_quantity = Math.min(quantity, resources_limits[resource] - this[resource]);
 
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
     if(this[resource] < this.getLimit(resource)) {
-        this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);;
+        this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
     }   
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
-    Gatherer.increaseResource(resource, quantity);
+    Gatherer.increaseResource(resource, limited_quantity);
     draw_all();
 };
 

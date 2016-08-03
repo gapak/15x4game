@@ -175,7 +175,7 @@ function draw_all() {
         objectives_html += objective.label + '. "' + objective.text + '"' + " [";
         
         for (var key in objective.cost) {
-            objectives_html += key + ": " + objective.cost[key] +",";
+            objectives_html += key + ": " + objective.cost[key];
         }
         objectives_html += '] </span></div>';
     });
