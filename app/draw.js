@@ -131,7 +131,8 @@ function draw_all() {
     var resources_html = "";
     resources.forEach(function(resource) {
         resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' +
-            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + '_indicator"></span></div>';
+            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + 
+            '_indicator"><span class = "resource_limit">/' + resources_limits[resource] + '</span></span></div>';
     });
     w("resources", resources_html);
 
