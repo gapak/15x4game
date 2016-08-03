@@ -51,6 +51,7 @@ Event.holdEvent = function(event_id) {
                 Player.will++;
                 Player.revealSecret('will');
                 Player.revealSecret('skills');
+                Player.revealSecret('education');
             }
             lecture.is_performed++;
             Player.action_points += lecture.is_performed;

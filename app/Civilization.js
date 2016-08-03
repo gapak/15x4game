@@ -4,10 +4,10 @@ var Civilization = {
     global_bonus: 0,
 
     buildings: {
-        teamwork: new Building('teamwork', ['upgradable'], 1.4, 'culture', function(){return 1;}, culture_rate),
-        sharing: new Building('sharing', [], 1.4, 'culture', function(){return 1;}, culture_rate),
-        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 1;}, culture_rate),
-        education: new Building('education', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 1;}, culture_rate)
+        teamwork: new Building('teamwork', ['upgradable'], 1.4, 'culture', function(){return 1;}, culture_rate, "Expands the maximum size of the teams."),
+        sharing: new Building('sharing', ['upgradable'], 1.1, 'culture', function(){return 1;}, culture_rate, "Expands maximum storage size."),
+        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.3, 'culture', function(){return 1;}, culture_rate, "Give a global production bonus, consuming culture."),
+        education: new Building('education', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your will, consuming culture.")
     }
 };
 
@@ -15,12 +15,15 @@ var Civilization = {
 Civilization.tick = function() {
   //  console.log(Player, Civilization);
 
-    Player.reward('culture', (1+(this.global_bonus / 100)) * Player.volunteers * 0.01, 1);
+
+    Player.culture_rate = (1+(this.global_bonus / 100)) * Player.volunteers * 0.01;
+    Player.reward('culture', Player.culture_rate, 1);
 
     if (Civilization.buildings.motivation.workers > 0 &&
         Player.withdraw('culture', Civilization.buildings.motivation.workers * 0.01, 1)) {
     //    message('bonus!');
-        this.global_bonus = Civilization.buildings.motivation.workers * (1 + (0.1 * Civilization.buildings.motivation.level));
+        Player.culture_rate -= Civilization.buildings.motivation.workers * 0.01;
+        this.global_bonus = Civilization.buildings.motivation.getEfficiency(); // .workers * (1 + (0.1 * Civilization.buildings.motivation.level));
     }
     else {
      //   message('minus!');
@@ -29,7 +32,8 @@ Civilization.tick = function() {
 
     if (Civilization.buildings.education.workers > 0 &&
         Player.withdraw('culture', Civilization.buildings.education.workers * 0.01, 1)) {
-        Player.will += (1 + (0.1 * Civilization.buildings.motivation.level)) * 0.01 * 1 / (1+ (Player.writing + Player.drawing + Player.programming + Player.management + 2*Player.will));
+        Player.culture_rate -= Civilization.buildings.education.workers * 0.01;
+        Player.will += Civilization.buildings.education.getEfficiency() * 1 / (1+ (Player.writing + Player.drawing + Player.programming + Player.management + 2*Player.will));
     }
 
 };
