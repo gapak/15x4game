@@ -48,10 +48,10 @@ Event.holdEvent = function(event_id) {
     if (Player.withdrawArray(events.db[event_id].cost)) {
         events.db[event_id].lectures.forEach(function(lecture, id, arr) {
             if (!lecture.is_performed) {
-                Player.will++;
-                Player.revealSecret('will');
+                Player.knowledge++;
+                Player.revealSecret('knowledge');
                 Player.revealSecret('skills');
-                Player.revealSecret('education');
+            //    Player.revealSecret('education');
             }
             lecture.is_performed++;
             Player.action_points += lecture.is_performed;

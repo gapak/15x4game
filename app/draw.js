@@ -114,7 +114,7 @@ function draw_all() {
     
     
     
-    w("will_indicator", Player.will.toFixed(2));
+    w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));
 
 
