@@ -81,9 +81,9 @@ Player.revealSecret = function(secret) {
     }
 };
 
-Player.checkReputation = function(reputation) {
+Player.checkReputation = function(reputation, silent) {
     if (random(0, 100) < this[reputation]) {
-        message({
+        if (!silent) message({
             "kindness": "Affected your kindness, you refuse to take payment. You will have to take these resources for free.",
             "generosity": "The fame of your generosity reaches many. You give twice as much resources.",
             "thoughtfulness": "Thoughtfulness led to enlightenment. Knowledge came looking for you.",
@@ -110,7 +110,7 @@ Player.learn = function(skill, quantity) {
 Player.reward = function(resource, quantity, silent) {
     if (quantity > 0) { this.revealSecret('resources'); Player.revealSecret('events'); }
 
-    if (this.checkReputation('generosity')) quantity *= 2;
+    if (this.checkReputation('generosity', silent)) quantity *= 2;
 
     this[resource] += quantity;
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
