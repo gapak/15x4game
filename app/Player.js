@@ -110,12 +110,13 @@ Player.learn = function(skill, quantity) {
 };
 
 Player.reward = function(resource, quantity, silent) {
-    if (quantity > 0 && resource != 'culture') { 
+    if (quantity < 0) return false;
+    if (resource != 'culture') {
         Player.revealSecret('resources'); 
         Player.revealSecret('events'); 
-    } else return false;
+    } 
 
-    var limited_quantity = Math.min(quantity, resources_limits[resource] - this[resource]);
+    var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
 
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
