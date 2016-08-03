@@ -11,3 +11,5 @@ var resources_rates = {'likes': 1000, 'design': 100, 'money': 10, 'ideas': 1};
 
 
 
+var culture_rate = 1;
+
