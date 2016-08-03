@@ -1,12 +1,18 @@
 
-function Department(name) {
+
+var buildings = {};
+buildings.db = [];
+
+function Building(name, types, price_ratio, price_resource, multiplying_formula, base_rate) {
     this.name = name;
+    this.types = types; // [] of: simple, upgradable, maintainable
+    this.price_ratio = price_ratio;
+    this.price_resource = price_resource;
+    this.multiplying_formula = multiplying_formula; // function() { return (1 + (Player[this.multiplying_skill] / 60); }
+    this.base_rate = base_rate;
+
     this.workers = 0;
     this.level = 0;
-
-    this.multiplying_skill = {'smm': 'writing', 'design': 'drawing', 'site': 'programming', 'docs': 'management'}[this.name];
-    this.base_resource = {'smm': 'likes', 'design': 'design', 'site': 'money', 'docs': 'ideas'}[this.name];
-    this.base_rate = resources_rates[this.base_resource];
 
     this.increase = function() {
         if (Player.volunteers < 1) {
@@ -25,7 +31,7 @@ function Department(name) {
             Player.volunteers++;
             this.workers--;
             draw_all();
-        //    message('One volunteer from the Department of ' + this.name + ' was released.');
+            //    message('One volunteer from the Department of ' + this.name + ' was released.');
         }
         else {
             message('Not enough volunteers in department');
@@ -41,21 +47,20 @@ function Department(name) {
 
     this.getUpgradeCost = function() {
         var cost = {};
-      //  cost[this.base_resource] = Math.pow(this.base_rate + (this.level * 0.1 * this.base_rate) , ((this.level*0.1) + 1));
-        cost[this.base_resource] = this.base_rate * (1 + Math.pow(this.level, 1.5));
+     //   console.log(this.price_resource, this.base_rate, this.level, this.price_ratio)
+        cost[this.price_resource] = this.base_rate * (1 + Math.pow(this.level, this.price_ratio));
         return cost;
     };
 
     this.getEfficiency = function() {
-        return (1+(Civilization.global_bonus / 100)) * this.workers * (1 + (0.1 * this.level)) * (1 + (Player[this.multiplying_skill] / 60));
+        return this.workers * (1 + (0.1 * this.level)) * this.multiplying_formula();
     };
 
     this.getProductivity = function() {
         var adjustment = 10 / 60 / 60;
-     //   console.log(this.name, rate, adjustment);
+        //   console.log(this.name, rate, adjustment);
         return this.getEfficiency() * this.base_rate * adjustment;
     };
-
 
     return this;
 }
