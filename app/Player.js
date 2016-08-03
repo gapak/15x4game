@@ -33,7 +33,7 @@ var Player = {
 };
 
 Player.seek = function() {
-    var inflow = 1 / ((0.1 * 0.5 * this.volunteers_memory * this.volunteers_memory) + 1);
+    var inflow = 1 / ((0.1 * 0.01 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
 
     if (Math.floor(this.volunteers + inflow) != Math.floor(this.volunteers)) Gatherer.found();
 
