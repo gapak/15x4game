@@ -108,11 +108,17 @@ Player.learn = function(skill, quantity) {
 };
 
 Player.reward = function(resource, quantity, silent) {
-    if (quantity > 0) { this.revealSecret('resources'); Player.revealSecret('events'); }
+    if (quantity > 0) { 
+        Player.revealSecret('resources'); 
+        Player.revealSecret('events'); 
+    }
 
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
-    this[resource] += quantity;
+    if(this[resource] < resources_limits[resource]) {
+        this[resource] += Math.min(quantity, resources_limits[resource] - this[resource]);;
+    }   
+
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
     Gatherer.increaseResource(resource, quantity);
     draw_all();
@@ -142,7 +148,7 @@ Player.withdrawArray = function(array) {
 
     var cost_checked = 1;
     for (var key in array) {
-        if (!(Player[key] > array[key])) {
+        if (!(Player[key] >= array[key])) {
             cost_checked = 0;
             message("Not enough " + key + ".");
         }
