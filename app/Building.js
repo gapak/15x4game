@@ -3,13 +3,14 @@
 var buildings = {};
 buildings.db = [];
 
-function Building(name, types, price_ratio, price_resource, multiplying_formula, base_rate) {
+function Building(name, types, price_ratio, price_resource, multiplying_formula, base_rate, text) {
     this.name = name;
     this.types = types; // [] of: simple, upgradable, maintainable
     this.price_ratio = price_ratio;
     this.price_resource = price_resource;
     this.multiplying_formula = multiplying_formula; // function() { return (1 + (Player[this.multiplying_skill] / 60); }
     this.base_rate = base_rate;
+    this.text = text;
 
     this.workers = 0;
     this.level = 0;

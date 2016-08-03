@@ -15,12 +15,17 @@ function draw_all() {
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
     w("culture_indicator", Player.culture.toFixed(2));
+    w("culture_rate_indicator", Player.culture_rate.toFixed(2));
 
     var culture_html = "";
     for (var key in Civilization.buildings) {
 
         var building = Civilization.buildings[key];
-        culture_html += '<div class="flex-element flex-container-row" id="' + key + '">';
+
+     //   console.log(building, Player.found_secrets.indexOf(building.name));
+
+        var secret_class = (Player.found_secrets.indexOf(building.name) == -1) ? " init_secret " : "";
+        culture_html += '<div class="flex-element flex-container-row' + secret_class + '" id="' + key + '_container">';
         culture_html += '<div class="flex-container-column">' + key.capitalizeFirstLetter() + '</div>';
 
         if (building.types.indexOf('upgradable') != -1) {
@@ -35,16 +40,15 @@ function draw_all() {
             culture_html += '</div>';
         }
 
-
         if (building.types.indexOf('maintainable') != -1) {
             culture_html += '<div>';
             culture_html += 'Workers: <span id="' + key + '_volunteers"> ' + building.workers + '/' + (Civilization.buildings.teamwork.level+1) + '</span>';
-            culture_html += '<button class = "" onclick="Civilization.increaseBuilding(\'' + key + '\');">+</button>';
-            culture_html += '<button class = "" onclick="Civilization.decreaseBuilding(\'' + key + '\');">-</button>';
-            culture_html += '</div>';
+            culture_html += '<button class = "" onclick="Civilization.increaseBuilding(\'' + key + '\');"> + </button>';
+            culture_html += '<button class = "" onclick="Civilization.decreaseBuilding(\'' + key + '\');"> - </button>';
+            culture_html += ' </div> ';
         }
 
-        culture_html += '</div>';
+        culture_html += building.text + ' </div>';
     }
     w("culture", culture_html);
 
@@ -132,7 +136,7 @@ function draw_all() {
     resources.forEach(function(resource) {
         resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' +
             Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + 
-            '_indicator"><span class = "resource_limit">/' + resources_limits[resource] + '</span></span></div>';
+            '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span></div>';
     });
     w("resources", resources_html);
 

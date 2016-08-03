@@ -6,6 +6,7 @@ var Player = {
     volunteers_memory: 0,
 
     culture: 0,
+    culture_rate: 0,
 
     departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
 
@@ -116,13 +117,19 @@ Player.reward = function(resource, quantity, silent) {
 
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
-    if(this[resource] < resources_limits[resource]) {
-        this[resource] += Math.min(quantity, resources_limits[resource] - this[resource]);;
+    if(this[resource] < this.getLimit(resource)) {
+        this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);;
     }   
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
     Gatherer.increaseResource(resource, quantity);
     draw_all();
+};
+
+Player.getLimit = function (resource) {
+    if (resources.indexOf(resource) == -1) return Infinity;
+
+    return resources_base_limits[resource] * (1 + (Civilization.buildings.sharing.level * 0.1));
 };
 
 Player.withdraw = function(resource, quantity, silent) {

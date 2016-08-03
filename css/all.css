@@ -3,10 +3,6 @@
     display: none;
 }
 
-.init_secret {
-    display: none;
-}
-
 .flex-container-column {
     display: flex;
     flex-direction: column;
@@ -19,4 +15,8 @@
 
 .flex-element {
     flex: 1;
+}
+
+.init_secret {
+    display: none;
 }
