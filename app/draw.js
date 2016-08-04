@@ -134,9 +134,31 @@ function draw_all() {
 
     var resources_html = "";
     resources.forEach(function(resource) {
-        resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' +
-            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + 
-            '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span></div>';
+        resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' + 
+            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span>';
+
+        var sb = Storages.buildings;  
+
+        resources_html +='<div>' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level + 
+            '<button onclick="Storages.upgradeBuilding(1, \'' + resource + '\')">Up1: ' + 
+            Storages.getUpgradeCostBuilding(1, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        resources_html +='<div>' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level + 
+            '<button onclick="Storages.upgradeBuilding(2, \'' + resource + '\')">Up2: ' + 
+            Storages.getUpgradeCostBuilding(2, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        resources_html +='<div>' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level + 
+            '<button onclick="Storages.upgradeBuilding(3, \'' + resource + '\')">Up3: ' + 
+            Storages.getUpgradeCostBuilding(3, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        resources_html +='<div>' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level + 
+            '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
+            Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+        resources_html += '</div>';    
+
+
+
+
     });
     w("resources", resources_html);
 

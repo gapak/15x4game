@@ -132,7 +132,12 @@ Player.reward = function(resource, quantity, silent) {
 Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
-    return resources_base_limits[resource] * (1 + (Civilization.buildings.sharing.level * 0.1));
+    storege_t1 = Storages.buildings.tier1[resource].level * resources_rates[resource];
+    storege_t2 = Storages.buildings.tier2[resource].level * 2 * resources_rates[resource];
+    storege_t3 = Storages.buildings.tier3[resource].level * 3 * resources_rates[resource];
+    storege_t4 = Storages.buildings.tier4[resource].level * 4 * resources_rates[resource];
+
+    return (resources_base_limits[resource] + storege_t1 + storege_t2 + storege_t3 + storege_t4) * (1 + (Civilization.buildings.sharing.level * 0.1));
 };
 
 Player.withdraw = function(resource, quantity, silent) {
