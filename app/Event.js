@@ -17,7 +17,7 @@ Event.generator = function () {
     var first = Math.random();
     var second = Math.random();
 
-    var price_of_responsibility = (event_counter) ? Math.pow(1 + 0.2 * event_counter,  Math.pow(1 + event_counter/60, 1 + (4/event_counter))) : 1;
+    var price_of_responsibility = (event_counter) ? Math.pow(1 + 0.3 * event_counter,  Math.pow(1 + event_counter/60, 1 + (4/event_counter))) : 1;
 
 
     var cardinalities = {

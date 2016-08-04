@@ -5,8 +5,8 @@ var Civilization = {
 
     buildings: {
         teamwork: new Building('teamwork', ['upgradable'], 1.4, 'culture', function(){return 1;}, culture_rate, "Expands the maximum size of the teams."),
-        sharing: new Building('sharing', ['upgradable'], 1.1, 'culture', function(){return 1;}, culture_rate, "Expands maximum storage size."),
-        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.3, 'culture', function(){return 1;}, culture_rate, "Give a global production bonus, consuming culture."),
+        sharing: new Building('sharing', ['upgradable'], 1.6, 'culture', function(){return 1;}, culture_rate, "Expands maximum storage size."),
+        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 1;}, culture_rate, "Give a global production bonus, consuming culture."),
         education: new Building('education', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your knowledge, consuming culture.")
     }
 };
@@ -34,7 +34,9 @@ Civilization.tick = function() {
         Player.withdraw('culture', Civilization.buildings.education.workers * 0.01, 1)) {
         Player.culture_rate -= Civilization.buildings.education.workers * 0.01;
         Player.revealSecret('knowledge');
-        Player.knowledge += Civilization.buildings.education.getEfficiency() * 1 / (1+ (Player.writing + Player.drawing + Player.programming + Player.management + 2*Player.knowledge));
+        var knowledge240 = Civilization.buildings.education.getEfficiency() * 1 / (1 + 5*(Player.writing + Player.drawing + Player.programming + Player.management + 2*Player.knowledge));
+        var knowledge60 = 1; // Civilization.buildings.education.getEfficiency() * 0.1 / (1 + 4 * Math.max(Player.writing, Player.drawing, Player.programming, Player.management, Player.knowledge));
+        Player.knowledge += Math.min(knowledge240, knowledge60);
     }
 
 };

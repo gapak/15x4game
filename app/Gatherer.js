@@ -70,8 +70,8 @@ Gatherer.search = function () { // ?
 
 Gatherer.found = function () {
     if (this.events.found < 15 && this.events.found + 1 >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('departments'); }
-    if (this.events.found < 30 && this.events.found + 1 >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('motivation'); }
-    if (this.events.found < 45 && this.events.found + 1 >= 45) { badges.achieve("volunteers 3"); }
+    if (this.events.found < 30 && this.events.found + 1 >= 30) { badges.achieve("volunteers 2"); }
+    if (this.events.found < 45 && this.events.found + 1 >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
     if (this.events.found < 60 && this.events.found + 1 >= 60) { badges.achieve("volunteers 4"); }
     this.events.found++;
 };
