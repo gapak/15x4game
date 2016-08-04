@@ -13,4 +13,3 @@ var resources_base_limits = {'likes': 10000, 'design': 1000, 'money': 100, 'idea
 
 var culture_rate = 1;
 
-
