@@ -139,19 +139,23 @@ function draw_all() {
 
         var sb = Storages.buildings;  
 
-        resources_html +='<div>' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level + 
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_1') == -1) ? "init_secret" : "";
+        resources_html +='<div class="' + secret_class + '" id="sold_for_' + resource + '_1_container">' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level + 
             '<button onclick="Storages.upgradeBuilding(1, \'' + resource + '\')">Up1: ' + 
             Storages.getUpgradeCostBuilding(1, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
 
-        resources_html +='<div>' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level + 
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_2') == -1) ? "init_secret" : "";
+        resources_html +='<div class="' + secret_class + '">' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level + 
             '<button onclick="Storages.upgradeBuilding(2, \'' + resource + '\')">Up2: ' + 
             Storages.getUpgradeCostBuilding(2, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
 
-        resources_html +='<div>' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level + 
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_3') == -1) ? "init_secret" : "";
+        resources_html +='<div class="' + secret_class + '">' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level + 
             '<button onclick="Storages.upgradeBuilding(3, \'' + resource + '\')">Up3: ' + 
             Storages.getUpgradeCostBuilding(3, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
 
-        resources_html +='<div>' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level + 
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_4') == -1) ? "init_secret" : "";
+        resources_html +='<div class="' + secret_class + '">' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level + 
             '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
             Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
         resources_html += '</div>';    
