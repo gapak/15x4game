@@ -79,7 +79,11 @@ Player.harvest = function () {
 Player.revealSecret = function(secret) {
     if (this.found_secrets.indexOf(secret) == -1) {
         this.found_secrets.push(secret);
-        document.getElementById(secret + '_container').style.display = 'block';
+        var secret_container = document.getElementById(secret + '_container');
+        if (secret_container) {
+            secret_container.style.display = 'block';
+        }
+        //document.getElementById(secret + '_container').style.display = 'block';
     }
 };
 
@@ -132,7 +136,12 @@ Player.reward = function(resource, quantity, silent) {
 Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
-    return resources_base_limits[resource] * (1 + (Civilization.buildings.sharing.level * 0.1));
+    storege_t1 = Storages.buildings.tier1[resource].level * resources_rates[resource];
+    storege_t2 = Storages.buildings.tier2[resource].level * resources_rates[resource];
+    storege_t3 = Storages.buildings.tier3[resource].level * resources_rates[resource];
+    storege_t4 = Storages.buildings.tier4[resource].level * resources_rates[resource];
+
+    return (resources_base_limits[resource] + storege_t1 + storege_t2 + storege_t3 + storege_t4) * (1 + (Civilization.buildings.sharing.level * 0.1));
 };
 
 Player.withdraw = function(resource, quantity, silent) {

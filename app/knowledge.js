@@ -12,3 +12,4 @@ var resources_rates = {'likes': 1000, 'design': 100, 'money': 10, 'ideas': 1};
 var resources_base_limits = {'likes': 10000, 'design': 1000, 'money': 100, 'ideas': 10};
 
 var culture_rate = 1;
+
