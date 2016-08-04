@@ -1,9 +1,3 @@
-
-
-
-
-
-
 function draw_all() {
     function w(element_id, text) {
         //    message("w("+element_id+", "+text+")");
@@ -87,7 +81,23 @@ function draw_all() {
 
     
     var events_html = "";
+    window.new_lections = 0;
+    window.done_lections = 0;
+    
+    function getNewAndDoneLections() {
+        window.lectures.db.forEach(function(lecture){
+           if (lecture.is_performed == 0) {
+               new_lections++;
+           } else  {
+               done_lections++;
+           }
+        });
+    }
+    
+    getNewAndDoneLections();
+    
     events.db.forEach(function (event, id) {
+        
         events_html += '<div class="flex-element">';
         events_html += '<button id="hold_event_container" onclick="Event.holdEvent(\'' + id + '\')">Hold Event</button>';
         var secret_class = (Player.found_secrets.indexOf("cancel_event") == -1) ? "init_secret" : "";
@@ -100,15 +110,16 @@ function draw_all() {
         }
         events_html += '</div>';
 
-        events_html += 'Lectures:';
+        events_html += '<span title="New lection give you 1 knowledge point"> Lectures (' + window.done_lections + '/' + window.new_lections + ') :</span>';
         event.lectures.forEach(function (lecture) {
             events_html += '<div class="event_element">';
-            var lecture_badge = lecture.is_performed ? '' : 'Новая! ';
+            var lecture_badge = lecture.is_performed ? '' : 'New!';
             events_html += '<span class="lecture_name" title="' + lecture.text + '">' + lecture_badge + '' + lecture.name + '.</span>';
             events_html += '</div>';
         });
         events_html += '</div>';
     });
+
     w("events", events_html);
     
     
