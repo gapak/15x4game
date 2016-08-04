@@ -68,12 +68,12 @@ Gatherer.search = function () { // ?
     this.events.search++;
 };
 
-Gatherer.found = function () {
-    if (this.events.found < 15 && this.events.found + 1 >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); }
-    if (this.events.found < 30 && this.events.found + 1 >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
-    if (this.events.found < 45 && this.events.found + 1 >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
-    if (this.events.found < 60 && this.events.found + 1 >= 60) { badges.achieve("volunteers 4"); }
-    this.events.found++;
+Gatherer.found = function (inflow) {
+    if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); }
+    if (Player.volunteers_memory < 30 && Player.volunteers_memory + inflow >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
+    if (Player.volunteers_memory < 45 && Player.volunteers_memory + inflow >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
+    if (Player.volunteers_memory < 60 && Player.volunteers_memory + inflow >= 60) { badges.achieve("volunteers 4"); }
+
 };
 
 Gatherer.tick = function () {

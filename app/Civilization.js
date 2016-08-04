@@ -37,7 +37,7 @@ Civilization.tick = function() {
         var new_volunteers = Civilization.buildings.popularization.getEfficiency() * 100 / Math.pow(Player.volunteers_memory, 2);
         Player.volunteers += new_volunteers;
         Player.volunteers_memory += new_volunteers;
-        if (Math.floor(Player.volunteers_memory + new_volunteers) != Math.floor(Player.volunteers_memory)) Gatherer.found();
+        Gatherer.found(new_volunteers);
     }
 
     if (Civilization.buildings.education.workers > 0 &&
