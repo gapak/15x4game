@@ -35,7 +35,7 @@ var Player = {
 Player.seek = function() {
     var inflow = 1 / ((0.1 * 0.1 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
 
-    if (Math.floor(this.volunteers + inflow) != Math.floor(this.volunteers)) Gatherer.found();
+    if (Math.floor(this.volunteers_memory + inflow) != Math.floor(this.volunteers_memory)) Gatherer.found();
 
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
@@ -47,6 +47,7 @@ Player.shareKnowledge = function() {
         this.knowledge--;
         this.volunteers++;
         this.volunteers_memory++;
+        Gatherer.found();
         message("You share knowledge and found a volunteer.");
     }
     else {

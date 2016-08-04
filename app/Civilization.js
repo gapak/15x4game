@@ -17,7 +17,7 @@ Civilization.tick = function() {
   //  console.log(Player, Civilization);
 
 
-    Player.culture_rate = (1+(this.global_bonus / 100)) * Player.volunteers * 0.01;
+    Player.culture_rate = (1+(this.global_bonus / 100)) * Player.volunteers * 0.1;
     Player.reward('culture', Player.culture_rate, 1);
 
     if (Civilization.buildings.motivation.workers > 0 &&
@@ -34,10 +34,10 @@ Civilization.tick = function() {
     if (Civilization.buildings.popularization.workers > 0 &&
         Player.withdraw('culture', Civilization.buildings.popularization.workers * 0.01, 1)) {
 
-        var new_volunteers = Civilization.buildings.popularization.getEfficiency() * 10 / Player.volunteers_memory;
+        var new_volunteers = Civilization.buildings.popularization.getEfficiency() * 100 / Math.pow(Player.volunteers_memory, 2);
         Player.volunteers += new_volunteers;
         Player.volunteers_memory += new_volunteers;
-        if (Math.floor(Player.volunteers + new_volunteers) != Math.floor(Player.volunteers)) Gatherer.found();
+        if (Math.floor(Player.volunteers_memory + new_volunteers) != Math.floor(Player.volunteers_memory)) Gatherer.found();
     }
 
     if (Civilization.buildings.education.workers > 0 &&
