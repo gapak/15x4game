@@ -3,17 +3,17 @@ var actions = {};
 actions.db = [
 
     // learn
-    new Action("Work hard", "One will, one job.", ["learn 1"], function () {
-        if (Player.will >= 1) { Player.will--; Player.reward("money", 100); } else { message("Not enough will."); }
+    new Action("Work hard", "One knowledge, one job.", ["learn 1"], function () {
+        if (Player.knowledge >= 1) { Player.knowledge--; Player.reward("money", 100); } else { message("Not enough knowledge."); }
     }),
     new Action("Search ideas", "All day on their feet.", ["learn 2"], function () {
-        if (Player.will >= 10) { Player.will -= 10; Player.reward("ideas", 1); } else { message("Not enough will."); }
+        if (Player.knowledge >= 10) { Player.knowledge -= 10; Player.reward("ideas", 1); } else { message("Not enough knowledge."); }
     }),
     new Action("Draw design", "Try to play with the square shape.", ["learn 3"], function () {
-        if (Player.will >= 1) { Player.will--; Player.reward("design", 1); } else { message("Not enough will."); }
+        if (Player.knowledge >= 1) { Player.knowledge--; Player.reward("design", 1); } else { message("Not enough knowledge."); }
     }),
     new Action("Collect likes", "Hey, look at me, do as I do!", ["learn 4"], function () {
-        if (Player.will >= 1) { Player.will--; Player.reward("likes", 10); } else { message("Not enough will."); }
+        if (Player.knowledge >= 1) { Player.knowledge--; Player.reward("likes", 10); } else { message("Not enough knowledge."); }
     }),
 
     // writing

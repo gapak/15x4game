@@ -15,8 +15,8 @@ var Player = {
     programming: 0,
     management: 0,
 
-    will: 0,
-    max_will: 0, // ?)
+    knowledge: 0,
+    max_knowledge: 0, // ?)
     action_points: 0,
 
     likes: 0,
@@ -33,7 +33,7 @@ var Player = {
 };
 
 Player.seek = function() {
-    var inflow = 1 / ((0.1 * 0.5 * this.volunteers_memory * this.volunteers_memory) + 1);
+    var inflow = 1 / ((0.1 * 0.01 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
 
     if (Math.floor(this.volunteers + inflow) != Math.floor(this.volunteers)) Gatherer.found();
 
@@ -86,7 +86,7 @@ Player.revealSecret = function(secret) {
 Player.checkReputation = function(reputation, silent) {
     if (random(0, 100) < this[reputation]) {
         if (!silent) message({
-            "kindness": "Affected your kindness, you refuse to take payment. You will have to take these resources for free.",
+            "kindness": "Affected your kindness, you refuse to take payment. You knowledge have to take these resources for free.",
             "generosity": "The fame of your generosity reaches many. You give twice as much resources.",
             "thoughtfulness": "Thoughtfulness led to enlightenment. Knowledge came looking for you.",
             "innovativeness": "Thanks to your innovative thinking, you can make twice as much experience."
@@ -114,7 +114,7 @@ Player.reward = function(resource, quantity, silent) {
     if (resource != 'culture') {
         Player.revealSecret('resources'); 
         Player.revealSecret('events'); 
-    } 
+    }
 
     var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
 
@@ -175,12 +175,12 @@ Player.withdrawArray = function(array) {
 };
 
 Player.selfStudy = function(skill) {
-    if (this.will < 1) {
-        message("You are weak-willed for study.");
+    if (this.knowledge < 1) {
+        message("You are weak-knowledgeed for study.");
         return false;
     }
 
-    if (!this.checkReputation('thoughtfulness')) this.will--;
+    if (!this.checkReputation('thoughtfulness')) this.knowledge--;
 
     message("You studied " + skill + " himself.");
     this.learn(skill, 2 - (2*(this[skill] / 60)) );
@@ -188,22 +188,22 @@ Player.selfStudy = function(skill) {
 };
 
 Player.books = function(skill) {
-    if (this.will < 1) {
-        message("You are weak-willed for reading.");
+    if (this.knowledge < 1) {
+        message("You are weak-knowledgeed for reading.");
         return false;
     }
-    if (!this.checkReputation('thoughtfulness')) this.will--;
+    if (!this.checkReputation('thoughtfulness')) this.knowledge--;
     message("You read book about " + skill + ".");
     this.learn(skill, 2 - (2*(Gatherer.events.learn.books / 60)));
     Gatherer.learn("books");
 };
 
 Player.work = function(skill) {
-    if (this.will < 1) {
-        message("You are weak-willed for the job.");
+    if (this.knowledge < 1) {
+        message("You are weak-knowledgeed for the job.");
         return false;
     }
-    if (!this.checkReputation('thoughtfulness')) this.will--;
+    if (!this.checkReputation('thoughtfulness')) this.knowledge--;
 
     switch(skill) {
         case "writing":
@@ -230,11 +230,11 @@ Player.work = function(skill) {
 };
 
 Player.petProject = function(skill) {
-    if (this.will < 1) {
-        message("You are weak-willed for working.");
+    if (this.knowledge < 1) {
+        message("You are weak-knowledgeed for working.");
         return false;
     }
-    if (!this.checkReputation('thoughtfulness')) this.will--;
+    if (!this.checkReputation('thoughtfulness')) this.knowledge--;
 
     message("You studied " + skill + " working on your pet-project.");
 
