@@ -15,6 +15,7 @@
     <script language="JavaScript" src="app/Civilization.js"></script>
     <script language="JavaScript" src="app/Department.js"></script>
     <script language="JavaScript" src="app/Player.js"></script>
+    <script language="JavaScript" src="app/Storages.js"></script>
 
     <script language="JavaScript" src="app/Badge.js"></script>
     <script language="JavaScript" src="app/badges.db.js"></script>
@@ -62,7 +63,7 @@
 <div class="container init_secret" id="culture_container">
     <hr>
     <div>Civilization</div>
-    <div>Culture: <span id="culture_indicator">0</span></div>
+    <div>Culture: <span id="culture_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
     <div class="flex-container-column" id="culture">
     </div>
 </div>
@@ -77,8 +78,13 @@
 <div class="container init_secret" id="resources_container">
     <hr>
     Resources:
-    <div class="flex-container-row" id="resources">
-    </div>
+    <div class="flex-container-row" id="resources"></div>
+    <button class = "cheat"  id="" onclick="
+    resources_base_limits['likes'] += resources_rates.likes;
+    resources_base_limits['design'] += resources_rates.design;
+    resources_base_limits['money'] += resources_rates.money;
+    resources_base_limits['ideas'] += resources_rates.ideas;
+    ">Extend stores [CHEAT]</button>
 </div>
 
 <div class="container init_secret" id="events_container">
@@ -89,10 +95,10 @@
     </div>
 </div>
 
-<div class="container init_secret" id="will_container" title="Points that you spend on the creation itself. They will not be able to get back.">
+<div class="container init_secret" id="knowledge_container">
     <hr>
-    <div id="your_will">Will: <span id="will_indicator">0</span></div>
-    <button class = "cheat" onclick="tick()">tick</button>
+    <div id="your_knowledge" title="Points that you spend on the creation itself. They knowledge not be able to get back.">Knowledge: <span id="knowledge_indicator">0</span></div>
+    <button class = "" title="Exchange knowledge to volunteer." onclick="Player.shareKnowledge()">Share Your Knowledge</button>
 </div>
 
 <div class="container init_secret" id="skills_container">
@@ -152,6 +158,9 @@ draw_all();
 
 var t = setInterval(tick,1000);
 Player.revealSecret('seek');
+Player.revealSecret('teamwork');
+Player.revealSecret('popularization');
+//Player.revealSecret('motivation');
 events.db.push(Event.generator());
 
 </script>

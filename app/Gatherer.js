@@ -34,8 +34,8 @@ Gatherer.increaseResource = function (resource, value) {
     if (Player[resource] - value < (resources_rates[resource] * 1000) && Player[resource] >= (resources_rates[resource] * 1000)  ) { badges.achieve(resource + " 4"); }
 
     if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); }
-    if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2"); }
-    if (this.events.increase_resource < 10000 && this.events.increase_resource + 1 >= 10000 ) { badges.achieve("resources 3"); }
+    if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2");  Player.revealSecret('objectives'); }
+    if (this.events.increase_resource < 10000 && this.events.increase_resource + 1 >= 10000 ) { badges.achieve("resources 3"); Player.revealSecret('sharing'); }
     if (this.events.increase_resource < 100000 && this.events.increase_resource + 1 >= 100000 ) { badges.achieve("resources 4"); }
 
     this.events.increase_resource++;
@@ -68,17 +68,17 @@ Gatherer.search = function () { // ?
     this.events.search++;
 };
 
-Gatherer.found = function () {
-    if (this.events.found < 15 && this.events.found + 1 >= 15) { badges.achieve("volunteers 1"); }
-    if (this.events.found < 30 && this.events.found + 1 >= 30) { badges.achieve("volunteers 2"); }
-    if (this.events.found < 45 && this.events.found + 1 >= 45) { badges.achieve("volunteers 3"); }
-    if (this.events.found < 60 && this.events.found + 1 >= 60) { badges.achieve("volunteers 4"); }
-    this.events.found++;
+Gatherer.found = function (inflow) {
+    if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); }
+    if (Player.volunteers_memory < 30 && Player.volunteers_memory + inflow >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
+    if (Player.volunteers_memory < 45 && Player.volunteers_memory + inflow >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
+    if (Player.volunteers_memory < 60 && Player.volunteers_memory + inflow >= 60) { badges.achieve("volunteers 4"); }
+
 };
 
 Gatherer.tick = function () {
     if (this.events.ticks < 7 && this.events.ticks + 1 >= 7 ) { badges.achieve("tick 1"); Event.invent(); Player.revealSecret('culture'); }
-    if (this.events.ticks < 30 && this.events.ticks + 1 >= 30 ) { badges.achieve("tick 1");  Player.revealSecret('departments');  }
+    if (this.events.ticks < 30 && this.events.ticks + 1 >= 30 ) { badges.achieve("tick 1");    }
     if (this.events.ticks < 356 && this.events.ticks + 1 >= 356 ) { badges.achieve("tick 2"); Player.revealSecret('upgrade_department'); Player.revealSecret('cancel_event'); }
     if (this.events.ticks < 356*10 && this.events.ticks + 1 >= 356*10 ) { badges.achieve("tick 3"); Player.revealSecret('invent'); }
     if (this.events.ticks < 356*100 && this.events.ticks + 1 >= 356*100 ) { badges.achieve("tick 4"); }

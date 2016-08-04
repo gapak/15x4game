@@ -2152,7 +2152,7 @@ var Modal = (function ($) {
 
     var $target = $(target).one(Event.SHOW, function (showEvent) {
       if (showEvent.isDefaultPrevented()) {
-        // only register focus restorer if modal will actually get shown
+        // only register focus restorer if modal knowledge actually get shown
         return;
       }
 
