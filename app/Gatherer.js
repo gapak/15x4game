@@ -33,9 +33,9 @@ Gatherer.increaseResource = function (resource, value) {
     if (Player[resource] - value < (resources_rates[resource] * 100) && Player[resource] >= (resources_rates[resource] * 100)  ) { badges.achieve(resource + " 3"); }
     if (Player[resource] - value < (resources_rates[resource] * 1000) && Player[resource] >= (resources_rates[resource] * 1000)  ) { badges.achieve(resource + " 4"); }
 
-    if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); Player.revealSecret('sharing'); }
+    if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); }
     if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2");  Player.revealSecret('objectives'); }
-    if (this.events.increase_resource < 10000 && this.events.increase_resource + 1 >= 10000 ) { badges.achieve("resources 3"); }
+    if (this.events.increase_resource < 10000 && this.events.increase_resource + 1 >= 10000 ) { badges.achieve("resources 3"); Player.revealSecret('sharing'); }
     if (this.events.increase_resource < 100000 && this.events.increase_resource + 1 >= 100000 ) { badges.achieve("resources 4"); }
 
     this.events.increase_resource++;
@@ -69,8 +69,8 @@ Gatherer.search = function () { // ?
 };
 
 Gatherer.found = function () {
-    if (this.events.found < 15 && this.events.found + 1 >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('departments'); }
-    if (this.events.found < 30 && this.events.found + 1 >= 30) { badges.achieve("volunteers 2"); }
+    if (this.events.found < 15 && this.events.found + 1 >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); }
+    if (this.events.found < 30 && this.events.found + 1 >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
     if (this.events.found < 45 && this.events.found + 1 >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
     if (this.events.found < 60 && this.events.found + 1 >= 60) { badges.achieve("volunteers 4"); }
     this.events.found++;

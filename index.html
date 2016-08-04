@@ -95,10 +95,10 @@
     </div>
 </div>
 
-<div class="container init_secret" id="knowledge_container" title="Points that you spend on the creation itself. They knowledge not be able to get back.">
+<div class="container init_secret" id="knowledge_container">
     <hr>
-    <div id="your_knowledge">Knowledge: <span id="knowledge_indicator">0</span></div>
-    <button class = "cheat" onclick="tick()">tick</button>
+    <div id="your_knowledge" title="Points that you spend on the creation itself. They knowledge not be able to get back.">Knowledge: <span id="knowledge_indicator">0</span></div>
+    <button class = "" onclick="Player.shareKnowledge()">Share Your Knowledge</button>
 </div>
 
 <div class="container init_secret" id="skills_container">
@@ -159,7 +159,7 @@ draw_all();
 var t = setInterval(tick,1000);
 Player.revealSecret('seek');
 Player.revealSecret('teamwork');
-Player.revealSecret('education');
+Player.revealSecret('popularization');
 //Player.revealSecret('motivation');
 events.db.push(Event.generator());
 

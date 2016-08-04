@@ -33,13 +33,25 @@ var Player = {
 };
 
 Player.seek = function() {
-    var inflow = 1 / ((0.1 * 0.01 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
+    var inflow = 1 / ((0.1 * 0.1 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
 
     if (Math.floor(this.volunteers + inflow) != Math.floor(this.volunteers)) Gatherer.found();
 
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
+};
+
+Player.shareKnowledge = function() {
+    if (this.knowledge >= 1) {
+        this.knowledge--;
+        this.volunteers++;
+        this.volunteers_memory++;
+        message("You share knowledge and found a volunteer.");
+    }
+    else {
+        message("Not enough knowledge.");
+    }
 };
 
 Player.increaseDepartment = function(department) {
