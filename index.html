@@ -188,6 +188,16 @@ Player.revealSecret('communication');
 //Player.revealSecret('motivation');
 events.db.push(Event.generator());
 
+
+if(JSON.parse(localStorage.getItem("Player")) != null) {
+    var savedPlayer = JSON.parse(localStorage.getItem("Player"));
+    console.log("savedPlayer" + savedPlayer);
+
+    Player.volunteers_memory = savedPlayer.volunteers_memory;
+    Player.volunteers = savedPlayer.volunteers_memory;
+
+}
+
 </script>
 
 </body>
