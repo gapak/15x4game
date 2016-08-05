@@ -49,7 +49,10 @@ String.prototype.capitalizeFirstLetter = function() {
 
 function message(text) {
     if(text == "A new day."){LogPanel.day++;}
+    else if (text.includes("Balance ratio")) {}
+    else{LogPanel.message.push(text);}
     console.log(text);
+    console.log(LogPanel.message);
 }
 
 function tick() {

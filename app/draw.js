@@ -262,4 +262,10 @@ function draw_all() {
     });
     w("reputations", reputations_html);
 
+    var log_message_html = "";
+    LogPanel.message.forEach(function (val) {
+        log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + val + '</span></div></li>';
+    });
+    w("log_message", log_message_html);
+
 }
