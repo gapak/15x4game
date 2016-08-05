@@ -4,6 +4,8 @@ var lectures = {};
 
 // ruby -e '(1..60).each { |i| puts "new Lecture(\"#{i}\", \"#{i}\"),\n" }'
 
+lectures.offered = [];
+
 lectures.db = [
     new Lecture("1", "1"),
     new Lecture("2", "2"),
