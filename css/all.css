@@ -20,3 +20,21 @@
 .init_secret {
     display: none;
 }
+
+.collapsar {
+    position: absolute;
+    right:0;
+    top:10;
+}
+
+.container {
+    position: relative;
+}
+
+hr {
+    margin: 3px;
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}

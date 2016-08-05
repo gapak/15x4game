@@ -27,11 +27,22 @@ Gatherer.increaseSkill = function (skill, value) {
 };
 
 Gatherer.increaseResource = function (resource, value) {
-    
-    if (Player[resource] - value < (resources_rates[resource] * 1) && Player[resource] >= (resources_rates[resource] * 1)  ) { badges.achieve(resource + " 1"); }
-    if (Player[resource] - value < (resources_rates[resource] * 10) && Player[resource] >= (resources_rates[resource] * 10)  ) { badges.achieve(resource + " 2"); }
-    if (Player[resource] - value < (resources_rates[resource] * 100) && Player[resource] >= (resources_rates[resource] * 100)  ) { badges.achieve(resource + " 3"); }
-    if (Player[resource] - value < (resources_rates[resource] * 1000) && Player[resource] >= (resources_rates[resource] * 1000)  ) { badges.achieve(resource + " 4"); }
+    var rate = 0;
+    if (resource == 'culture') {
+        rate = culture_rate * 10;
+        if (Player[resource] - value < (rate / 10) && Player[resource] >= (rate / 10)  ) { Player.revealSecret('culture'); }
+        if (Player[resource] - value < (rate * 1) && Player[resource] >= (rate * 1)  ) { badges.achieve(resource + " 1");  }
+        if (Player[resource] - value < (rate * 10) && Player[resource] >= (rate * 10)  ) { badges.achieve(resource + " 2"); }
+        if (Player[resource] - value < (rate * 100) && Player[resource] >= (rate * 100)  ) { badges.achieve(resource + " 3"); }
+        if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
+    }
+    else {
+        rate = resources_rates[resource];
+        if (Player[resource] - value < (rate * 1) && Player[resource] >= (rate * 1)  ) { badges.achieve(resource + " 1"); }
+        if (Player[resource] - value < (rate * 10) && Player[resource] >= (rate * 10)  ) { badges.achieve(resource + " 2"); }
+        if (Player[resource] - value < (rate * 100) && Player[resource] >= (rate * 100)  ) { badges.achieve(resource + " 3"); }
+        if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
+    }
 
     if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); }
     if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2");  Player.revealSecret('objectives'); }
@@ -77,7 +88,7 @@ Gatherer.found = function (inflow) {
 };
 
 Gatherer.tick = function () {
-    if (this.events.ticks < 7 && this.events.ticks + 1 >= 7 ) { badges.achieve("tick 1"); Event.invent(); Player.revealSecret('culture'); }
+    if (this.events.ticks < 7 && this.events.ticks + 1 >= 7 ) {  }
     if (this.events.ticks < 30 && this.events.ticks + 1 >= 30 ) { badges.achieve("tick 1");    }
     if (this.events.ticks < 356 && this.events.ticks + 1 >= 356 ) { badges.achieve("tick 2"); Player.revealSecret('upgrade_department'); Player.revealSecret('cancel_event'); }
     if (this.events.ticks < 356*10 && this.events.ticks + 1 >= 356*10 ) { badges.achieve("tick 3"); Player.revealSecret('invent'); }
