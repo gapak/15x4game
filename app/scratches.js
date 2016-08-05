@@ -57,4 +57,5 @@ function tick() {
     Gatherer.tick();
     Civilization.tick();
     draw_all();
+    localStorage.setItem("Player", JSON.stringify(Player));
 }
