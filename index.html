@@ -73,7 +73,7 @@
 <div class="container init_secret" id="culture_container">
     <hr>
     <button class="collapsar" data-toggle="collapse" data-target="#culture_collapse">-</button>
-    <div>Civilization</div>
+    <div>Community</div>
     <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
     <div class="collapse in" id="culture_collapse">
         <div class="flex-container-column " id="culture"></div>
@@ -91,8 +91,9 @@
 
 <div class="container init_secret" id="resources_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
     Resources:
-    <div class="flex-container-row" id="resources"></div>
+    <div id="resources"></div>
     <button class = "cheat"  id="" onclick="
     resources_base_limits['likes'] += resources_rates.likes;
     resources_base_limits['design'] += resources_rates.design;
@@ -109,6 +110,13 @@
     <div class="collapse in" id="events_collapse">
         <div class="flex-container-row" id="events"></div>
     </div>
+</div>
+
+<div class="container" id="lecture_container">
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
+    <button id="new_lecture" onclick="Lecture.generateLecture();">Generate new lecture</button>
+        <div id = "offered_lecture_collapse"><div class="container collapse in" id = "offered_lectures_container"></div></div>
 </div>
 
 <div class="container init_secret" id="knowledge_container">
