@@ -6,6 +6,7 @@ var Player = {
     volunteers_memory: 0,
 
     culture: 0,
+    culture_soft_cap: 0,
     culture_rate: 0,
 
     departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
@@ -33,13 +34,26 @@ var Player = {
 };
 
 Player.seek = function() {
-    var inflow = 1 / ((0.1 * 0.01 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
+    var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
-    if (Math.floor(this.volunteers + inflow) != Math.floor(this.volunteers)) Gatherer.found();
+    Gatherer.found(inflow);
 
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
+};
+
+Player.shareKnowledge = function() {
+    if (this.knowledge >= 1) {
+        Gatherer.found(1);
+        this.knowledge--;
+        this.volunteers++;
+        this.volunteers_memory++;
+        message("You share knowledge and found a volunteer.");
+    }
+    else {
+        message("Not enough knowledge.");
+    }
 };
 
 Player.increaseDepartment = function(department) {
@@ -79,7 +93,11 @@ Player.harvest = function () {
 Player.revealSecret = function(secret) {
     if (this.found_secrets.indexOf(secret) == -1) {
         this.found_secrets.push(secret);
-        document.getElementById(secret + '_container').style.display = 'block';
+        var secret_container = document.getElementById(secret + '_container');
+        if (secret_container) {
+            secret_container.style.display = 'block';
+        }
+        //document.getElementById(secret + '_container').style.display = 'block';
     }
 };
 
@@ -132,7 +150,12 @@ Player.reward = function(resource, quantity, silent) {
 Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
-    return resources_base_limits[resource] * (1 + (Civilization.buildings.sharing.level * 0.1));
+    var storage_t1 = Storages.buildings.tier1[resource].level * resources_rates[resource];
+    var storage_t2 = Storages.buildings.tier2[resource].level * resources_rates[resource];
+    var storage_t3 = Storages.buildings.tier3[resource].level * resources_rates[resource];
+    var storage_t4 = Storages.buildings.tier4[resource].level * resources_rates[resource];
+
+    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.buildings.sharing.level * 0.01));
 };
 
 Player.withdraw = function(resource, quantity, silent) {
