@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title>15x4 Share Your Knowledge</title>
 
+    <link href='css/bootstrap.css' rel='stylesheet' type='text/css' media='all'>
     <link href="css/all.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
 
     <script language="JavaScript" src="app/scratches.js"></script>
     <script language="JavaScript" src="app/knowledge.js"></script>
@@ -57,21 +61,25 @@
 <div class="container " id="volunteers_container">
     Volunteers: <span id="volunteers_indicator">0</span>/<span id="volunteers_memory_indicator">0</span>
     <button class = "init_secret"  id="seek_container" onclick="Player.seek()">Seek the volunteers</button>
-    <div id="volunteers"></div>
+    <div id="volunteers" ></div>
 </div>
 
 <div class="container init_secret" id="culture_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#culture_collapse">-</button>
     <div>Civilization</div>
     <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
-    <div class="flex-container-column" id="culture">
+    <div class="collapse in" id="culture_collapse">
+        <div class="flex-container-column " id="culture"></div>
     </div>
 </div>
 
 <div class="container init_secret" id="departments_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#departments_collapse">-</button>
     Departments:
-    <div class="flex-container-row" id="departments">
+    <div class="collapse in" id="departments_collapse">
+        <div class="flex-container-row" id="departments"></div>
     </div>
 </div>
 
@@ -89,9 +97,11 @@
 
 <div class="container init_secret" id="events_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#events_collapse">-</button>
     Events:
     <button class = "init_secret"  id="invent_container" onclick="Event.inventButton();">Invent a New Event</button>
-    <div class="flex-container-row" id="events">
+    <div class="collapse in" id="events_collapse">
+        <div class="flex-container-row" id="events"></div>
     </div>
 </div>
 
@@ -103,34 +113,48 @@
 
 <div class="container init_secret" id="skills_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#skills_collapse">-</button>
     Skills:
-    <div class="flex-container-row" id="skills">
+    <div class="collapse in" id="skills_collapse">
+        <div class="flex-container-row" id="skills"></div>
     </div>
 </div>
 
 <div class="container init_secret" id="actions_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#actions_collapse">-</button>
     <div id="your_ap">Action Points: <span id="ap_indicator">0</span></div>
     Actions:
-    <div id="actions"></div>
+    <div class="collapse in" id="actions_collapse">
+        <div id="actions"></div>
+    </div>
 </div>
 
 <div class="container init_secret" id="startups_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#startups_collapse">-</button>
     Startups:
-    <div id="startups"></div>
+    <div class="collapse in" id="startups_collapse">
+        <div id="startups"></div>
+    </div>
 </div>
 
 <div class="container init_secret" id="objectives_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#objectives_collapse">-</button>
     Objectives:
-    <div id="objectives"></div>
+    <div class="collapse in" id="objectives_collapse">
+        <div id="objectives"></div>
+    </div>
 </div>
 
 <div class="container init_secret" id="badges_container">
     <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#badges_collapse">-</button>
     Badges:
-    <div id="badges"></div>
+    <div class="collapse in" id="badges_collapse">
+        <div id="badges"></div>
+    </div>
 </div>
 
 <div class="container init_secret" id="reputations_container">
