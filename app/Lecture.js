@@ -25,7 +25,7 @@ function Lecture(name, lecturer_name, text, url) {
  	var adjective = ["рационального", "социального", "случайного", "массового", "наименьшего", "сознательного", "принципиального", "нормального", "культурного", "медленного", "качественного"];
  	var supplement = ["мышления", "менеджмента", "значения", "поражения", "котика", "существования", "управления", "генератора", "употребления", "обьяснения", "познания"];
 
- 	var name = noun[Math.floor(Math.random() * noun.length)] + " и " + 
+ 	var name = noun[Math.floor(Math.random() * noun.length)] + " как " + 
  			second_noun[Math.floor(Math.random() * second_noun.length)] + " " + 
  			adjective[Math.floor(Math.random() * adjective.length)] + " " + 
  			supplement[Math.floor(Math.random() * supplement.length)];
