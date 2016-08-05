@@ -48,6 +48,7 @@ String.prototype.capitalizeFirstLetter = function() {
 
 
 function message(text) {
+    if(text == "A new day."){LogPanel.day++;}
     console.log(text);
 }
 

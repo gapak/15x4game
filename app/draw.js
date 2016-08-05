@@ -4,6 +4,7 @@ function draw_all() {
         document.getElementById(element_id).innerHTML = text;
     }
 
+    w("day_indicator", LogPanel.day.toFixed());
 
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
