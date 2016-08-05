@@ -151,9 +151,9 @@ Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
     var storage_t1 = Storages.buildings.tier1[resource].level * resources_rates[resource];
-    var storage_t2 = Storages.buildings.tier2[resource].level * resources_rates[resource];
-    var storage_t3 = Storages.buildings.tier3[resource].level * resources_rates[resource];
-    var storage_t4 = Storages.buildings.tier4[resource].level * resources_rates[resource];
+    var storage_t2 = Storages.buildings.tier2[resource].level * 2 * resources_rates[resource];
+    var storage_t3 = Storages.buildings.tier3[resource].level * 3 * resources_rates[resource];
+    var storage_t4 = Storages.buildings.tier4[resource].level * 4 * resources_rates[resource];
 
     return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.buildings.sharing.level * 0.01));
 };

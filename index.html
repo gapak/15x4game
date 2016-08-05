@@ -193,9 +193,14 @@ if(JSON.parse(localStorage.getItem("Player")) != null) {
     var savedPlayer = JSON.parse(localStorage.getItem("Player"));
     console.log("savedPlayer" + savedPlayer);
 
-    Player.volunteers_memory = savedPlayer.volunteers_memory;
-    Player.volunteers = savedPlayer.volunteers_memory;
-
+    var i = 0;
+    for (i; i < savedPlayer.volunteers_memory; i++) {
+        Gatherer.found(1);
+        Player.volunteers_memory++;
+        Player.volunteers++;
+    }
+    Player.volunteers += savedPlayer.volunteers - i;
+    Player.volunteers_memory += savedPlayer.volunteers_memory - i;
 }
 
 </script>
