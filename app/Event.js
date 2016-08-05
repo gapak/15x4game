@@ -11,14 +11,13 @@ function Event(event_number, cost, lectures) {
 
 
 Event.generator = function () {
-    event_counter++;
     lectures.db.sort(function() { return Math.round(Math.random()); } );
 
     var tumbler = Math.round(Math.random());
     var first = Math.random();
     var second = Math.random();
 
-    var price_of_responsibility = Math.pow(1 + 0.2 * event_counter,  Math.pow(1 + event_counter/60, 1 + (4/event_counter)));
+    var price_of_responsibility = (event_counter) ? Math.pow(1 + 0.2 * event_counter,  Math.pow(1 + event_counter/60, 1 + (4/event_counter))) : 1;
 
 
     var cardinalities = {
@@ -38,6 +37,7 @@ Event.generator = function () {
     var balance_sum = cost.likes * 1 + cost.design * 10 + cost.money * 100 + cost.ideas * 1000;
     var balance_ratio = balance_sum/price_of_responsibility;
 
+    event_counter++;
     message("Generate new event. Counter: " + event_counter + ". Price of responsibility: " + price_of_responsibility.toFixed(2) + ". Balance sum: " + balance_sum.toFixed(0) + ". Balance ratio:" + balance_ratio.toFixed(0));
 
     return new Event(event_counter, cost, [lectures.db[0], lectures.db[1], lectures.db[2], lectures.db[3]]);
@@ -48,9 +48,10 @@ Event.holdEvent = function(event_id) {
     if (Player.withdrawArray(events.db[event_id].cost)) {
         events.db[event_id].lectures.forEach(function(lecture, id, arr) {
             if (!lecture.is_performed) {
-                Player.will++;
-                Player.revealSecret('will');
+                Player.knowledge++;
+                Player.revealSecret('knowledge');
                 Player.revealSecret('skills');
+            //    Player.revealSecret('education');
             }
             lecture.is_performed++;
             Player.action_points += lecture.is_performed;
