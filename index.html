@@ -199,7 +199,7 @@ if(JSON.parse(localStorage.getItem("Player")) != null) {
         Player.volunteers_memory++;
         Player.volunteers++;
     }
-    Player.volunteers += savedPlayer.volunteers - i;
+    Player.volunteers += savedPlayer.volunteers_memory - i;
     Player.volunteers_memory += savedPlayer.volunteers_memory - i;
 }
 
