@@ -1,3 +1,20 @@
+.main_container {
+  margin: auto;
+}
+  
+.main_content,
+.sidebar {
+  float: left;
+}
+
+.sidebar {
+  width: 20%;
+  border: 1px solid;
+}
+
+.main_content {
+  width: 80%;
+}
 
 .cheat {
     display: none;
@@ -28,6 +45,7 @@
 }
 
 .container {
+	width: initial;
     position: relative;
 }
 
