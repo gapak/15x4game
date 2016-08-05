@@ -9,6 +9,7 @@ function draw_all() {
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
     w("culture_indicator", Player.culture.toFixed(2));
+    w("culture_limit_indicator", Player.culture_soft_cap.toFixed(2));
     w("culture_rate_indicator", Player.culture_rate.toFixed(2));
 
     var culture_html = "";

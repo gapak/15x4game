@@ -63,7 +63,7 @@
 <div class="container init_secret" id="culture_container">
     <hr>
     <div>Civilization</div>
-    <div>Culture: <span id="culture_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
+    <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
     <div class="flex-container-column" id="culture">
     </div>
 </div>
@@ -160,6 +160,7 @@ var t = setInterval(tick,1000);
 Player.revealSecret('seek');
 Player.revealSecret('teamwork');
 Player.revealSecret('popularization');
+Player.revealSecret('communication');
 //Player.revealSecret('motivation');
 events.db.push(Event.generator());
 

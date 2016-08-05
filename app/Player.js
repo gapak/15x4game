@@ -6,6 +6,7 @@ var Player = {
     volunteers_memory: 0,
 
     culture: 0,
+    culture_soft_cap: 0,
     culture_rate: 0,
 
     departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
@@ -33,7 +34,7 @@ var Player = {
 };
 
 Player.seek = function() {
-    var inflow = 1 / ((0.1 * 0.1 * this.volunteers_memory * this.volunteers_memory * this.volunteers_memory) + 1);
+    var inflow = 1 / (0.1 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
     Gatherer.found(inflow);
 
