@@ -155,7 +155,7 @@ Player.getLimit = function (resource) {
     var storage_t3 = Storages.buildings.tier3[resource].level * resources_rates[resource];
     var storage_t4 = Storages.buildings.tier4[resource].level * resources_rates[resource];
 
-    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.buildings.sharing.level * 0.1));
+    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.buildings.sharing.level * 0.01));
 };
 
 Player.withdraw = function(resource, quantity, silent) {
