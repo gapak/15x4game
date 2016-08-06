@@ -8,12 +8,14 @@
 }
 
 .sidebar {
-  width: 20%;
+  position: absolute;
+  top: 0;
+  right: 0;
   border: 1px solid;
 }
 
 .main_content {
-  width: 80%;
+  width: 100%;
 }
 
 .cheat {
