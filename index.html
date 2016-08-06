@@ -14,6 +14,9 @@
     <script language="JavaScript" src="app/knowledge.js"></script>
     <script language="JavaScript" src="app/draw.js"></script>
 
+    <script language="JavaScript" src="app/dungeon/Dungeon.js"></script>
+    <script language="JavaScript" src="app/dungeon/Unit.js"></script>
+
     <script language="JavaScript" src="app/Gatherer.js"></script>
     <script language="JavaScript" src="app/Building.js"></script>
     <script language="JavaScript" src="app/Civilization.js"></script>
@@ -112,7 +115,7 @@
     </div>
 </div>
 
-<div class="container" id="lecture_container">
+<div class="container init_secret" id="lecture_container">
     <hr>
     <button class="collapsar" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
     <button id="new_lecture" onclick="Lecture.generateLecture();">Generate new lecture</button>
@@ -177,16 +180,76 @@
     <div class="flex-container-row" id="reputations"></div>
 </div>
 
-<hr>
+<div class="container init_secret" id="dungeon_container">
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#dungeon_collapse">-</button>
+    Dungeon
+    <div class="collapse in" id="dungeon_collapse">
+        <div id="dungeon" class="flex-container-column">
+            <div class="flex-element flex-container-row">
+                <div class="flex-element">Stamina: 0/0</div>
+                <div class="flex-element">Poise: 0/0</div>
+                <div class="flex-element">HP: 0/0</div>
+                <div class="flex-element">MP: 0/0</div>
+            </div>
+            <div class="flex-element" id="dungeon_battlefield_container">
+                ____P_______________g_g_g_B_______________________________________
+            </div>
+            <div class="flex-element flex-container-row">
+                <div class="flex-element">
+                    Weapon_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+                <div class="flex-element">
+                    Armor_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+                <div class="flex-element">
+                    HP_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+                <div class="flex-element">
+                    MP_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+            </div>
+            <div class="flex-element flex-container-row">
+                <div class="flex-element flex-container-column">
+                    <span>Weapon</span>
+                    <div>Sword</div>
+                    <div>Shield</div>
+                    <div>Bow</div>
+                    <div>Staff</div>
+                </div>
+                <div class="flex-element">
+                    <span>Armor</span>
+                    <div>Helm</div>
+                    <div>Chest</div>
+                    <div>Gloves</div>
+                    <div>Boots</div>
+                </div>
+                <div class="flex-element">
+                    <span>Shop</span>
+                    <div>HP Potion</div>
+                    <div>MP Potion</div>
+                    <div>Rage</div>
+                    <div>Firebomb</div>
+                </div>
+                <div class="flex-element">
+                    <span>Magic</span>
+                    <div>Heal</div>
+                    <div>Wave</div>
+                    <div>Rage</div>
+                    <div>Fireball</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 
-
-
-
-<div class="init_secret" id="cancel_event_container"></div>
-<div class="init_secret" id="upgrade_department_container"></div>
 
 
 

@@ -30,8 +30,13 @@ var Player = {
     thoughtfulness: 1,
     innovativeness: 1,
 
-    found_secrets: []
+    found_secrets: [],
+
+    unit: new Unit()
 };
+
+Player.unit.team = 'ally';
+Player.unit.symbol = 'P';
 
 Player.seek = function() {
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
@@ -94,7 +99,7 @@ Player.revealSecret = function(secret) {
     if (this.found_secrets.indexOf(secret) == -1) {
         this.found_secrets.push(secret);
         var secret_container = document.getElementById(secret + '_container');
-        if (secret_container) {
+        if (secret_container && secret_container.style.display != 'block') {
             secret_container.style.display = 'block';
         }
         //document.getElementById(secret + '_container').style.display = 'block';
@@ -144,7 +149,7 @@ Player.reward = function(resource, quantity, silent) {
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
     Gatherer.increaseResource(resource, limited_quantity);
-    draw_all();
+//    draw_all();
 };
 
 Player.getLimit = function (resource) {
@@ -165,7 +170,7 @@ Player.withdraw = function(resource, quantity, silent) {
     this[resource] -= quantity;
     if (!silent) message("Paid " + quantity.toFixed(2) + " of " + resource);
     Gatherer.decrease(resource, quantity);
-    draw_all();
+//    draw_all();
     return true;
 };
 
@@ -173,7 +178,7 @@ Player.paid = function(resource, quantity) {
     this[resource] -= quantity;
     message("Paid " + quantity.toFixed(2) + " of " + resource);
     Gatherer.decrease(resource, quantity);
-    draw_all();
+//    draw_all();
 };
 
 Player.withdrawArray = function(array) {
@@ -191,7 +196,7 @@ Player.withdrawArray = function(array) {
         for (var key in array) {
             Player.withdraw(key, array[key]);
         }
-        draw_all();
+//        draw_all();
         return true;
     }
     return false;

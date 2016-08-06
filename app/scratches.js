@@ -57,6 +57,7 @@ function tick() {
     Player.harvest();
     Gatherer.tick();
     Civilization.tick();
+    Dungeon.tick();
     draw_all();
     localStorage.setItem("Player", JSON.stringify(Player));
 }
