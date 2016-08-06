@@ -5,6 +5,7 @@ function Lecture(name, lecturer_name, text, url, cost) {
     this.text = text;
     this.url = url;
     this.cost = cost;
+    this.patience = (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge;
     this.is_performed = 0;
 }
 
@@ -77,4 +78,25 @@ function Lecture(name, lecturer_name, text, url, cost) {
  	console.log(offered_lecture_cost);
 	return offered_lecture_cost;
  	
+ }
+
+ Lecture.hype = 0;
+
+ Lecture.tick = function () {
+ 	lectures.offered.forEach(function (lecture, id) {
+ 		if (lectures.offered[id].patience > 0) lectures.offered[id].patience--;
+ 		else {
+ 			message("Lecturer has disappointed and gone");
+ 			lectures.offered.splice(id, 1);
+ 		}
+ 	});
+
+ 	if (Lecture.hype > 0) {
+ 		if (rand(0, 100) < Lecture.hype * 0.1) {
+ 			Lecture.generateLecture();
+ 			message("New lecturer had come");
+ 			Player.revealSecret('offered_lecture');
+ 		}
+ 		Lecture.hype--;
+ 	}
  }

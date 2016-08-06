@@ -59,5 +59,6 @@ function tick() {
     Civilization.tick();
     Dungeon.tick();
     draw_all();
+    Lecture.tick();
     localStorage.setItem("Player", JSON.stringify(Player));
 }

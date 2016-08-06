@@ -49,11 +49,13 @@ Event.holdEvent = function(event_id) {
         events.db[event_id].lectures.forEach(function(lecture, id, arr) {
             if (!lecture.is_performed) {
                 Player.knowledge++;
+                Lecture.hype += 15;
                 Player.revealSecret('knowledge');
                 Player.revealSecret('skills');
             }
             lecture.is_performed++;
             Player.action_points += lecture.is_performed;
+            Lecture.hype += lecture.is_performed;
         });
 
         events.db.splice(event_id, 1);
