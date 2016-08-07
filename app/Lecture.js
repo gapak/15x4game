@@ -1,4 +1,7 @@
 
+Lecture.hype = 0;
+Lecture.accepted_lectures_counter = 0;
+
 function Lecture(name, lecturer_name, text, url, cost) {
     this.name = name;
     this.lecturer_name = lecturer_name;
@@ -42,7 +45,6 @@ function Lecture(name, lecturer_name, text, url, cost) {
  };
 
  Lecture.accept_lecture = function(lecture_id) {
-
  	if (Player.action_points < 1 ) {
         message("Not enough action points.");
         return false;
@@ -53,6 +55,7 @@ function Lecture(name, lecturer_name, text, url, cost) {
 	    lectures.db.push(lectures.offered[lecture_id]);
 	 	lectures.offered.splice(lecture_id, 1);
 	 	console.log("Lecture has accepted");
+	 	Lecture.accepted_lectures_counter++;
  	}
  }
 
@@ -71,7 +74,7 @@ function Lecture(name, lecturer_name, text, url, cost) {
 
  Lecture.generate_offered_lecture_cost = function () {
  	var random_resource = resources[Math.floor(Math.random() * resources.length)];
- 	var random_resource_cost = event_counter * resources_rates[random_resource];
+ 	var random_resource_cost = event_counter * resources_rates[random_resource] * (1 + Lecture.accepted_lectures_counter);
  	var offered_lecture_cost = {};
 
  	offered_lecture_cost[random_resource] = random_resource_cost;
@@ -79,8 +82,6 @@ function Lecture(name, lecturer_name, text, url, cost) {
 	return offered_lecture_cost;
  	
  }
-
- Lecture.hype = 0;
 
  Lecture.tick = function () {
  	lectures.offered.forEach(function (lecture, id) {
