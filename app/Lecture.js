@@ -1,10 +1,14 @@
 
+Lecture.hype = 0;
+Lecture.accepted_lectures_counter = 0;
+
 function Lecture(name, lecturer_name, text, url, cost) {
     this.name = name;
     this.lecturer_name = lecturer_name;
     this.text = text;
     this.url = url;
     this.cost = cost;
+    this.patience = (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge;
     this.is_performed = 0;
 }
 
@@ -41,7 +45,6 @@ function Lecture(name, lecturer_name, text, url, cost) {
  };
 
  Lecture.accept_lecture = function(lecture_id) {
-
  	if (Player.action_points < 1 ) {
         message("Not enough action points.");
         return false;
@@ -52,6 +55,7 @@ function Lecture(name, lecturer_name, text, url, cost) {
 	    lectures.db.push(lectures.offered[lecture_id]);
 	 	lectures.offered.splice(lecture_id, 1);
 	 	console.log("Lecture has accepted");
+	 	Lecture.accepted_lectures_counter++;
  	}
  }
 
@@ -70,11 +74,30 @@ function Lecture(name, lecturer_name, text, url, cost) {
 
  Lecture.generate_offered_lecture_cost = function () {
  	var random_resource = resources[Math.floor(Math.random() * resources.length)];
- 	var random_resource_cost = event_counter * resources_rates[random_resource];
+ 	var random_resource_cost = event_counter * resources_rates[random_resource] * (1 + Lecture.accepted_lectures_counter);
  	var offered_lecture_cost = {};
 
  	offered_lecture_cost[random_resource] = random_resource_cost;
  	console.log(offered_lecture_cost);
 	return offered_lecture_cost;
  	
+ }
+
+ Lecture.tick = function () {
+ 	lectures.offered.forEach(function (lecture, id) {
+ 		if (lectures.offered[id].patience > 0) lectures.offered[id].patience--;
+ 		else {
+ 			message("Lecturer has disappointed and gone");
+ 			lectures.offered.splice(id, 1);
+ 		}
+ 	});
+
+ 	if (Lecture.hype > 0) {
+ 		if (rand(0, 100) < Lecture.hype * 0.1) {
+ 			Lecture.generateLecture();
+ 			message("New lecturer had come");
+ 			Player.revealSecret('offered_lecture');
+ 		}
+ 		Lecture.hype--;
+ 	}
  }
