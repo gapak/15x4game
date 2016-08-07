@@ -74,7 +74,7 @@ function Lecture(name, lecturer_name, text, url, cost) {
 
  Lecture.generate_offered_lecture_cost = function () {
  	var random_resource = resources[Math.floor(Math.random() * resources.length)];
- 	var random_resource_cost = event_counter * resources_rates[random_resource] * (1 + Lecture.accepted_lectures_counter);
+ 	var random_resource_cost = resources_rates[random_resource] * (1 + Lecture.accepted_lectures_counter);
  	var offered_lecture_cost = {};
 
  	offered_lecture_cost[random_resource] = random_resource_cost;

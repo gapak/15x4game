@@ -136,6 +136,8 @@ function draw_all() {
     });
 
     w("offered_lectures_container", offered_lectures_html);
+
+    w("hype", Lecture.hype);
      
     w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));
