@@ -11,6 +11,7 @@ var Player = {
 
     departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
 
+    // skills
     writing: 0,
     drawing: 0,
     programming: 0,
@@ -18,13 +19,16 @@ var Player = {
 
     knowledge: 0,
     max_knowledge: 0, // ?)
+
     action_points: 0,
 
+    // R1 resources
     likes: 0,
     design: 0,
     money: 0,
     ideas: 0,
 
+    // Reputation
     kindness: 1,
     generosity: 1,
     thoughtfulness: 1,
@@ -32,7 +36,9 @@ var Player = {
 
     found_secrets: [],
 
-    unit: new Unit()
+    unit: new Unit(),
+    ship: new Ship(),
+    conventional_units: 100000
 };
 
 Player.unit.team = 'ally';
@@ -46,6 +52,12 @@ Player.seek = function() {
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
+};
+
+Player.reset = function () {
+    this.volunteers = 0;
+    this.volunteers_memory = 0;
+    localStorage.removeItem('Player');
 };
 
 Player.shareKnowledge = function() {
@@ -134,22 +146,22 @@ Player.learn = function(skill, quantity) {
 
 Player.reward = function(resource, quantity, silent) {
     if (quantity < 0) return false;
-    if (resource != 'culture') {
-        Player.revealSecret('resources'); 
-        Player.revealSecret('events'); 
-    }
-
-    var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
-
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
-    if(this[resource] < this.getLimit(resource)) {
-        this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
-    }   
+    if (resources.indexOf(resource)) {
+        Player.revealSecret('resources'); 
+        Player.revealSecret('events');
+        var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
+        if(this[resource] < this.getLimit(resource)) {
+            this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
+        }
+        Gatherer.increaseResource(resource, limited_quantity);
+    }
+    else {
+        this[resource] += quantity;
+    }
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
-    Gatherer.increaseResource(resource, limited_quantity);
-//    draw_all();
 };
 
 Player.getLimit = function (resource) {

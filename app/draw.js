@@ -266,5 +266,8 @@ function draw_all() {
     w("reputations", reputations_html);
 
 
+
+    w("space_container", Space.getHTML());
+
     w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 }
