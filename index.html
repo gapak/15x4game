@@ -117,7 +117,7 @@
 
 <div class="container init_secret" id="offered_lecture_container">
     <hr>
-    Offered lectures:
+    <div>Offered lectures. Hype:  <span id = "hype"></span></div>
     <button class="collapsar" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
     <button id="new_lecture" class = "cheat" onclick="Lecture.generateLecture();">Generate new lecture</button>
         <div id = "offered_lecture_collapse"><div class="container collapse in" id = "offered_lectures_container"></div></div>
@@ -279,19 +279,22 @@ Player.revealSecret('communication');
 //Player.revealSecret('motivation');
 events.db.push(Event.generator());
 
-
-if(JSON.parse(localStorage.getItem("Player")) != null) {
-    var savedPlayer = JSON.parse(localStorage.getItem("Player"));
+var savedPlayer = JSON.parse(localStorage.getItem("Player"));
+if (savedPlayer) {
     console.log("savedPlayer" + savedPlayer);
 
-    var i = 0;
-    for (i; i < savedPlayer.volunteers_memory; i++) {
+    for (var i = 0; i < savedPlayer.volunteers_memory; i++) {
         Gatherer.found(1);
         Player.volunteers_memory++;
         Player.volunteers++;
     }
     Player.volunteers += savedPlayer.volunteers_memory - i;
     Player.volunteers_memory += savedPlayer.volunteers_memory - i;
+}
+
+var savedLectures = JSON.parse(localStorage.getItem("lectures.db"));
+if (savedLectures) {
+    lectures.db = savedLectures;
 }
 
 </script>

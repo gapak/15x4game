@@ -61,4 +61,5 @@ function tick() {
     draw_all();
     Lecture.tick();
     localStorage.setItem("Player", JSON.stringify(Player));
+    localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
 }
