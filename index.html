@@ -64,7 +64,7 @@
 <body>
 
 <div class="main_container">
-<div class="main_content">
+<div id="main_content" class="main_content80">
 
 
 <div class="container " id="welcome_container">
@@ -315,9 +315,12 @@
 <aside class="sidebar" id="log_panel_container">
     <span>Log Panel</span>
     <button onclick="LogPanel.clear()">ClearLog</button>
+    <button class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse">-</button>
     <div>Day: <span id="day_indicator">0</span></div>
     <hr>
-    <div id="log_message"></div>
+    <div class="collapse in" id="log_panel_collapse">
+            <div id="log_message"></div>
+    <div>
 </aside>
 
 
