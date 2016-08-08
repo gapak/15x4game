@@ -8,7 +8,7 @@ function Lecture(lecturer_name, name, text, url, cost) {
 	this.cost = cost;
     this.patience = (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge;
     this.is_performed = 0;
-}
+};
 
 	Lecture.hype = 0;
 	Lecture.accepted_lectures_counter = 0;
