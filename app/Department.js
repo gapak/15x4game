@@ -8,6 +8,14 @@ function Department(name) {
     this.base_resource = {'smm': 'likes', 'design': 'design', 'site': 'money', 'docs': 'ideas'}[this.name];
     this.base_rate = resources_rates[this.base_resource];
 
+    this.countOfWork = 0;
+    this.supervision = 0;
+    this.isSupervision = 0;
+
+    this.setSupervision = function (skilllvl) {
+        this.supervision = this.isSupervision * (1 + skilllvl / 30 + this.countOfWork * 1.5);
+    };
+
     this.increase = function() {
         if (Player.volunteers < 1) {
             message('Not enough free volunteers');
@@ -47,7 +55,7 @@ function Department(name) {
     };
 
     this.getEfficiency = function() {
-        return Civilization.getGlobalBonus() * this.workers * (1 + (0.1 * this.level)) * (1 + (Player[this.multiplying_skill] / 60));
+        return Civilization.getGlobalBonus() * (this.workers + this.supervision) * (1 + (0.1 * this.level)) * (1 + (Player[this.multiplying_skill] / 60));
     };
 
     this.getProductivity = function() {
