@@ -13,6 +13,9 @@ var Civilization = {
     }
 };
 
+Civilization.getGlobalBonus = function() {
+    return (1+(Civilization.global_bonus / 100));
+};
 
 Civilization.tick = function() {
   //  console.log(Player, Civilization);
@@ -23,7 +26,7 @@ Civilization.tick = function() {
     if (Player.culture_soft_cap < 10) Player.culture_soft_cap = 10;
 
     var soft_cap = Math.sqrt(Player.culture - Player.culture_soft_cap);
-    Player.culture_rate = (1+(Civilization.global_bonus / 100)) * Player.volunteers * 0.1 / (soft_cap ? soft_cap : 1);
+    Player.culture_rate = Civilization.getGlobalBonus() * Player.volunteers * 0.1 / (soft_cap ? soft_cap : 1);
    // console.log(Player.culture_rate, Civilization.global_bonus, Player.volunteers, soft_cap);
     if (Player.culture_rate > 0) Player.reward('culture', Player.culture_rate, 1);
 
