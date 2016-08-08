@@ -315,7 +315,7 @@
 <aside class="sidebar" id="log_panel_container">
     <span>Log Panel</span>
     <button onclick="LogPanel.clear()">ClearLog</button>
-    <button class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse">-</button>
+    <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse" onclick="LogPanel.hide()">-</button>
     <div>Day: <span id="day_indicator">0</span></div>
     <hr>
     <div class="collapse in" id="log_panel_collapse">
