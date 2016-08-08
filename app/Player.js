@@ -45,6 +45,10 @@ var Player = {
     race_win_points_memory: 0
 };
 
+Player.addSupervision = function (department_name) {
+    this.departments[department_name].isSupervision = 1;
+    this.departments[department_name].setSupervision(this[this.departments[department_name].multiplying_skill]);
+};
 Player.unit.team = 'ally';
 Player.unit.symbol = 'P';
 
@@ -229,6 +233,8 @@ Player.selfStudy = function(skill) {
     message("You studied " + skill + " himself.");
     this.learn(skill, 2 - (2*(this[skill] / 60)) );
     Gatherer.learn("selfStudy");
+
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
 Player.books = function(skill) {
@@ -240,6 +246,8 @@ Player.books = function(skill) {
     message("You read book about " + skill + ".");
     this.learn(skill, 2 - (2*(Gatherer.events.learn.books / 60)));
     Gatherer.learn("books");
+
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
 Player.work = function(skill) {
@@ -271,6 +279,9 @@ Player.work = function(skill) {
     message("You learned some " + skill + " on the job.");
     this.learn(skill, Math.max(0, 2*Math.sin(this[skill]/(Math.PI*6))));
     Gatherer.learn("work");
+
+    this.departments[skills_departments[skill]].countOfWork ++;
+    this.departments[skills_departments[skill]].setSupervision( this[skill]);
 };
 
 Player.petProject = function(skill) {
@@ -290,4 +301,7 @@ Player.petProject = function(skill) {
         startups.found(skill);
         message("You have successfully founded a startup!");
     }
+
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
+

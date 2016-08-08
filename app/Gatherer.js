@@ -14,7 +14,10 @@ var Gatherer = {
 
 Gatherer.increaseSkill = function (skill, value) {
     if (Player[skill] - value < 15 && Player[skill] >= 15 ) { badges.achieve(skill + " 1"); }
-    if (Player[skill] - value < 30 && Player[skill] >= 30 ) { badges.achieve(skill + " 2"); }
+    if (Player[skill] - value < 30 && Player[skill] >= 30 ) {
+        badges.achieve(skill + " 2");
+        Player.addSupervision(skills_departments[skill]);
+    }
     if (Player[skill] - value < 45 && Player[skill] >= 45 ) { badges.achieve(skill + " 3"); }
     if (Player[skill] - value < 60 && Player[skill] >= 60 ) { badges.achieve(skill + " 4"); }
 
