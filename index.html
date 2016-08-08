@@ -10,9 +10,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
 
+    <script language="JavaScript" src="app/parts/Billet.js"></script>
+
     <script language="JavaScript" src="app/scratches.js"></script>
     <script language="JavaScript" src="app/knowledge.js"></script>
     <script language="JavaScript" src="app/draw.js"></script>
+
+    <script language="JavaScript" src="app/rally/Rally.js"></script>
 
     <script language="JavaScript" src="app/space/Ship.js"></script>
     <script language="JavaScript" src="app/space/Space.js"></script>
@@ -291,6 +295,14 @@
 </div>
 
 
+<div class="container init_secret" id="rally_container"><!--
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#rally_collapse">-</button>
+    Rally
+    <div class="collapse in" id="rally_collapse">
+        <div id="rally" class="flex-container-column"></div>
+    </div>-->
+</div>
 
 
 
@@ -332,6 +344,9 @@ if (savedPlayer) {
     }
     Player.volunteers += savedPlayer.volunteers_memory - i;
     Player.volunteers_memory += savedPlayer.volunteers_memory - i;
+
+    Player.race_win_points = savedPlayer.race_win_points;
+    Player.race_win_points_memory = savedPlayer.race_win_points_memory;
 }
 
 var savedLectures = JSON.parse(localStorage.getItem("lectures.db"));

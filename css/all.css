@@ -51,6 +51,10 @@
     position: relative;
 }
 
+.text-center {
+    text-align: center;
+}
+
 hr {
     margin: 3px;
     border: 0;
@@ -58,3 +62,4 @@ hr {
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
+
