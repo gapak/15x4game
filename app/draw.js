@@ -1,20 +1,16 @@
-
-
-
-
-
-
 function draw_all() {
     function w(element_id, text) {
         //    message("w("+element_id+", "+text+")");
         document.getElementById(element_id).innerHTML = text;
     }
 
+    w("day_indicator", LogPanel.day.toFixed());
 
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
     w("culture_indicator", Player.culture.toFixed(2));
+    w("culture_limit_indicator", Player.culture_soft_cap.toFixed(2));
     w("culture_rate_indicator", Player.culture_rate.toFixed(2));
 
     var culture_html = "";
@@ -87,7 +83,23 @@ function draw_all() {
 
     
     var events_html = "";
+    window.new_lections = 0;
+    window.done_lections = 0;
+    
+    function getNewAndDoneLections() {
+        window.lectures.db.forEach(function(lecture){
+           if (lecture.is_performed == 0) {
+               new_lections++;
+           } else  {
+               done_lections++;
+           }
+        });
+    }
+    
+    getNewAndDoneLections();
+    
     events.db.forEach(function (event, id) {
+        
         events_html += '<div class="flex-element">';
         events_html += '<button id="hold_event_container" onclick="Event.holdEvent(\'' + id + '\')">Hold Event</button>';
         var secret_class = (Player.found_secrets.indexOf("cancel_event") == -1) ? "init_secret" : "";
@@ -100,21 +112,34 @@ function draw_all() {
         }
         events_html += '</div>';
 
-        events_html += 'Lectures:';
+        events_html += '<span title="New lection give you 1 knowledge point"> Lectures (' + window.done_lections + '/' + window.new_lections + ') :</span>';
         event.lectures.forEach(function (lecture) {
             events_html += '<div class="event_element">';
-            var lecture_badge = lecture.is_performed ? '' : 'Новая! ';
+            var lecture_badge = lecture.is_performed ? '' : 'New!';
             events_html += '<span class="lecture_name" title="' + lecture.text + '">' + lecture_badge + '' + lecture.name + '.</span>';
             events_html += '</div>';
         });
         events_html += '</div>';
     });
+
     w("events", events_html);
     
-    
-    
-    
-    w("will_indicator", Player.will.toFixed(2));
+    var offered_lectures_html = "";
+    lectures.offered.forEach(function (lecture, id, arr) {
+        for (var name in lecture.cost) break;
+            var cost = lecture.cost[name];
+        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "Lecture.accept_lecture(' + id + ');">Accept</button>';
+        offered_lectures_html += '<button onclick = "Lecture.skip_lecture(' + id + ');">Skip</button>';
+        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + 
+        ' (' + cost + " " + name + ')' + '</span></div>';
+
+    });
+
+    w("offered_lectures_container", offered_lectures_html);
+
+    w("hype", Lecture.hype);
+     
+    w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));
 
 
@@ -133,12 +158,39 @@ function draw_all() {
 
 
     var resources_html = "";
+    var storages_html = "";
     resources.forEach(function(resource) {
-        resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' +
-            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + 
-            '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span></div>';
+        resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' + 
+            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span>';
+
+        var sb = Storages.buildings;  
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_1') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '" id="sold_for_' + resource + '_1_container">' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level +
+            '<button onclick="Storages.upgradeBuilding(1, \'' + resource + '\')">Up1: ' + 
+            Storages.getUpgradeCostBuilding(1, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_2') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level +
+            '<button onclick="Storages.upgradeBuilding(2, \'' + resource + '\')">Up2: ' + 
+            Storages.getUpgradeCostBuilding(2, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_3') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level +
+            '<button onclick="Storages.upgradeBuilding(3, \'' + resource + '\')">Up3: ' + 
+            Storages.getUpgradeCostBuilding(3, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_4') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level +
+            '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
+            Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+        resources_html += '</div>';    
+
+
+
+
     });
-    w("resources", resources_html);
+    w("resources", '<div class="flex-element flex-container-row">' + resources_html + '</div><div id="resources_collapse" class="flex-element flex-container-row"><div>' + storages_html + '</div></div>');
 
     /*
     w("writing_indicator", Player.writing.toFixed(2));
@@ -215,4 +267,10 @@ function draw_all() {
     });
     w("reputations", reputations_html);
 
+
+
+    w("space_container", Space.getHTML());
+    w("rally_container", Rally.getHTML());
+
+    w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 }

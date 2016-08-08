@@ -52,6 +52,12 @@ badges.db = [
 
 
 
+
+    new Badge("culture 1", "", "You feel the cultural growth."),
+    new Badge("culture 2", "", "You feel the cultural rise."),
+    new Badge("culture 3", "", "You led a moral imperative."),
+    new Badge("culture 4", "", "You are part of the cultural revolution."),
+
     new Badge("writing 1", "", "Mom thinks that you write as Dostoevsky."),
     new Badge("writing 2", "", "You think that you write as Dostoevsky."),
     new Badge("writing 3", "", "Everyone thinks that you write as Dostoevsky."),

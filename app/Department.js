@@ -55,7 +55,7 @@ function Department(name) {
     };
 
     this.getEfficiency = function() {
-        return  this.supervision + (1 + (Civilization.global_bonus / 100)) * this.workers * (1 + (0.1 * this.level)) * (1 + (Player[this.multiplying_skill] / 60));
+        return Civilization.getGlobalBonus() * (this.workers + this.supervision) * (1 + (0.1 * this.level)) * (1 + (Player[this.multiplying_skill] / 60));
     };
 
     this.getProductivity = function() {

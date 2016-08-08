@@ -3,7 +3,7 @@ var actions = {};
 actions.db = [
 
     // raw work
-    new Action("Rewriting", "Trying to get some resources. Writing boring texts for which no one will give money.", ["writing 1"], function(){actions.rawWork("writing");}),
+    new Action("Rewriting", "Trying to get some resources. Writing boring texts for which no one knowledge give money.", ["writing 1"], function(){actions.rawWork("writing");}),
     new Action("Logo Drawing", "Trying to get some resources. Seven logo options, zero sane.", ["drawing 1"], function(){actions.rawWork("drawing");}),
     new Action("Coding", "Trying to get some resources. define(true, false); // Happy debugging!", ["programming 1"], function(){actions.rawWork("programming");}),
     new Action("Calling", "Trying to get some resources. Cold sale as the heart of the former girlfriend.", ["management 1"], function(){actions.rawWork("management");}),
@@ -50,9 +50,9 @@ actions.db = [
     new Action("Dark Ritual", "You have waited your reward.", ["tick 4"], function(){
         if (Player.volunteers >= 1) {
             Player.volunteers--;
-            Player.will++;
+            Player.knowledge++;
             draw_all();
-            message('Your will has been strengthened by infernal knowledge.');
+            message('Your knowledge has been strengthened by infernal knowledge.');
         }
         else {
             message('Not enough free volunteers');
