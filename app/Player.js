@@ -234,7 +234,7 @@ Player.selfStudy = function(skill) {
     this.learn(skill, 2 - (2*(this[skill] / 60)) );
     Gatherer.learn("selfStudy");
 
-    this.departments[skills_departments[skill]].setSupervision( Math.max(this[skill], 0));
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
 Player.books = function(skill) {
@@ -247,7 +247,7 @@ Player.books = function(skill) {
     this.learn(skill, 2 - (2*(Gatherer.events.learn.books / 60)));
     Gatherer.learn("books");
 
-    this.departments[skills_departments[skill]].setSupervision( Math.max(this[skill], 0));
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
 Player.work = function(skill) {
@@ -281,7 +281,7 @@ Player.work = function(skill) {
     Gatherer.learn("work");
 
     this.departments[skills_departments[skill]].countOfWork ++;
-    this.departments[skills_departments[skill]].setSupervision( Math.max(this[skill], 0));
+    this.departments[skills_departments[skill]].setSupervision( this[skill]);
 };
 
 Player.petProject = function(skill) {
@@ -302,6 +302,6 @@ Player.petProject = function(skill) {
         message("You have successfully founded a startup!");
     }
 
-    this.departments[skills_departments[skill]].setSupervision( Math.max(this[skill], 0));
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
