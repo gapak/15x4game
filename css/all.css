@@ -1,3 +1,22 @@
+.main_container {
+  margin: auto;
+}
+  
+.main_content,
+.sidebar {
+  float: left;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid;
+}
+
+.main_content {
+  width: 100%;
+}
 
 .cheat {
     display: none;
@@ -28,7 +47,12 @@
 }
 
 .container {
+	width: initial;
     position: relative;
+}
+
+.text-center {
+    text-align: center;
 }
 
 hr {
@@ -38,3 +62,4 @@ hr {
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
+

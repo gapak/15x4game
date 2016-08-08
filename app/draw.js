@@ -4,6 +4,7 @@ function draw_all() {
         document.getElementById(element_id).innerHTML = text;
     }
 
+    w("day_indicator", LogPanel.day.toFixed());
 
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
@@ -123,9 +124,21 @@ function draw_all() {
 
     w("events", events_html);
     
-    
-    
-    
+    var offered_lectures_html = "";
+    lectures.offered.forEach(function (lecture, id, arr) {
+        for (var name in lecture.cost) break;
+            var cost = lecture.cost[name];
+        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "Lecture.accept_lecture(' + id + ');">Accept</button>';
+        offered_lectures_html += '<button onclick = "Lecture.skip_lecture(' + id + ');">Skip</button>';
+        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + 
+        ' (' + cost + " " + name + ')' + '</span></div>';
+
+    });
+
+    w("offered_lectures_container", offered_lectures_html);
+
+    w("hype", Lecture.hype);
+     
     w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));
 
@@ -145,6 +158,7 @@ function draw_all() {
 
 
     var resources_html = "";
+    var storages_html = "";
     resources.forEach(function(resource) {
         resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' + 
             Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span>';
@@ -152,22 +166,22 @@ function draw_all() {
         var sb = Storages.buildings;  
 
         var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_1') == -1) ? "init_secret" : "";
-        resources_html +='<div class="' + secret_class + '" id="sold_for_' + resource + '_1_container">' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level + 
+        storages_html +='<div class="flex-element ' + secret_class + '" id="sold_for_' + resource + '_1_container">' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level +
             '<button onclick="Storages.upgradeBuilding(1, \'' + resource + '\')">Up1: ' + 
             Storages.getUpgradeCostBuilding(1, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
 
         var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_2') == -1) ? "init_secret" : "";
-        resources_html +='<div class="' + secret_class + '">' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level + 
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level +
             '<button onclick="Storages.upgradeBuilding(2, \'' + resource + '\')">Up2: ' + 
             Storages.getUpgradeCostBuilding(2, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
 
         var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_3') == -1) ? "init_secret" : "";
-        resources_html +='<div class="' + secret_class + '">' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level + 
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level +
             '<button onclick="Storages.upgradeBuilding(3, \'' + resource + '\')">Up3: ' + 
             Storages.getUpgradeCostBuilding(3, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
 
         var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_4') == -1) ? "init_secret" : "";
-        resources_html +='<div class="' + secret_class + '">' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level + 
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level +
             '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
             Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
         resources_html += '</div>';    
@@ -176,7 +190,7 @@ function draw_all() {
 
 
     });
-    w("resources", resources_html);
+    w("resources", '<div class="flex-element flex-container-row">' + resources_html + '</div><div id="resources_collapse" class="flex-element flex-container-row"><div>' + storages_html + '</div></div>');
 
     /*
     w("writing_indicator", Player.writing.toFixed(2));
@@ -252,5 +266,18 @@ function draw_all() {
             Player[reputation_name].toFixed(2) + '<span class="flex-element" id="' + reputation_name + '_indicator"></span></div>';
     });
     w("reputations", reputations_html);
+
+    var log_message_html = "";
+    LogPanel.message.forEach(function (val) {
+        log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + val + '</span></div></li>';
+    });
+    w("log_message", log_message_html);
+
+
+
+    w("space_container", Space.getHTML());
+    w("rally_container", Rally.getHTML());
+
+    w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 
 }
