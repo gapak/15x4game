@@ -1,4 +1,5 @@
 LogPanel = {
 	day: 0,
-	message: []
+	message: [],
+	clear: function(){this.message = []}
 }
