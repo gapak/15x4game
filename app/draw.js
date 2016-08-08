@@ -268,9 +268,9 @@ function draw_all() {
     w("reputations", reputations_html);
 
     var log_message_html = "";
-    LogPanel.message.forEach(function (val) {
-        log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + val + '</span></div></li>';
-    });
+    for(var i=LogPanel.message.length-1; i>=0; i--){
+        log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + LogPanel.message[i] + '</span></div></li>';
+    };
     w("log_message", log_message_html);
 
 
