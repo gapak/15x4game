@@ -37,8 +37,12 @@ var Player = {
     found_secrets: [],
 
     unit: new Unit(),
+
     ship: new Ship(),
-    conventional_units: 100000
+    conventional_units: 100000,
+
+    race_win_points: 0,
+    race_win_points_memory: 0
 };
 
 Player.unit.team = 'ally';
