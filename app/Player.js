@@ -55,6 +55,7 @@ Player.unit.symbol = 'P';
 Player.seek = function() {
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
+    Player.revealSecret('culture');
     Gatherer.found(inflow);
 
     this.volunteers += inflow;
@@ -153,21 +154,22 @@ Player.learn = function(skill, quantity) {
 };
 
 Player.reward = function(resource, quantity, silent) {
-    if (quantity < 0) return false;
+    if (quantity <= 0) return false;
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
-    if (resources.indexOf(resource)) {
+    if (resources.indexOf(resource) != -1) {
         Player.revealSecret('resources'); 
         Player.revealSecret('events');
         var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
         if(this[resource] < this.getLimit(resource)) {
             this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
         }
-        Gatherer.increaseResource(resource, limited_quantity);
     }
     else {
         this[resource] += quantity;
     }
+
+    Gatherer.increaseResource(resource, limited_quantity);
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
 };
