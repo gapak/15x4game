@@ -126,14 +126,19 @@ function draw_all() {
     
     var offered_lectures_html = "";
     lectures.offered.forEach(function (lecture, id, arr) {
-        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "accept_lecture(' + id + ');">Accept</button>';
-        offered_lectures_html += '<button onclick = "skip_lecture(' + id + ');">Skip</button>';
-        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + '</span></div>';
+        for (var name in lecture.cost) break;
+            var cost = lecture.cost[name];
+        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "Lecture.accept_lecture(' + id + ');">Accept</button>';
+        offered_lectures_html += '<button onclick = "Lecture.skip_lecture(' + id + ');">Skip</button>';
+        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + 
+        ' (' + cost + " " + name + ')' + '</span></div>';
+
     });
 
     w("offered_lectures_container", offered_lectures_html);
-    
-    
+
+    w("hype", Lecture.hype);
+     
     w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));
 
@@ -267,5 +272,12 @@ function draw_all() {
         log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + val + '</span></div></li>';
     });
     w("log_message", log_message_html);
+
+
+
+    w("space_container", Space.getHTML());
+    w("rally_container", Rally.getHTML());
+
+    w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 
 }

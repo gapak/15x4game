@@ -44,6 +44,13 @@ String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
+function sum( obj ) {
+    return Object.keys( obj )
+        .reduce( function( sum, key ){
+            return sum + parseFloat( obj[key] );
+        }, 0 );
+}
+
 
 
 
@@ -60,6 +67,11 @@ function tick() {
     Player.harvest();
     Gatherer.tick();
     Civilization.tick();
+    Dungeon.tick();
+    Space.tick();
+    Rally.tick();
     draw_all();
+    Lecture.tick();
     localStorage.setItem("Player", JSON.stringify(Player));
+    localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
 }
