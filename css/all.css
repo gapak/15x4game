@@ -23,6 +23,10 @@
     width: 100%;
 }
 
+.main_content {
+  width: 80%;
+}
+
 .cheat {
     display: none;
 }
