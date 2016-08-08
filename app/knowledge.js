@@ -13,3 +13,10 @@ var resources_base_limits = {'likes': 2000, 'design': 200, 'money': 20, 'ideas':
 
 var culture_rate = 1;
 
+var skills_departments = {
+    "writing" : 'smm',
+    "drawing" : 'design',
+    "programming" : 'site',
+    "management" : 'docs'
+};
+

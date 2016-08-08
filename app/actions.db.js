@@ -10,26 +10,38 @@ actions.db = [
 
 
     // writing
-    new Action("Likes to random", "Transform likes to random. You newer know!", ["writing 1"], function () {actions.randomReward("writing");}),
-    new Action("Likes to design", "Fun-art. Win or fail: You newer know!", ["writing 2"], function () {actions.shiftReward("writing", 1);}),
+    new Action("Likes to random", "Transform likes to random. You newer know!", ["writing 1"], function () {console.log("FUCK U");actions.randomReward("writing");}),
+    new Action("Likes to design", "Fun-art. Win or fail: You newer know!", ["writing 2"], function () {console.log("AAAAAAAAAAAAAAAAAAAAAAAAAaa");
+        //Player.addSupervision('smm');
+        actions.shiftReward("writing", 1);
+    }),
     new Action("Likes to money", "Call for assistance. The right to give money 15x4 must be earned.", ["writing 3"], function () {actions.shiftReward("writing", 2);}),
     new Action("Likes to ideas", "Fest video. Viral video about our community.", ["writing 4"], function () {actions.shiftReward("writing", 3);}),
 
     // drawing
     new Action("Design to random", "Transform design to random. You newer know!", ["drawing 1"], function () {actions.randomReward("drawing");}),
-    new Action("Design to likes", "Posters for the Event. DIN font, neat style, bold colors.", ["drawing 2"], function () {actions.shiftReward("drawing", 3);}),
+    new Action("Design to likes", "Posters for the Event. DIN font, neat style, bold colors.", ["drawing 2"], function () {
+        actions.shiftReward("drawing", 3);
+        //Player.addSupervision('design');
+    }),
     new Action("Design to ideas", "Kat's pictures. Picture for ideas search post.", ["drawing 3"], function () {actions.shiftReward("drawing", 2);}),
     new Action("Design to money", "Design to money", ["drawing 4"], function () {actions.shiftReward("drawing", 1);}),
 
     // programming
     new Action("Money to random", "Transform money to random. You newer know!", ["programming 1"], function () {actions.randomReward("programming");}),
-    new Action("Money to design", "Apples for repetition. Twenty kilograms of apples. Popularization never been so heavy.", ["programming 2"], function () {actions.shiftReward("programming", 3);}),
+    new Action("Money to design", "Apples for repetition. Twenty kilograms of apples. Popularization never been so heavy.", ["programming 2"], function () {
+        actions.shiftReward("programming", 3);
+        //Player.addSupervision('site');
+    }),
     new Action("Money to ideas", "Advertising. We all hate adds", ["programming 3"], function () {actions.shiftReward("programming", 1);}),
     new Action("Money to likes", "Order merchandising. Full set of pen, notebook and t-shirt!", ["programming 4"], function () {actions.shiftReward("programming", 2);}),
 
     // management
     new Action("Ideas to random", "Transform ideas to random. You newer know!", ["management 1"], function () {actions.randomReward("management");}),
-    new Action("Ideas to likes", "We all together are 15x4.", ["management 2"], function () {actions.shiftReward("management", 1);}),
+    new Action("Ideas to likes", "We all together are 15x4.", ["management 2"], function () {
+        actions.shiftReward("management", 1);
+        //Player.addSupervision('docs');
+    }),
     new Action("Ideas to money", "Astronomical Event. Looking stars in night.", ["management 3"], function () {actions.shiftReward("management", 3);}),
     new Action("Ideas to design", "It is necessary to draw it up yesterday.", ["management 4"], function () {actions.shiftReward("management", 2);}),
 

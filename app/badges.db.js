@@ -96,7 +96,6 @@ badges.db = [
 
 ];
 
-
 badges.achieve = function (name) {
     badges.db.filter(function (val) {
         return (val.name == name) ? 1 : 0;
