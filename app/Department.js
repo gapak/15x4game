@@ -67,3 +67,47 @@ function Department(name) {
 
     return this;
 }
+
+Department.getHtml = function() {
+    var html = `<hr><button class="collapsar" data-toggle="collapse" data-target="#departments_collapse">-</button>
+    Departments: 
+    <div class="collapse in" id="departments_collapse">
+    <div class="flex-container-row" id="departments">`;
+    
+    for (var key in Player.departments) {
+        var department = Player.departments[key];
+        var upgrade_cost = department.getUpgradeCost();
+        for (var resource_name in upgrade_cost) break;
+        var price = upgrade_cost[resource_name];
+        var secret_class = (Player.found_secrets.indexOf("upgrade_department") == -1) ? "init_secret" : "";
+
+        html += `
+        <div class = "flex-element flex-container-column" id = "${key}">
+            <div class="flex-element">${key.capitalizeFirstLetter()}</div>
+            <div class = "${secret_class} flex-element">
+                Level: <span id="${key}level"> ${department.level}</span>
+                <button onclick = "Player.upgradeDepartment('${key}');">
+                    Up: ${price.toFixed(2)} ${resource_name} 
+                </button>
+            </div>
+                
+            <div>Workers: <span id="${key}_volunteers">  
+                ${department.workers} / ${(Civilization.buildings.teamwork.level+1)} </span>
+                <button class = "" onclick="Player.increaseDepartment('${key}');">+</button>
+                <button class = "" onclick="Player.decreaseDepartment('${key}');">-</button>
+            </div>
+
+            <div class="flex-element">
+                Efficiency: <span id="${key}_productivity"> 
+                ${Player.getDepartmentEfficiency(key).toFixed(2)}</span>
+            </div>
+            <div class="flex-element">
+                Productivity: <span id="${key}_productivity"> 
+                ${Player.getDepartmentProductivity(key).toFixed(2)} ${department.base_resource} </span>
+            </div>
+        </div>`;
+    }
+
+    html += `</div></div>`;
+    return html;
+};
