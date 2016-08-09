@@ -232,7 +232,7 @@ Player.selfStudy = function(skill) {
 
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
 
-    message("You studied " + skill + " himself.");
+    message("You studied " + skill + " yourself.");
     this.learn(skill, 2 - (2*(this[skill] / 60)) );
     Gatherer.learn("selfStudy");
 
