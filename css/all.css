@@ -53,6 +53,10 @@
     visibility: hidden;
 }
 
+.init_secret_block {
+  visible: false;
+}
+
 .collapsar {
     position: absolute;
     right: 0;
