@@ -19,7 +19,7 @@ function Department(name) {
     this.increase = function() {
         if (Player.volunteers < 1) {
             message('Not enough free volunteers');
-        } else if (this.workers > Civilization.buildings.teamwork.level ) {
+        } else if (this.workers > Civilization.updates.teamwork.level + 1) {
             message('Not enough teamwork');
         } else {
             Player.volunteers--;

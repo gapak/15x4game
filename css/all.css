@@ -49,10 +49,14 @@
     display: none;
 }
 
+.init_hidden {
+    visibility: hidden;
+}
+
 .collapsar {
     position: absolute;
-    right:0;
-    top:10;
+    right: 0;
+    top: 10px;
 }
 
 .container {
@@ -68,7 +72,6 @@ hr {
     margin: 3px;
     border: 0;
     height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    background: #333 linear-gradient(to right, #ccc, #333, #ccc);
 }
 
