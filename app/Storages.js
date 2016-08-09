@@ -29,6 +29,51 @@ var Storages = {
 	}	
 };
 
+Storages.getHTML = function () {
+    var html = `    
+	<hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
+    Resources:
+    <div id="resources">`;
+
+	var resources_html = "";
+    var storages_html = "";
+    resources.forEach(function(resource) {
+        resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' + 
+            Player[resource].toFixed(2) + '<span class="flex-element" id="' + resource + '_indicator"><span class = "resource_limit">/' + Player.getLimit(resource).toFixed(2) + '</span></span>';
+
+        var sb = Storages.buildings;  
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_1') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '" id="sold_for_' + resource + '_1_container">' + sb.tier1[resource].name + ': ' + sb.tier1[resource].level +
+            '<button onclick="Storages.upgradeBuilding(1, \'' + resource + '\')">Up1: ' + 
+            Storages.getUpgradeCostBuilding(1, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_2') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier2[resource].name + ': ' + sb.tier2[resource].level +
+            '<button onclick="Storages.upgradeBuilding(2, \'' + resource + '\')">Up2: ' + 
+            Storages.getUpgradeCostBuilding(2, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_3') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier3[resource].name + ': ' + sb.tier3[resource].level +
+            '<button onclick="Storages.upgradeBuilding(3, \'' + resource + '\')">Up3: ' + 
+            Storages.getUpgradeCostBuilding(3, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+
+        var secret_class = (Player.found_secrets.indexOf('sold_for_' + resource + '_4') == -1) ? "init_secret" : "";
+        storages_html +='<div class="flex-element ' + secret_class + '">' + sb.tier4[resource].name + ': ' + sb.tier4[resource].level +
+            '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
+            Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
+        resources_html += '</div>';    
+    });
+    html += '<div class="flex-element flex-container-row">' + resources_html + '</div><div id="resources_collapse" class="flex-element flex-container-column"><div>' + storages_html + '</div></div>';
+
+    html += `</div>
+    `;
+    return html;
+};
+
+
+
 Storages.increaseBuilding = function(tier, building) {
     this.buildings['tier' + tier][building].increase();
 };
