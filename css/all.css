@@ -9,7 +9,18 @@
 
 .sidebar {
   width: 20%;
+  position: absolute;
+  top: 0;
+  right: 0;
   border: 1px solid;
+}
+
+.main_content80 {
+  width: 80%;
+}
+
+.main_content100 {
+    width: 100%;
 }
 
 .main_content {
@@ -49,6 +60,10 @@
     position: relative;
 }
 
+.text-center {
+    text-align: center;
+}
+
 hr {
     margin: 3px;
     border: 0;
@@ -56,3 +71,4 @@ hr {
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
+

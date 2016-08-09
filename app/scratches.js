@@ -44,12 +44,22 @@ String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
+function sum( obj ) {
+    return Object.keys( obj )
+        .reduce( function( sum, key ){
+            return sum + parseFloat( obj[key] );
+        }, 0 );
+}
+
 
 
 
 function message(text) {
     if(text == "A new day."){LogPanel.day++;}
+    else if (text.includes("Balance ratio")) {}
+    else{LogPanel.message.push(text);}
     console.log(text);
+    //console.log(LogPanel.message);
 }
 
 function tick() {
@@ -57,6 +67,11 @@ function tick() {
     Player.harvest();
     Gatherer.tick();
     Civilization.tick();
+    Dungeon.tick();
+    Space.tick();
+    Rally.tick();
     draw_all();
+    Lecture.tick();
     localStorage.setItem("Player", JSON.stringify(Player));
+    localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
 }

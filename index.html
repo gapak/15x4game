@@ -10,9 +10,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
 
+    <script language="JavaScript" src="app/parts/Billet.js"></script>
+
     <script language="JavaScript" src="app/scratches.js"></script>
     <script language="JavaScript" src="app/knowledge.js"></script>
     <script language="JavaScript" src="app/draw.js"></script>
+
+    <script language="JavaScript" src="app/rally/Rally.js"></script>
+
+    <script language="JavaScript" src="app/space/Ship.js"></script>
+    <script language="JavaScript" src="app/space/Space.js"></script>
+
+    <script language="JavaScript" src="app/dungeon/Dungeon.js"></script>
+    <script language="JavaScript" src="app/dungeon/Unit.js"></script>
 
     <script language="JavaScript" src="app/Gatherer.js"></script>
     <script language="JavaScript" src="app/Building.js"></script>
@@ -54,7 +64,7 @@
 <body>
 
 <div class="main_container">
-<div class="main_content">
+<div id="main_content" class="main_content80">
 
 
 <div class="container " id="welcome_container">
@@ -73,7 +83,7 @@
 <div class="container init_secret" id="culture_container">
     <hr>
     <button class="collapsar" data-toggle="collapse" data-target="#culture_collapse">-</button>
-    <div>Community</div>
+    <div>Community. Global Bonus: <span id="global_bonus_indicator">0</span>%</div>
     <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
     <div class="collapse in" id="culture_collapse">
         <div class="flex-container-column " id="culture"></div>
@@ -89,18 +99,7 @@
     </div>
 </div>
 
-<div class="container init_secret" id="resources_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
-    Resources:
-    <div id="resources"></div>
-    <button class = "cheat"  id="" onclick="
-    resources_base_limits['likes'] += resources_rates.likes;
-    resources_base_limits['design'] += resources_rates.design;
-    resources_base_limits['money'] += resources_rates.money;
-    resources_base_limits['ideas'] += resources_rates.ideas;
-    ">Extend stores [CHEAT]</button>
-</div>
+<div class="container init_secret" id="resources_container"></div>
 
 <div class="container init_secret" id="events_container">
     <hr>
@@ -112,10 +111,11 @@
     </div>
 </div>
 
-<div class="container" id="lecture_container">
+<div class="container init_secret" id="offered_lecture_container">
     <hr>
+    <div>Offered lectures. Hype:  <span id = "hype"></span></div>
     <button class="collapsar" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
-    <button id="new_lecture" onclick="Lecture.generateLecture();">Generate new lecture</button>
+    <button id="new_lecture" class = "cheat" onclick="Lecture.generateLecture();">Generate new lecture</button>
         <div id = "offered_lecture_collapse"><div class="container collapse in" id = "offered_lectures_container"></div></div>
 </div>
 
@@ -177,16 +177,123 @@
     <div class="flex-container-row" id="reputations"></div>
 </div>
 
-<hr>
+<div class="container init_secret" id="dungeon_container">
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#dungeon_collapse">-</button>
+    Dungeon
+    <div class="collapse in" id="dungeon_collapse">
+        <div id="dungeon" class="flex-container-column">
+            <div class="flex-element flex-container-row">
+                <div class="flex-element">Stamina: 0/0</div>
+                <div class="flex-element">Poise: 0/0</div>
+                <div class="flex-element">HP: 0/0</div>
+                <div class="flex-element">MP: 0/0</div>
+            </div>
+            <div class="flex-element" id="dungeon_battlefield_container">
+                ____P_______________g_g_g_B_______________________________________
+            </div>
+            <div class="flex-element flex-container-row">
+                <div class="flex-element">
+                    Weapon_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+                <div class="flex-element">
+                    Armor_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+                <div class="flex-element">
+                    HP_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+                <div class="flex-element">
+                    MP_STAT: 0
+                    <button onclick="">Up</button>
+                </div>
+            </div>
+            <div class="flex-element flex-container-row">
+                <div class="flex-element flex-container-column">
+                    <span>Weapon</span>
+                    <div>Sword</div>
+                    <div>Shield</div>
+                    <div>Bow</div>
+                    <div>Staff</div>
+                </div>
+                <div class="flex-element">
+                    <span>Armor</span>
+                    <div>Helm</div>
+                    <div>Chest</div>
+                    <div>Gloves</div>
+                    <div>Boots</div>
+                </div>
+                <div class="flex-element">
+                    <span>Shop</span>
+                    <div>HP Potion</div>
+                    <div>MP Potion</div>
+                    <div>Rage</div>
+                    <div>Firebomb</div>
+                </div>
+                <div class="flex-element">
+                    <span>Magic</span>
+                    <div>Heal</div>
+                    <div>Wave</div>
+                    <div>Rage</div>
+                    <div>Fireball</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+<div class="container init_secret" id="space_container">
+    <!--
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#space_collapse">-</button>
+    <div class="flex-element" id="space_title_container">Space.</div>
+    <div class="flex-element flex-container-row">
+        <div class="flex-element">Uranium: 0</div>
+        <div class="flex-element">Iron: 0</div>
+        <div class="flex-element">Iridium: 0</div>
+        <div class="flex-element">Oil: 0</div>
+    </div>
+    <div class="flex-element flex-container-row">
+        <div class="flex-element">Cargo: 100/100</div>
+        <div class="flex-element">Speed: 100/100</div>
+        <div class="flex-element">Armor: 100/100</div>
+        <div class="flex-element">Shield: 100/100</div>
+    </div>
+    <div class="collapse in" id="space_collapse">
+        <div id="space_content_container" class="flex-container-column">
+            <!-- <div class="flex-element flex-container-column">
+                <div class="flex-element flex-container-column">
+                    <div>FLY 1 Planet</div>
+                    <div>FLY 2 Planet</div>
+                    <div>FLY 3 Planet</div>
+                    <div>FLY 4 Planet</div>
+                    <div>FLY 1 Belt</div>
+                    <div>FLY 2 Belt</div>
+                    <div>FLY 3 Belt</div>
+                    <div>FLY 4 Belt</div>
+                    <div>FLY 3 Belt</div>
+                    <div>FLY 4 Belt</div>
+                    <div>Jump to Orsala</div>
+                </div>
+            </div> // -- >
+        </div>
+    </div> -->
+</div>
 
 
+<div class="container init_secret" id="rally_container"><!--
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#rally_collapse">-</button>
+    Rally
+    <div class="collapse in" id="rally_collapse">
+        <div id="rally" class="flex-container-column"></div>
+    </div>-->
+</div>
 
 
-
-<div class="init_secret" id="cancel_event_container"></div>
-<div class="init_secret" id="upgrade_department_container"></div>
 
 
 
@@ -195,8 +302,14 @@
 
 
 <aside class="sidebar" id="log_panel_container">
-    <div>Log Panel</div>
+    <span>Log Panel</span>
+    <button onclick="LogPanel.clear()">ClearLog</button>
+    <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse" onclick="LogPanel.hide()">-</button>
     <div>Day: <span id="day_indicator">0</span></div>
+    <hr>
+    <div class="collapse in" id="log_panel_collapse">
+            <div id="log_message"></div>
+    <div>
 </aside>
 
 
@@ -209,25 +322,31 @@ draw_all();
 
 var t = setInterval(tick,1000);
 Player.revealSecret('seek');
-Player.revealSecret('teamwork');
 Player.revealSecret('popularization');
 Player.revealSecret('communication');
+Player.revealSecret('attentiveness');
 //Player.revealSecret('motivation');
 events.db.push(Event.generator());
 
-
-if(JSON.parse(localStorage.getItem("Player")) != null) {
-    var savedPlayer = JSON.parse(localStorage.getItem("Player"));
+var savedPlayer = JSON.parse(localStorage.getItem("Player"));
+if (savedPlayer) {
     console.log("savedPlayer" + savedPlayer);
 
-    var i = 0;
-    for (i; i < savedPlayer.volunteers_memory; i++) {
+    for (var i = 0; i < savedPlayer.volunteers_memory; i++) {
         Gatherer.found(1);
         Player.volunteers_memory++;
         Player.volunteers++;
     }
     Player.volunteers += savedPlayer.volunteers_memory - i;
     Player.volunteers_memory += savedPlayer.volunteers_memory - i;
+
+    Player.race_win_points = savedPlayer.race_win_points;
+    Player.race_win_points_memory = savedPlayer.race_win_points_memory;
+}
+
+var savedLectures = JSON.parse(localStorage.getItem("lectures.db"));
+if (savedLectures) {
+    lectures.db = savedLectures;
 }
 
 </script>

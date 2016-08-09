@@ -11,6 +11,7 @@ var Player = {
 
     departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
 
+    // skills
     writing: 0,
     drawing: 0,
     programming: 0,
@@ -18,29 +19,54 @@ var Player = {
 
     knowledge: 0,
     max_knowledge: 0, // ?)
+
     action_points: 0,
 
+    // R1 resources
     likes: 0,
     design: 0,
     money: 0,
     ideas: 0,
 
+    // Reputation
     kindness: 1,
     generosity: 1,
     thoughtfulness: 1,
     innovativeness: 1,
 
-    found_secrets: []
+    found_secrets: [],
+
+    unit: new Unit(),
+
+    ship: new Ship(),
+    conventional_units: 100000,
+
+    race_win_points: 0,
+    race_win_points_memory: 0
 };
+
+Player.addSupervision = function (department_name) {
+    this.departments[department_name].isSupervision = 1;
+    this.departments[department_name].setSupervision(this[this.departments[department_name].multiplying_skill]);
+};
+Player.unit.team = 'ally';
+Player.unit.symbol = 'P';
 
 Player.seek = function() {
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
+    Player.revealSecret('culture');
     Gatherer.found(inflow);
 
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
+};
+
+Player.reset = function () {
+    this.volunteers = 0;
+    this.volunteers_memory = 0;
+    localStorage.removeItem('Player');
 };
 
 Player.shareKnowledge = function() {
@@ -94,7 +120,7 @@ Player.revealSecret = function(secret) {
     if (this.found_secrets.indexOf(secret) == -1) {
         this.found_secrets.push(secret);
         var secret_container = document.getElementById(secret + '_container');
-        if (secret_container) {
+        if (secret_container && secret_container.style.display != 'block') {
             secret_container.style.display = 'block';
         }
         //document.getElementById(secret + '_container').style.display = 'block';
@@ -128,32 +154,33 @@ Player.learn = function(skill, quantity) {
 };
 
 Player.reward = function(resource, quantity, silent) {
-    if (quantity < 0) return false;
-    if (resource != 'culture') {
-        Player.revealSecret('resources'); 
-        Player.revealSecret('events'); 
-    }
-
-    var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
-
+    if (quantity <= 0) return false;
     if (this.checkReputation('generosity', silent)) quantity *= 2;
 
-    if(this[resource] < this.getLimit(resource)) {
-        this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
-    }   
+    if (resources.indexOf(resource) != -1) {
+        Player.revealSecret('resources'); 
+        Player.revealSecret('events');
+        var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
+        if(this[resource] < this.getLimit(resource)) {
+            this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
+        }
+    }
+    else {
+        this[resource] += quantity;
+    }
+
+    Gatherer.increaseResource(resource, limited_quantity);
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
-    Gatherer.increaseResource(resource, limited_quantity);
-    draw_all();
 };
 
 Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
-    var storage_t1 = Storages.buildings.tier1[resource].level * resources_rates[resource];
-    var storage_t2 = Storages.buildings.tier2[resource].level * 2 * resources_rates[resource];
-    var storage_t3 = Storages.buildings.tier3[resource].level * 3 * resources_rates[resource];
-    var storage_t4 = Storages.buildings.tier4[resource].level * 4 * resources_rates[resource];
+    var storage_t1 = (Storages.buildings.tier1[resource].level - 1) * resources_rates[resource];
+    var storage_t2 = (Storages.buildings.tier2[resource].level - 1) * 2 * resources_rates[resource];
+    var storage_t3 = (Storages.buildings.tier3[resource].level - 1) * 3 * resources_rates[resource];
+    var storage_t4 = (Storages.buildings.tier4[resource].level - 1) * 4 * resources_rates[resource];
 
     return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.buildings.sharing.level * 0.01));
 };
@@ -165,7 +192,7 @@ Player.withdraw = function(resource, quantity, silent) {
     this[resource] -= quantity;
     if (!silent) message("Paid " + quantity.toFixed(2) + " of " + resource);
     Gatherer.decrease(resource, quantity);
-    draw_all();
+//    draw_all();
     return true;
 };
 
@@ -173,7 +200,7 @@ Player.paid = function(resource, quantity) {
     this[resource] -= quantity;
     message("Paid " + quantity.toFixed(2) + " of " + resource);
     Gatherer.decrease(resource, quantity);
-    draw_all();
+//    draw_all();
 };
 
 Player.withdrawArray = function(array) {
@@ -191,7 +218,7 @@ Player.withdrawArray = function(array) {
         for (var key in array) {
             Player.withdraw(key, array[key]);
         }
-        draw_all();
+//        draw_all();
         return true;
     }
     return false;
@@ -208,6 +235,8 @@ Player.selfStudy = function(skill) {
     message("You studied " + skill + " himself.");
     this.learn(skill, 2 - (2*(this[skill] / 60)) );
     Gatherer.learn("selfStudy");
+
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
 Player.books = function(skill) {
@@ -219,6 +248,8 @@ Player.books = function(skill) {
     message("You read book about " + skill + ".");
     this.learn(skill, 2 - (2*(Gatherer.events.learn.books / 60)));
     Gatherer.learn("books");
+
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
 
 Player.work = function(skill) {
@@ -250,6 +281,9 @@ Player.work = function(skill) {
     message("You learned some " + skill + " on the job.");
     this.learn(skill, Math.max(0, 2*Math.sin(this[skill]/(Math.PI*6))));
     Gatherer.learn("work");
+
+    this.departments[skills_departments[skill]].countOfWork ++;
+    this.departments[skills_departments[skill]].setSupervision( this[skill]);
 };
 
 Player.petProject = function(skill) {
@@ -269,4 +303,7 @@ Player.petProject = function(skill) {
         startups.found(skill);
         message("You have successfully founded a startup!");
     }
+
+    this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
+

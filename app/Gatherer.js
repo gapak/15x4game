@@ -14,7 +14,10 @@ var Gatherer = {
 
 Gatherer.increaseSkill = function (skill, value) {
     if (Player[skill] - value < 15 && Player[skill] >= 15 ) { badges.achieve(skill + " 1"); }
-    if (Player[skill] - value < 30 && Player[skill] >= 30 ) { badges.achieve(skill + " 2"); }
+    if (Player[skill] - value < 30 && Player[skill] >= 30 ) {
+        badges.achieve(skill + " 2");
+        Player.addSupervision(skills_departments[skill]);
+    }
     if (Player[skill] - value < 45 && Player[skill] >= 45 ) { badges.achieve(skill + " 3"); }
     if (Player[skill] - value < 60 && Player[skill] >= 60 ) { badges.achieve(skill + " 4"); }
 
@@ -80,10 +83,10 @@ Gatherer.search = function () { // ?
 };
 
 Gatherer.found = function (inflow) {
-    if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); }
+    if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); Player.revealSecret('teamwork'); }
     if (Player.volunteers_memory < 30 && Player.volunteers_memory + inflow >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
     if (Player.volunteers_memory < 45 && Player.volunteers_memory + inflow >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
-    if (Player.volunteers_memory < 60 && Player.volunteers_memory + inflow >= 60) { badges.achieve("volunteers 4"); }
+    if (Player.volunteers_memory < 60 && Player.volunteers_memory + inflow >= 60) { badges.achieve("volunteers 4"); Player.revealSecret('activism'); }
 
 };
 

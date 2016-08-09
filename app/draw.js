@@ -9,6 +9,7 @@ function draw_all() {
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
+    w("global_bonus_indicator", Civilization.global_bonus.toFixed(2));
     w("culture_indicator", Player.culture.toFixed(2));
     w("culture_limit_indicator", Player.culture_soft_cap.toFixed(2));
     w("culture_rate_indicator", Player.culture_rate.toFixed(2));
@@ -126,14 +127,19 @@ function draw_all() {
     
     var offered_lectures_html = "";
     lectures.offered.forEach(function (lecture, id, arr) {
-        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "accept_lecture(' + id + ');">Accept</button>';
-        offered_lectures_html += '<button onclick = "skip_lecture(' + id + ');">Skip</button>';
-        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + '</span></div>';
+        for (var name in lecture.cost) break;
+            var cost = lecture.cost[name];
+        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "Lecture.accept_lecture(' + id + ');">Accept</button>';
+        offered_lectures_html += '<button onclick = "Lecture.skip_lecture(' + id + ');">Skip</button>';
+        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + 
+        ' (' + cost + " " + name + ')' + '</span></div>';
+
     });
 
     w("offered_lectures_container", offered_lectures_html);
-    
-    
+
+    w("hype", Lecture.hype);
+     
     w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));
 
@@ -151,8 +157,8 @@ function draw_all() {
     w("skills", skill_html);
 
 
-
-    var resources_html = "";
+    w("resources_container", Storages.getHTML());
+   /*var resources_html = "";
     var storages_html = "";
     resources.forEach(function(resource) {
         resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' + 
@@ -180,13 +186,9 @@ function draw_all() {
             '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
             Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
         resources_html += '</div>';    
-
-
-
-
     });
     w("resources", '<div class="flex-element flex-container-row">' + resources_html + '</div><div id="resources_collapse" class="flex-element flex-container-row"><div>' + storages_html + '</div></div>');
-
+    */
     /*
     w("writing_indicator", Player.writing.toFixed(2));
     w("drawing_indicator", Player.drawing.toFixed(2));
@@ -261,5 +263,18 @@ function draw_all() {
             Player[reputation_name].toFixed(2) + '<span class="flex-element" id="' + reputation_name + '_indicator"></span></div>';
     });
     w("reputations", reputations_html);
+
+    var log_message_html = "";
+    for(var i=LogPanel.message.length-1; i>=0; i--){
+        log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + LogPanel.message[i] + '</span></div></li>';
+    };
+    w("log_message", log_message_html);
+
+
+
+    w("space_container", Space.getHTML());
+    w("rally_container", Rally.getHTML());
+
+    w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 
 }
