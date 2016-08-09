@@ -9,6 +9,7 @@ function draw_all() {
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
+    w("global_bonus_indicator", Civilization.global_bonus.toFixed(2));
     w("culture_indicator", Player.culture.toFixed(2));
     w("culture_limit_indicator", Player.culture_soft_cap.toFixed(2));
     w("culture_rate_indicator", Player.culture_rate.toFixed(2));
@@ -156,8 +157,8 @@ function draw_all() {
     w("skills", skill_html);
 
 
-
-    var resources_html = "";
+    w("resources_container", Storages.getHTML());
+   /*var resources_html = "";
     var storages_html = "";
     resources.forEach(function(resource) {
         resources_html += '<div class="flex-element resource_element">' + resource.capitalizeFirstLetter() + ': ' + 
@@ -185,13 +186,9 @@ function draw_all() {
             '<button onclick="Storages.upgradeBuilding(4, \'' + resource + '\')">Up4: ' + 
             Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2) + ' ' + resource + ' </button></div>';
         resources_html += '</div>';    
-
-
-
-
     });
     w("resources", '<div class="flex-element flex-container-row">' + resources_html + '</div><div id="resources_collapse" class="flex-element flex-container-row"><div>' + storages_html + '</div></div>');
-
+    */
     /*
     w("writing_indicator", Player.writing.toFixed(2));
     w("drawing_indicator", Player.drawing.toFixed(2));
