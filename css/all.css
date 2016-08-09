@@ -8,10 +8,19 @@
 }
 
 .sidebar {
+  width: 20%;
   position: absolute;
   top: 0;
   right: 0;
   border: 1px solid;
+}
+
+.main_content80 {
+  width: 80%;
+}
+
+.main_content100 {
+    width: 100%;
 }
 
 .main_content {

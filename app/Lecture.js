@@ -1,16 +1,17 @@
 
-Lecture.hype = 0;
-Lecture.accepted_lectures_counter = 0;
 
-function Lecture(name, lecturer_name, text, url, cost) {
+function Lecture(lecturer_name, name, text, url, cost) {
+	this.lecturer_name = lecturer_name;
     this.name = name;
-    this.lecturer_name = lecturer_name;
     this.text = text;
     this.url = url;
-    this.cost = cost;
+	this.cost = cost;
     this.patience = (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge;
     this.is_performed = 0;
-}
+};
+
+	Lecture.hype = 0;
+	Lecture.accepted_lectures_counter = 0;
 
  Lecture.generateLecture = function(old_lecturer) {
  	var lecturer_name = "";

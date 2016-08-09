@@ -34,7 +34,7 @@ Civilization.tick = function() {
         Player.withdraw('culture', Civilization.buildings.motivation.workers * 0.01, 1)) {
     //    message('bonus!');
         Player.culture_rate -= Civilization.buildings.motivation.workers * 0.01;
-        this.global_bonus = Civilization.buildings.motivation.getEfficiency(); // .workers * (1 + (0.1 * Civilization.buildings.motivation.level));
+        this.global_bonus = Civilization.buildings.motivation.getEfficiency() / Civilization.getGlobalBonus() ; // .workers * (1 + (0.1 * Civilization.buildings.motivation.level));
     }
     else {
      //   message('minus!');
@@ -54,7 +54,7 @@ Civilization.tick = function() {
         Player.withdraw('culture', Civilization.buildings.education.workers * 0.01, 1)) {
         Player.culture_rate -= Civilization.buildings.education.workers * 0.01;
         Player.revealSecret('knowledge');
-        Player.knowledge += Civilization.buildings.education.getEfficiency() * 1 / (1 + 2*(Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
+        Player.knowledge += Civilization.buildings.education.getEfficiency() * 2 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
     }
 
 };
