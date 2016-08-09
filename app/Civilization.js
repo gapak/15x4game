@@ -8,9 +8,10 @@
         attentiveness: new Building('attentiveness', ['upgradable'], 1.6, 'culture', function(){return 1;}, culture_rate, "Soften culture soft-cap."),
         teamwork: new Building('teamwork', ['upgradable'], 1.7, 'culture', function(){return 1;}, culture_rate, "Expands the maximum size of the teams."),
         sharing: new Building('sharing', ['upgradable'], 1.8, 'culture', function(){return 1;}, 10*culture_rate, "Expands maximum storage size."),
-        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.5, 'culture', function(){return 1;}, culture_rate, "Give a global production bonus, consuming culture."),
-        popularization: new Building('popularization', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your volunteers, consuming culture."),
-        education: new Building('education', ['upgradable', 'maintainable'], 1.3, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your knowledge, consuming culture.")
+        popularization: new Building('popularization', ['upgradable', 'maintainable'], 1.3, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your volunteers, consuming culture."),
+        education: new Building('education', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your knowledge, consuming culture."),
+        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.5, 'culture', function(){return 1;}, culture_rate, "Increases a global production bonus, consuming culture."),
+        activism: new Building('activism', ['upgradable', 'maintainable'], 1.6, 'culture', function(){return 1;}, culture_rate, "Decreases a global production bonus, slowly increase your action points."),
     }
 };
 
@@ -21,6 +22,8 @@ Civilization.getGlobalBonus = function() {
 Civilization.tick = function() {
   //  console.log(Player, Civilization);
     Player.culture_rate = 0;
+
+    this.global_bonus = 0;
 
     Player.culture_soft_cap = (Civilization.buildings.communication.level + 1) * 10;
     if (!Player.culture_soft_cap) Player.culture_soft_cap = 10;
@@ -33,13 +36,15 @@ Civilization.tick = function() {
 
     if (Civilization.buildings.motivation.workers > 0 &&
         Player.withdraw('culture', Civilization.buildings.motivation.workers * 0.01, 1)) {
-    //    message('bonus!');
         Player.culture_rate -= Civilization.buildings.motivation.workers * 0.01;
-        this.global_bonus = Civilization.buildings.motivation.getEfficiency() / Civilization.getGlobalBonus() ; // .workers * (1 + (0.1 * Civilization.buildings.motivation.level));
+        this.global_bonus += Civilization.buildings.motivation.getEfficiency() / Civilization.getGlobalBonus();
     }
-    else {
-     //   message('minus!');
-        this.global_bonus = 0;
+
+    if (Civilization.buildings.activism.workers > 0) {
+        Player.culture_rate -= Civilization.buildings.activism.workers * 0.01;
+        this.global_bonus -= Civilization.buildings.activism.getEfficiency() / Civilization.getGlobalBonus();
+        var debuff = Player.volunteers_memory * 1000 + Player.action_points * 1000 + (Player.likes + Player.design * 10 + Player.money * 100 + Player.ideas * 1000);
+        Player.action_points += Civilization.buildings.activism.getEfficiency() * 10 / (1 + debuff);
     }
 
     if (Civilization.buildings.popularization.workers > 0 &&

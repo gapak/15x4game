@@ -83,7 +83,7 @@
 <div class="container init_secret" id="culture_container">
     <hr>
     <button class="collapsar" data-toggle="collapse" data-target="#culture_collapse">-</button>
-    <div>Community</div>
+    <div>Community. Global Bonus: <span id="global_bonus_indicator">0</span>%</div>
     <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
     <div class="collapse in" id="culture_collapse">
         <div class="flex-container-column " id="culture"></div>
@@ -333,7 +333,6 @@ draw_all();
 
 var t = setInterval(tick,1000);
 Player.revealSecret('seek');
-Player.revealSecret('teamwork');
 Player.revealSecret('popularization');
 Player.revealSecret('communication');
 Player.revealSecret('attentiveness');
