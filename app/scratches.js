@@ -59,7 +59,7 @@ function message(text) {
     //else if (text.includes("Balance ratio")) {}
     else{LogPanel.messages.push(new LogMessage(false,text));}
     console.log(text);
-    console.log(LogPanel.messages);
+    //console.log(LogPanel.messages);
 }
 
 function tick() {
