@@ -55,7 +55,7 @@ Player.unit.symbol = 'P';
 Player.seek = function() {
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
-    Player.revealSecret('culture');
+    if (this.volunteers_memory > 3) Player.revealSecret('culture');
     Gatherer.found(inflow);
 
     this.volunteers += inflow;
@@ -177,12 +177,12 @@ Player.reward = function(resource, quantity, silent) {
 Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
-    var storage_t1 = Storages.buildings.tier1[resource].level * resources_rates[resource];
-    var storage_t2 = Storages.buildings.tier2[resource].level * 2 * resources_rates[resource];
-    var storage_t3 = Storages.buildings.tier3[resource].level * 3 * resources_rates[resource];
-    var storage_t4 = Storages.buildings.tier4[resource].level * 4 * resources_rates[resource];
+    var storage_t1 = (Storages.buildings.tier1[resource].level - 1) * resources_rates[resource];
+    var storage_t2 = (Storages.buildings.tier2[resource].level - 1) * 2 * resources_rates[resource];
+    var storage_t3 = (Storages.buildings.tier3[resource].level - 1) * 3 * resources_rates[resource];
+    var storage_t4 = (Storages.buildings.tier4[resource].level - 1) * 4 * resources_rates[resource];
 
-    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.buildings.sharing.level * 0.01));
+    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.updates.sharing.level * 0.01));
 };
 
 Player.withdraw = function(resource, quantity, silent) {
@@ -232,7 +232,7 @@ Player.selfStudy = function(skill) {
 
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
 
-    message("You studied " + skill + " himself.");
+    message("You studied " + skill + " yourself.");
     this.learn(skill, 2 - (2*(this[skill] / 60)) );
     Gatherer.learn("selfStudy");
 

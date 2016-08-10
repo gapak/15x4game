@@ -1,31 +1,101 @@
+
 var Storages = {
 	buildings: { 
 		tier1: {
-			likes: new Building('storage for likes', ['upgradable'], 1.2, 'likes', function(){return 1;}, resources_rates['likes'], "Expands the maximum size of the likes."),
-			design: new Building('storage for design', ['upgradable'], 1.2, 'design', function(){return 1;}, resources_rates['design'], "Expands the maximum size of the design."),
-			money: new Building('storage for money', ['upgradable'], 1.2, 'money', function(){return 1;}, resources_rates['money'], "Expands the maximum size of the money."),
-			ideas: new Building('storage for ideas', ['upgradable'], 1.2, 'ideas', function(){return 1;}, resources_rates['ideas'], "Expands the maximum size of the ideas.")
+			likes: new Billet('storage for likes', {likes: resources_rates.likes}, 1.2, "Expands the maximum size of the likes."),
+			design: new Billet('storage for design', {design: resources_rates.design}, 1.2, "Expands the maximum size of the design."),
+			money: new Billet('storage for money', {money: resources_rates.money}, 1.2, "Expands the maximum size of the money."),
+			ideas: new Billet('storage for ideas', {ideas: resources_rates.ideas}, 1.2, "Expands the maximum size of the ideas.")
 		}, 
 		tier2: {
-			likes: new Building('storage for likes', ['upgradable'], 1.3, 'likes', function(){return 1;}, resources_rates['likes'], "Expands the maximum size of the likes."),
-			design: new Building('storage for design', ['upgradable'], 1.3, 'design', function(){return 1;}, resources_rates['design'], "Expands the maximum size of the design."),
-			money: new Building('storage for money', ['upgradable'], 1.3, 'money', function(){return 1;}, resources_rates['money'], "Expands the maximum size of the money."),
-			ideas: new Building('storage for ideas', ['upgradable'], 1.3, 'ideas', function(){return 1;}, resources_rates['ideas'], "Expands the maximum size of the ideas.")
+			likes: new Billet('storage for likes', {likes: resources_rates.likes}, 1.3, "Expands the maximum size of the likes."),
+			design: new Billet('storage for design', {design: resources_rates.design}, 1.3, "Expands the maximum size of the design."),
+			money: new Billet('storage for money', {money: resources_rates.money}, 1.3, "Expands the maximum size of the money."),
+			ideas: new Billet('storage for ideas', {ideas: resources_rates.ideas}, 1.3, "Expands the maximum size of the ideas.")
 		}, 
 		tier3: {
-			likes: new Building('storage for likes', ['upgradable'], 1.4, 'likes', function(){return 1;}, resources_rates['likes'], "Expands the maximum size of the likes."),
-			design: new Building('storage for design', ['upgradable'], 1.4, 'design', function(){return 1;}, resources_rates['design'], "Expands the maximum size of the design."),
-			money: new Building('storage for money', ['upgradable'], 1.4, 'money', function(){return 1;}, resources_rates['money'], "Expands the maximum size of the money."),
-			ideas: new Building('storage for ideas', ['upgradable'], 1.4, 'ideas', function(){return 1;}, resources_rates['ideas'], "Expands the maximum size of the ideas.")
+			likes: new Billet('storage for likes', {likes: resources_rates.likes}, 1.4, "Expands the maximum size of the likes."),
+			design: new Billet('storage for design', {design: resources_rates.design}, 1.4, "Expands the maximum size of the design."),
+			money: new Billet('storage for money', {money: resources_rates.money}, 1.4, "Expands the maximum size of the money."),
+			ideas: new Billet('storage for ideas', {ideas: resources_rates.ideas}, 1.4, "Expands the maximum size of the ideas.")
 		}, 
 		tier4: {
-			likes: new Building('storage for likes', ['upgradable'], 1.5, 'likes', function(){return 1;}, resources_rates['likes'], "Expands the maximum size of the likes."),
-			design: new Building('storage for design', ['upgradable'], 1.5, 'design', function(){return 1;}, resources_rates['design'], "Expands the maximum size of the design."),
-			money: new Building('storage for money', ['upgradable'], 1.5, 'money', function(){return 1;}, resources_rates['money'], "Expands the maximum size of the money."),
-			ideas: new Building('storage for ideas', ['upgradable'], 1.5, 'ideas', function(){return 1;}, resources_rates['ideas'], "Expands the maximum size of the ideas.")
+			likes: new Billet('storage for likes', {likes: resources_rates.likes}, 1.5, "Expands the maximum size of the likes."),
+			design: new Billet('storage for design', {design: resources_rates.design}, 1.5, "Expands the maximum size of the design."),
+			money: new Billet('storage for money', {money: resources_rates.money}, 1.5, "Expands the maximum size of the money."),
+			ideas: new Billet('storage for ideas', {ideas: resources_rates.ideas}, 1.5, "Expands the maximum size of the ideas.")
 		} 
 	}	
 };
+
+Storages.getHTML = function () {
+    var html = `<hr><button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
+    Resources:
+    <div id="resources">`;
+
+	var resources_html = "";
+    var storages_html = "";
+    resources.forEach(function(resource) {
+        resources_html += `
+       	<div class="flex-element resource_element"> 
+        	${resource.capitalizeFirstLetter()}: 
+            ${Player[resource].toFixed(2)} <span class="flex-element" id="${resource}_indicator"><span class = "resource_limit">/ 
+            ${Player.getLimit(resource).toFixed(2)} </span></span>`;
+
+        var sb = Storages.buildings;  
+
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_1`) == -1) ? "init_secret" : "";
+        storages_html += `
+        	<div class="flex-element ${secret_class}" id="sold_for_${resource}_1_container">
+	        	${sb.tier1[resource].name}: ${sb.tier1[resource].level}
+	            <button onclick = "Storages.upgradeBuilding(1, \'${resource}\')">Up1:
+	            	${Storages.getUpgradeCostBuilding(1, resource)[resource].toFixed(2)} ${resource} 
+	            </button>
+	        </div>`;
+
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_2`) == -1) ? "init_secret" : "";
+        storages_html += `
+        	<div class="flex-element ${secret_class}">
+	        	${sb.tier2[resource].name}: ${sb.tier2[resource].level}
+	            <button onclick = "Storages.upgradeBuilding(2, \'${resource}\')">Up2: 
+	            	${Storages.getUpgradeCostBuilding(2, resource)[resource].toFixed(2)} ${resource} 
+	            </button>
+	        </div>`;
+
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_3`) == -1) ? "init_secret" : "";
+        storages_html += `
+        	<div class="flex-element ${secret_class}">
+	        	${sb.tier3[resource].name}: ${sb.tier3[resource].level}
+	            <button onclick = "Storages.upgradeBuilding(3, \'${resource}\')">Up3:
+	            	${Storages.getUpgradeCostBuilding(3, resource)[resource].toFixed(2)} ${resource} 
+	            </button>
+	        </div>`;
+
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_4`) == -1) ? "init_secret" : "";
+        storages_html += `
+        	<div class="flex-element ${secret_class}">
+	        	${sb.tier4[resource].name}:  ${sb.tier4[resource].level} 
+	            <button onclick = "Storages.upgradeBuilding(4, '${resource}')">Up4:
+	            	${Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2)} ${resource} 
+	            </button>
+	        </div>`;
+        	resources_html += `
+        </div>`;    
+    });
+
+    	html += `
+	    <div class="flex-element flex-container-row"> ${resources_html}</div>
+	    <div id="resources_collapse" class="flex-element flex-container-column"> 
+	    	<div class="flex-element flex-container-row">
+	    		${storages_html} 
+	    	</div>
+	    </div>`;
+
+    html += `</div>`;
+    return html;
+};
+
+
 
 Storages.increaseBuilding = function(tier, building) {
     this.buildings['tier' + tier][building].increase();

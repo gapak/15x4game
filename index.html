@@ -11,6 +11,7 @@
     <script src="js/bootstrap.js"></script>
 
     <script language="JavaScript" src="app/parts/Billet.js"></script>
+    <script language="JavaScript" src="app/parts/Workplace.js"></script>
 
     <script language="JavaScript" src="app/scratches.js"></script>
     <script language="JavaScript" src="app/knowledge.js"></script>
@@ -83,44 +84,16 @@
 <div class="container init_secret" id="culture_container">
     <hr>
     <button class="collapsar" data-toggle="collapse" data-target="#culture_collapse">-</button>
-    <div>Community</div>
+    <div>Community. Global Bonus: <span id="global_bonus_indicator">0</span>%</div>
     <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
     <div class="collapse in" id="culture_collapse">
         <div class="flex-container-column " id="culture"></div>
     </div>
 </div>
 
-<div class="container init_secret" id="departments_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#departments_collapse">-</button>
-    Departments:
-    <div class="collapse in" id="departments_collapse">
-        <div class="flex-container-row" id="departments"></div>
-    </div>
-</div>
-
-<div class="container init_secret" id="resources_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
-    Resources:
-    <div id="resources"></div>
-    <button class = "cheat"  id="" onclick="
-    resources_base_limits['likes'] += resources_rates.likes;
-    resources_base_limits['design'] += resources_rates.design;
-    resources_base_limits['money'] += resources_rates.money;
-    resources_base_limits['ideas'] += resources_rates.ideas;
-    ">Extend stores [CHEAT]</button>
-</div>
-
-<div class="container init_secret" id="events_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#events_collapse">-</button>
-    Events:
-    <button class = "init_secret"  id="invent_container" onclick="Event.inventButton();">Invent a New Event</button>
-    <div class="collapse in" id="events_collapse">
-        <div class="flex-container-row" id="events"></div>
-    </div>
-</div>
+<div class="container init_secret" id="departments_container"></div>
+<div class="container init_secret" id="resources_container"></div>
+<div class="container init_secret" id="events_container"></div>
 
 <div class="container init_secret" id="offered_lecture_container">
     <hr>
@@ -333,9 +306,9 @@ draw_all();
 
 var t = setInterval(tick,1000);
 Player.revealSecret('seek');
-Player.revealSecret('teamwork');
 Player.revealSecret('popularization');
 Player.revealSecret('communication');
+Player.revealSecret('attentiveness');
 //Player.revealSecret('motivation');
 events.db.push(Event.generator());
 
