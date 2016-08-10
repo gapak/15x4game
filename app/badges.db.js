@@ -111,3 +111,20 @@ badges.achieve = function (name) {
         message("Badge reached: " + array[0].name);
     });
 };
+
+badges.getHTML = function () {
+
+    var html = `<hr>
+        <button class="collapsar" data-toggle="collapse" data-target="#badges_collapse">-</button>
+        Badges:
+        <div class="collapse in" id="badges_collapse">
+            <div id="badges">`;
+
+    badges.db.filter(function (badge) {
+        return badge.reached;
+    }).forEach(function (val, id, arr) {
+        html += `<div class="badge_element"><span class="badge_name">${val.label}. ${val.text}</span></div>`;
+    });
+    html += `</div></div>`;
+    return html;
+};
