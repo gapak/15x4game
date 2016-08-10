@@ -55,7 +55,7 @@ Player.unit.symbol = 'P';
 Player.seek = function() {
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
-    Player.revealSecret('culture');
+    if (this.volunteers_memory > 3) Player.revealSecret('culture');
     Gatherer.found(inflow);
 
     this.volunteers += inflow;

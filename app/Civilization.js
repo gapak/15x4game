@@ -52,7 +52,7 @@ Civilization.tick = function() {
     if (Civilization.works.popularization.workers > 0 &&
         Player.withdraw('culture', Civilization.works.popularization.workers * 0.01, 1)) {
         Player.culture_rate -= Civilization.works.popularization.workers * 0.01;
-        var new_volunteers = Civilization.works.popularization.getEfficiency() * 100 / Math.pow(Player.volunteers_memory, 2);
+        var new_volunteers = Civilization.works.popularization.getEfficiency() * Math.max(100, 200 - Player.volunteers_memory) / Math.pow(Player.volunteers_memory, 2);
         Gatherer.found(new_volunteers);
         Player.volunteers += new_volunteers;
         Player.volunteers_memory += new_volunteers;
@@ -79,10 +79,10 @@ Civilization.getHTML = function() {
     for (var key in Civilization.updates) {
         var update = Civilization.updates[key];
         var secret_class = (Player.found_secrets.indexOf(update.name) == -1) ? " init_hidden " : "";
-        html += `    <div class="flex-element flex-container-column ' + secret_class + '" id="' + key + '_container">
+        html += `    <div class="flex-element flex-container-column ${secret_class}" id="${key}_container">
                         <div class="flex-element flex-container-row ">
                             ${key.capitalizeFirstLetter()}
-                            <div class="' + secret_class + '">: <span id="' + key + 'level">${update.level}</span></div>
+                            <div class="${secret_class}">: <span id="${key}level">${update.level}</span></div>
                         </div>`;
 
         var upgrade_cost = update.getUpgradeCost();
@@ -98,10 +98,10 @@ Civilization.getHTML = function() {
     for (var key in Civilization.works) {
         var work = Civilization.works[key];
         var secret_class = (Player.found_secrets.indexOf(work.name) == -1) ? " init_hidden " : "";
-        html += `    <div class="flex-element flex-container-column ' + secret_class + '" id="' + key + '_container">
+        html += `    <div class="flex-element flex-container-column ${secret_class}" id="${key}_container">
                         <div class="flex-element flex-container-row ">
                             ${key.capitalizeFirstLetter()}
-                            <div class="' + secret_class + '">: <span id="' + key + 'level">${work.level}</span></div>
+                            <div class="${secret_class}">: <span id="${key}level">${work.level}</span></div>
                         </div>`;
 
         var upgrade_cost = work.getUpgradeCost();
