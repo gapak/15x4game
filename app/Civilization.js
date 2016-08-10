@@ -10,10 +10,10 @@
         sharing: new Billet('sharing', {culture: culture_rate * 10}, 1.8, "Expands maximum storage size."),
     },
     works: {
-        popularization: new Building('popularization', ['upgradable', 'maintainable'], 1.3, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your volunteers, consuming culture."),
-        education: new Building('education', ['upgradable', 'maintainable'], 1.4, 'culture', function(){return 0.01;}, culture_rate, "Slowly increase your knowledge, consuming culture."),
-        motivation: new Building('motivation', ['upgradable', 'maintainable'], 1.5, 'culture', function(){return 1;}, culture_rate, "Increases a global production bonus, consuming culture."),
-        activism: new Building('activism', ['upgradable', 'maintainable'], 1.6, 'culture', function(){return 1;}, culture_rate, "Decreases a global production bonus, slowly increase your action points."),
+        popularization: new Workplace('popularization', {culture: culture_rate}, 1.3, "Slowly increase volunteers, consuming culture."),
+        education: new Workplace('education', {culture: culture_rate}, 1.4, "Slowly increase knowledge, consuming culture."),
+        motivation: new Workplace('motivation', {culture: culture_rate}, 1.5, "Increases global bonus, consuming culture."),
+        activism: new Workplace('activism', {culture: culture_rate}, 1.6, "Decreases global bonus, slowly increase action points."),
     }
 };
 
@@ -52,7 +52,7 @@ Civilization.tick = function() {
     if (Civilization.works.popularization.workers > 0 &&
         Player.withdraw('culture', Civilization.works.popularization.workers * 0.01, 1)) {
         Player.culture_rate -= Civilization.works.popularization.workers * 0.01;
-        var new_volunteers = Civilization.works.popularization.getEfficiency() * Math.max(100, 200 - Player.volunteers_memory) / Math.pow(Player.volunteers_memory, 2);
+        var new_volunteers = Civilization.works.popularization.getEfficiency() * 0.01 * Math.max(100, 200 - Player.volunteers_memory) / Math.pow(Player.volunteers_memory, 2);
         Gatherer.found(new_volunteers);
         Player.volunteers += new_volunteers;
         Player.volunteers_memory += new_volunteers;
@@ -62,7 +62,7 @@ Civilization.tick = function() {
         Player.withdraw('culture', Civilization.works.education.workers * 0.01, 1)) {
         Player.culture_rate -= Civilization.works.education.workers * 0.01;
         Player.revealSecret('knowledge');
-        Player.knowledge += Civilization.works.education.getEfficiency() * 2 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
+        Player.knowledge += Civilization.works.education.getEfficiency() * 0.01 * 2 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
     }
 
 };
@@ -109,15 +109,11 @@ Civilization.getHTML = function() {
         var price = upgrade_cost[resource_name];
 
         html += `<div class="flex-element"><button onclick="Civilization.upgradeWork('${key}');">Up: ${price.toFixed(2)} ${resource_name}</button></div>`;
-
-        if (work.types.indexOf('maintainable') != -1) {
-            html += `<div class="flex-element>
+        html += `<div class="flex-element>
             <span id="' + key + '_volunteers">Workers: ${work.workers}/${Civilization.updates.teamwork.level}</span>
             <button class = "" onclick="Civilization.increaseWork('${key}');"> + </button>
             <button class = "" onclick="Civilization.decreaseWork('${key}');"> - </button>
             </div>`;
-        }
-
         html += `<div class="flex-element">${work.text}</div></div>`;
     }
 
