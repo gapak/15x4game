@@ -51,6 +51,7 @@
     <script language="JavaScript" src="app/lectures.db.js"></script>
 
     <script language="JavaScript" src="app/LogPanel.js"></script>
+    <script language="JavaScript" src="app/tips.js"></script>
 
     <script language="JavaScript"></script>
 </head>
@@ -190,16 +191,29 @@
 
 </div>
 
+
+
+<div class="container init_secret" id="rally_container"><!--
+    <hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#rally_collapse">-</button>
+    Rally
+    <div class="collapse in" id="rally_collapse">
+        <div id="rally" class="flex-container-column"></div>
+    </div>-->
+</div>
+
 <div>
     <aside class="sidebar" id="log_panel_container">
         <span>Log Panel</span>
         <button onclick="LogPanel.clear()">ClearLog</button>
-        <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse" onclick="LogPanel.hide()">-</button>
+        <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse" style="top: 0px;" onclick="LogPanel.hide()">-</button>
         <div>Day: <span id="day_indicator">0</span></div>
         <hr>
         <div class="collapse in" id="log_panel_collapse">
-                <div id="log_message"></div>
-        </div>
+        <div id="log_panel_filters"></div>
+        <hr>
+        <div id="log_message"></div>
+        <div>
     </aside>
 </div>
 

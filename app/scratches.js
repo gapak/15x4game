@@ -56,10 +56,10 @@ function sum( obj ) {
 
 function message(text) {
     if(text == "A new day."){LogPanel.day++;}
-    else if (text.includes("Balance ratio")) {}
-    else{LogPanel.message.push(text);}
+    //else if (text.includes("Balance ratio")) {}
+    else{LogPanel.messages.push(new LogMessage(false,text));}
     console.log(text);
-    //console.log(LogPanel.message);
+    //console.log(LogPanel.messages);
 }
 
 function tick() {

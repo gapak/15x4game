@@ -16,14 +16,15 @@ function draw_all() {
     w("hype", Lecture.hype);   
     w("knowledge_indicator", Player.knowledge.toFixed(2));
 
+
     var skill_html = "";
     skills.forEach(function(skill) {
         skill_html += '<div class="flex-element flex-container-column" id="' + skill + '">';
         skill_html += '<span id="' + skill + '_indicator">' + skill.capitalizeFirstLetter() + ': ' + Player[skill].toFixed(2) + '/60</span>';
-        skill_html += '<button onclick="Player.selfStudy(\'' + skill + '\')">Self-study</button>';
-        skill_html += '<button onclick="Player.books(\'' + skill + '\')">Books</button>';
-        skill_html += '<button onclick="Player.work(\'' + skill + '\')">Work</button>';
-        skill_html += '<button onclick="Player.petProject(\'' + skill + '\')">Pet-project</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.selfStudy(\'' + skill + '\')">Self-study</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.books(\'' + skill + '\')">Books</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.work(\'' + skill + '\')">Work</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.petProject(\'' + skill + '\')">Pet-project</button>';
         skill_html += '</div>';
     });
 
@@ -55,10 +56,18 @@ function draw_all() {
     });
     w("reputations", reputations_html);
 
+
+    FilterLogs();
     var log_message_html = "";
-    for(var i=LogPanel.message.length-1; i>=0; i--){
-        log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + LogPanel.message[i] + '</span></div></li>';
+    log_message_html += "<ul>";
+    if(LogPanel.messages.length!=0) {
+        for (var i = LogPanel.messages.length-1; i >= 0; i--) {
+            if(LogPanel.messages[i].filter == true) {
+                log_message_html += '<li><div class="log_message_element"><span class="log_message_name">' + LogPanel.messages[i].text + '</span></div></li>';
+            };
+        };
     };
+    log_message_html += "</ul>";
     w("log_message", log_message_html);
 
 
