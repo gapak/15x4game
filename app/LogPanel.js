@@ -16,7 +16,7 @@ LogPanel.filters = ["Badge", "Not enough", "Paid"];
 
 var check_html ="";
 LogPanel.filters.forEach(function (filter) {
-	check_html += '<input type="checkbox" name="log_filter" value="'+filter+'">'+filter;
+	check_html += '<input type="checkbox" name="log_filter" checked="checked" value="'+filter+'">'+filter;
 });
 
 document.addEventListener("DOMContentLoaded", function() {
