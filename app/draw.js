@@ -77,13 +77,4 @@ function draw_all() {
 
     w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 
-    resources.forEach(function(resource) {
-        var plenum=Player[resource]/Player.getLimit(resource);
-        if(plenum<0.75){
-            document.getElementById(resource+"_indicator").style.color = "black";
-        }else if(plenum<0.95){
-            document.getElementById(resource+"_indicator").style.color = "orange";
-        }else  document.getElementById(resource+"_indicator").style.color = "red";
-    });
 }
-
