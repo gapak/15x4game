@@ -9,6 +9,8 @@ function draw_all() {
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));
 
+
+    /*
     w("global_bonus_indicator", Civilization.global_bonus.toFixed(2));
     w("culture_indicator", Player.culture.toFixed(2));
     w("culture_limit_indicator", Player.culture_soft_cap.toFixed(2));
@@ -49,6 +51,9 @@ function draw_all() {
     }
     w("culture", culture_html);
 
+    */
+
+    w("culture_container", Civilization.getHTML());
 
 
     /*var department_html = "";
@@ -68,7 +73,7 @@ function draw_all() {
         department_html += '<button onclick="Player.upgradeDepartment(\'' + key + '\');">Up: ' + price.toFixed(2) + ' ' + resource_name + ' </button>';
         department_html += '</div>';
         department_html += '<div>';
-        department_html += 'Workers: <span id="' + key + '_volunteers"> ' + department.workers + '/' + (Civilization.buildings.teamwork.level+1) + ' </span>';
+        department_html += 'Workers: <span id="' + key + '_volunteers"> ' + department.workers + '/' + (Civilization.updates.teamwork.level) + ' </span>';
         department_html += '<button class = "" onclick="Player.increaseDepartment(\'' + key + '\');">+</button>';
         department_html += '<button class = "" onclick="Player.decreaseDepartment(\'' + key + '\');">-</button>';
         department_html += '</div>';

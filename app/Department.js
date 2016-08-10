@@ -19,7 +19,7 @@ function Department(name) {
     this.increase = function() {
         if (Player.volunteers < 1) {
             message('Not enough free volunteers');
-        } else if (this.workers > Civilization.buildings.teamwork.level ) {
+        } else if (this.workers + 1 > Civilization.updates.teamwork.level) {
             message('Not enough teamwork');
         } else {
             Player.volunteers--;
@@ -92,7 +92,7 @@ Department.getHtml = function() {
             </div>
                 
             <div>Workers: <span id="${key}_volunteers">  
-                ${department.workers} / ${(Civilization.buildings.teamwork.level+1)} </span>
+                ${department.workers} / ${(Civilization.updates.teamwork.level)} </span>
                 <button class = "" onclick="Player.increaseDepartment('${key}');">+</button>
                 <button class = "" onclick="Player.decreaseDepartment('${key}');">-</button>
             </div>
