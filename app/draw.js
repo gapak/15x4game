@@ -11,92 +11,30 @@ function draw_all() {
     w("departments_container", Department.getHTML());
     w("resources_container", Storages.getHTML());
     w("events_container", Event.getHTML());
-    
-    var offered_lectures_html = "";
-    lectures.offered.forEach(function (lecture, id, arr) {
-        for (var name in lecture.cost) break;
-            var cost = lecture.cost[name];
-        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "Lecture.accept_lecture(' + id + ');">Accept</button>';
-        offered_lectures_html += '<button onclick = "Lecture.skip_lecture(' + id + ');">Skip</button>';
-        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + 
-        ' (' + cost + " " + name + ')' + '</span></div>';
+    w("offered_lecture_container", Lecture.getHTML());
 
-    });
-
-    w("offered_lectures_container", offered_lectures_html);
     w("hype", Lecture.hype);   
     w("knowledge_indicator", Player.knowledge.toFixed(2));
-    w("ap_indicator", Player.action_points.toFixed(2));
 
 
     var skill_html = "";
     skills.forEach(function(skill) {
         skill_html += '<div class="flex-element flex-container-column" id="' + skill + '">';
         skill_html += '<span id="' + skill + '_indicator">' + skill.capitalizeFirstLetter() + ': ' + Player[skill].toFixed(2) + '/60</span>';
-        skill_html += '<button onclick="Player.selfStudy(\'' + skill + '\')">Self-study</button>';
-        skill_html += '<button onclick="Player.books(\'' + skill + '\')">Books</button>';
-        skill_html += '<button onclick="Player.work(\'' + skill + '\')">Work</button>';
-        skill_html += '<button onclick="Player.petProject(\'' + skill + '\')">Pet-project</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.selfStudy(\'' + skill + '\')">Self-study</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.books(\'' + skill + '\')">Books</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.work(\'' + skill + '\')">Work</button>';
+        skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.petProject(\'' + skill + '\')">Pet-project</button>';
         skill_html += '</div>';
     });
 
     w("skills", skill_html);
+    w("badges_container", badges.getHTML());
+    w("objectives_container", objectives.getHTML());
 
 
-    /*
-    w("writing_indicator", Player.writing.toFixed(2));
-    w("drawing_indicator", Player.drawing.toFixed(2));
-    w("programming_indicator", Player.programming.toFixed(2));
-    w("management_indicator", Player.management.toFixed(2));
-
-    w("money_indicator", Player.money.toFixed(2));
-    w("ideas_indicator", Player.ideas.toFixed(2));
-    w("decor_indicator", Player.design.toFixed(2));
-    w("likes_indicator", Player.likes.toFixed(2));
-
-     */
-
-
-    var badges_html = "";
-    badges.db.filter(function (badge) {
-        return badge.reached;
-    }).forEach(function (val, id, arr) {
-        badges_html += '<div class="badge_element"><span class="badge_name">' + val.label + '. ' + val.text + '</span></div>';
-    });
-    w("badges", badges_html);
-
-
-    var objectives_html = "";
-    objectives.db.filter(function (objective) {
-        return objective.is_reached();
-    }).forEach(function (objective, id, arr) {
-
-        objectives_html += '<div class="objective_element"><span class="objective_name">';
-        if (!objective.reached) {
-            objectives_html += '<button onclick="objectives.buy(\'' + objective.name + '\')">buy</button>';
-        }
-        objectives_html += objective.label + '. "' + objective.text + '"' + " [";
-        
-        for (var key in objective.cost) {
-            objectives_html += key + ": " + objective.cost[key];
-        }
-        objectives_html += '] </span></div>';
-    });
-    w("objectives", objectives_html);
-
-
-    var actions_html = "";
-    actions.db.filter(function (action) {
-        return action.is_reached();
-    }).forEach(function (action, id, arr) {
-        Player.revealSecret('actions');
-        actions_html += '<div class="action_element">';
-        actions_html += '<button onclick="actions.do(\'' + action.name + '\')">do</button>';
-        actions_html += '<span class="action_name">' + action.name + '.</span>';
-        actions_html += '<span class="action_text"> "' + action.text + '" </span>';
-        actions_html += '</div>';
-    });
-    w("actions", actions_html);
+  
+    w("actions_container", actions.getHTML());
 
     
     var startups_html = "";

@@ -51,221 +51,146 @@
     <script language="JavaScript" src="app/lectures.db.js"></script>
 
     <script language="JavaScript" src="app/LogPanel.js"></script>
+    <script language="JavaScript" src="app/tips.js"></script>
 
-    <script language="JavaScript">
-
-
-
-
-
-    </script>
-
-
+    <script language="JavaScript"></script>
 </head>
+
 <body>
 
 <div class="main_container">
-<div id="main_content" class="main_content80">
+    <div id="main_content" class="main_content80">
 
-
-<div class="container " id="welcome_container">
-    <span id="welcome_indicator">
-        You do not have to be a scientist to save the planet. Act wisely, and share your knowledge!
-    </span>
-</div>
-
-
-<div class="container " id="volunteers_container">
-    Volunteers: <span id="volunteers_indicator">0</span>/<span id="volunteers_memory_indicator">0</span>
-    <button class = "init_secret"  id="seek_container" onclick="Player.seek()">Seek the volunteers</button>
-    <div id="volunteers" ></div>
-</div>
-
-<div class="container init_secret" id="culture_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#culture_collapse">-</button>
-    <div>Community. Global Bonus: <span id="global_bonus_indicator">0</span>%</div>
-    <div>Culture: <span id="culture_indicator">0</span>/<span id="culture_limit_indicator">0</span> (<span id="culture_rate_indicator">0</span>/sec)</div>
-    <div class="collapse in" id="culture_collapse">
-        <div class="flex-container-column " id="culture"></div>
+    <div class="container " id="welcome_container">
+        <span id="welcome_indicator">
+            You do not have to be a scientist to save the planet. Act wisely, and share your knowledge!
+        </span>
     </div>
-</div>
 
-<div class="container init_secret" id="departments_container"></div>
-<div class="container init_secret" id="resources_container"></div>
-<div class="container init_secret" id="events_container"></div>
 
-<div class="container init_secret" id="offered_lecture_container">
-    <hr>
-    <div>Offered lectures. Hype:  <span id = "hype"></span></div>
-    <button class="collapsar" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
-    <button id="new_lecture" class = "cheat" onclick="Lecture.generateLecture();">Generate new lecture</button>
-        <div id = "offered_lecture_collapse"><div class="container collapse in" id = "offered_lectures_container"></div></div>
-</div>
-
-<div class="container init_secret" id="knowledge_container">
-    <hr>
-    <div id="your_knowledge" title="Points that you spend on the creation itself. They knowledge not be able to get back.">Knowledge: <span id="knowledge_indicator">0</span></div>
-    <button class = "" title="Exchange knowledge to volunteer." onclick="Player.shareKnowledge()">Share Your Knowledge</button>
-</div>
-
-<div class="container init_secret" id="skills_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#skills_collapse">-</button>
-    Skills:
-    <div class="collapse in" id="skills_collapse">
-        <div class="flex-container-row" id="skills"></div>
+    <div class="container " id="volunteers_container">
+        Volunteers: <span id="volunteers_indicator">0</span>/<span id="volunteers_memory_indicator">0</span>
+        <button class = "init_secret"  id="seek_container" onclick="Player.seek()">Seek the volunteers</button>
+        <div id="volunteers" ></div>
     </div>
-</div>
 
-<div class="container init_secret" id="actions_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#actions_collapse">-</button>
-    <div id="your_ap">Action Points: <span id="ap_indicator">0</span></div>
-    Actions:
-    <div class="collapse in" id="actions_collapse">
-        <div id="actions"></div>
+    <div class="container init_secret" id="culture_container"></div>
+    <div class="container init_secret" id="departments_container"></div>
+    <div class="container init_secret" id="resources_container"></div>
+    <div class="container init_secret" id="events_container"></div>
+    <div class="container init_secret" id="offered_lecture_container"></div>
+
+    <div class="container init_secret" id="knowledge_container">
+        <hr>
+        <div id="your_knowledge" title="Points that you spend on the creation itself. They knowledge not be able to get back."> 
+            Knowledge: 
+            <span id="knowledge_indicator">0</span>
+        </div>
+        <button class = "" title="Exchange knowledge to volunteer." onclick="Player.shareKnowledge()">Share Your Knowledge</button>
     </div>
-</div>
 
-<div class="container init_secret" id="startups_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#startups_collapse">-</button>
-    Startups:
-    <div class="collapse in" id="startups_collapse">
-        <div id="startups"></div>
+    <div class="container init_secret" id="skills_container">
+        <hr>
+        <button class="collapsar" data-toggle="collapse" data-target="#skills_collapse">-</button>
+        Skills:
+        <div class="collapse in" id="skills_collapse">
+            <div class="flex-container-row" id="skills"></div>
+        </div>
     </div>
-</div>
 
-<div class="container init_secret" id="objectives_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#objectives_collapse">-</button>
-    Objectives:
-    <div class="collapse in" id="objectives_collapse">
-        <div id="objectives"></div>
+    <div class="container init_secret" id="actions_container"></div>
+
+    <div class="container init_secret" id="startups_container">
+        <hr>
+        <button class="collapsar" data-toggle="collapse" data-target="#startups_collapse">-</button>
+        Startups:
+        <div class="collapse in" id="startups_collapse">
+            <div id="startups"></div>
+        </div>
     </div>
-</div>
 
-<div class="container init_secret" id="badges_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#badges_collapse">-</button>
-    Badges:
-    <div class="collapse in" id="badges_collapse">
-        <div id="badges"></div>
+    <div class="container init_secret" id="objectives_container"></div>
+
+    <div class="container init_secret" id="badges_container"></div>
+
+    <div class="container init_secret" id="reputations_container">
+        <hr>
+        Reputation:
+        <div class="flex-container-row" id="reputations"></div>
     </div>
-</div>
 
-<div class="container init_secret" id="reputations_container">
-    <hr>
-    Reputation:
-    <div class="flex-container-row" id="reputations"></div>
-</div>
-
-<div class="container init_secret" id="dungeon_container">
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#dungeon_collapse">-</button>
-    Dungeon
-    <div class="collapse in" id="dungeon_collapse">
-        <div id="dungeon" class="flex-container-column">
-            <div class="flex-element flex-container-row">
-                <div class="flex-element">Stamina: 0/0</div>
-                <div class="flex-element">Poise: 0/0</div>
-                <div class="flex-element">HP: 0/0</div>
-                <div class="flex-element">MP: 0/0</div>
-            </div>
-            <div class="flex-element" id="dungeon_battlefield_container">
-                ____P_______________g_g_g_B_______________________________________
-            </div>
-            <div class="flex-element flex-container-row">
-                <div class="flex-element">
-                    Weapon_STAT: 0
-                    <button onclick="">Up</button>
+    <div class="container init_secret" id="dungeon_container">
+        <hr>
+        <button class="collapsar" data-toggle="collapse" data-target="#dungeon_collapse">-</button>
+        Dungeon
+        <div class="collapse in" id="dungeon_collapse">
+            <div id="dungeon" class="flex-container-column">
+                <div class="flex-element flex-container-row">
+                    <div class="flex-element">Stamina: 0/0</div>
+                    <div class="flex-element">Poise: 0/0</div>
+                    <div class="flex-element">HP: 0/0</div>
+                    <div class="flex-element">MP: 0/0</div>
                 </div>
-                <div class="flex-element">
-                    Armor_STAT: 0
-                    <button onclick="">Up</button>
+                <div class="flex-element" id="dungeon_battlefield_container">
+                    ____P_______________g_g_g_B_______________________________________
                 </div>
-                <div class="flex-element">
-                    HP_STAT: 0
-                    <button onclick="">Up</button>
+                <div class="flex-element flex-container-row">
+                    <div class="flex-element">
+                        Weapon_STAT: 0
+                        <button onclick="">Up</button>
+                    </div>
+                    <div class="flex-element">
+                        Armor_STAT: 0
+                        <button onclick="">Up</button>
+                    </div>
+                    <div class="flex-element">
+                        HP_STAT: 0
+                        <button onclick="">Up</button>
+                    </div>
+                    <div class="flex-element">
+                        MP_STAT: 0
+                        <button onclick="">Up</button>
+                    </div>
                 </div>
-                <div class="flex-element">
-                    MP_STAT: 0
-                    <button onclick="">Up</button>
-                </div>
-            </div>
-            <div class="flex-element flex-container-row">
-                <div class="flex-element flex-container-column">
-                    <span>Weapon</span>
-                    <div>Sword</div>
-                    <div>Shield</div>
-                    <div>Bow</div>
-                    <div>Staff</div>
-                </div>
-                <div class="flex-element">
-                    <span>Armor</span>
-                    <div>Helm</div>
-                    <div>Chest</div>
-                    <div>Gloves</div>
-                    <div>Boots</div>
-                </div>
-                <div class="flex-element">
-                    <span>Shop</span>
-                    <div>HP Potion</div>
-                    <div>MP Potion</div>
-                    <div>Rage</div>
-                    <div>Firebomb</div>
-                </div>
-                <div class="flex-element">
-                    <span>Magic</span>
-                    <div>Heal</div>
-                    <div>Wave</div>
-                    <div>Rage</div>
-                    <div>Fireball</div>
+                <div class="flex-element flex-container-row">
+                    <div class="flex-element flex-container-column">
+                        <span>Weapon</span>
+                        <div>Sword</div>
+                        <div>Shield</div>
+                        <div>Bow</div>
+                        <div>Staff</div>
+                    </div>
+                    <div class="flex-element">
+                        <span>Armor</span>
+                        <div>Helm</div>
+                        <div>Chest</div>
+                        <div>Gloves</div>
+                        <div>Boots</div>
+                    </div>
+                    <div class="flex-element">
+                        <span>Shop</span>
+                        <div>HP Potion</div>
+                        <div>MP Potion</div>
+                        <div>Rage</div>
+                        <div>Firebomb</div>
+                    </div>
+                    <div class="flex-element">
+                        <span>Magic</span>
+                        <div>Heal</div>
+                        <div>Wave</div>
+                        <div>Rage</div>
+                        <div>Fireball</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="container init_secret" id="space_container"></div>
+    <div class="container init_secret" id="rally_container"></div>
+
 </div>
 
-
-<div class="container init_secret" id="space_container">
-    <!--
-    <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#space_collapse">-</button>
-    <div class="flex-element" id="space_title_container">Space.</div>
-    <div class="flex-element flex-container-row">
-        <div class="flex-element">Uranium: 0</div>
-        <div class="flex-element">Iron: 0</div>
-        <div class="flex-element">Iridium: 0</div>
-        <div class="flex-element">Oil: 0</div>
-    </div>
-    <div class="flex-element flex-container-row">
-        <div class="flex-element">Cargo: 100/100</div>
-        <div class="flex-element">Speed: 100/100</div>
-        <div class="flex-element">Armor: 100/100</div>
-        <div class="flex-element">Shield: 100/100</div>
-    </div>
-    <div class="collapse in" id="space_collapse">
-        <div id="space_content_container" class="flex-container-column">
-            <!-- <div class="flex-element flex-container-column">
-                <div class="flex-element flex-container-column">
-                    <div>FLY 1 Planet</div>
-                    <div>FLY 2 Planet</div>
-                    <div>FLY 3 Planet</div>
-                    <div>FLY 4 Planet</div>
-                    <div>FLY 1 Belt</div>
-                    <div>FLY 2 Belt</div>
-                    <div>FLY 3 Belt</div>
-                    <div>FLY 4 Belt</div>
-                    <div>FLY 3 Belt</div>
-                    <div>FLY 4 Belt</div>
-                    <div>Jump to Orsala</div>
-                </div>
-            </div> // -- >
-        </div>
-    </div> -->
-</div>
 
 
 <div class="container init_secret" id="rally_container"><!--
@@ -277,28 +202,19 @@
     </div>-->
 </div>
 
-
-
-
-
-
-</div>
-
-
-<aside class="sidebar" id="log_panel_container">
-    <span>Log Panel</span>
-    <button onclick="LogPanel.clear()">ClearLog</button>
-    <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse" style="top: 0px;" onclick="LogPanel.hide()">-</button>
-    <div>Day: <span id="day_indicator">0</span></div>
-    <hr>
-    <div class="collapse in" id="log_panel_collapse">
-    <div id="log_panel_filters"></div>
-    <hr>
-    <div id="log_message"></div>
-    <div>
-</aside>
-
-
+<div>
+    <aside class="sidebar" id="log_panel_container">
+        <span>Log Panel</span>
+        <button onclick="LogPanel.clear()">ClearLog</button>
+        <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse" style="top: 0px;" onclick="LogPanel.hide()">-</button>
+        <div>Day: <span id="day_indicator">0</span></div>
+        <hr>
+        <div class="collapse in" id="log_panel_collapse">
+        <div id="log_panel_filters"></div>
+        <hr>
+        <div id="log_message"></div>
+        <div>
+    </aside>
 </div>
 
 
