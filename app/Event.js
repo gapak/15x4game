@@ -1,7 +1,7 @@
 
 
 var event_counter = 0;
-
+var canceled_event_counter = 0;
 
 function Event(event_number, cost, lectures) {
     this.event_number = event_number;
@@ -64,8 +64,6 @@ Event.holdEvent = function(event_id) {
     }
 };
 
-
-var canceled_event_counter = 0;
 Event.cancelEvent = function(event_id) {
     canceled_event_counter++;
     Player.action_points += canceled_event_counter;
@@ -92,5 +90,63 @@ Event.inventButton = function () {
     Player.action_points--;
 
     this.invent();
+};
+
+Event.getHTML = function () {
+    var html = `<hr>
+    <button class="collapsar" data-toggle="collapse" data-target="#events_collapse">-</button>
+        Events:
+    <button class = "init_secret"  id="invent_container" onclick="Event.inventButton();">Invent a New Event</button>
+    <div class="collapse in" id="events_collapse">
+        <div class="flex-container-row" id="events">`;
+
+    var events_html = "";
+    window.new_lections = 0;
+    window.done_lections = 0;
+    
+    function getNewAndDoneLections() {
+        window.lectures.db.forEach(function(lecture){
+           if (lecture.is_performed == 0) {
+               new_lections++;
+           } else  {
+               done_lections++;
+           }
+        });
+    }
+    
+    getNewAndDoneLections();
+    events.db.forEach(function (event, id) {
+        
+        html += `
+        <div class="flex-element"> 
+            <button id="hold_event_container" onclick="Event.holdEvent('${id}')">Hold Event</button>`;
+            var secret_class = (Player.found_secrets.indexOf("cancel_event") == -1) ? "init_secret" : "";
+            html += `
+            <button class="' + secret_class + '" onclick="Event.cancelEvent(\'' + id + '\')">Cancel Event</button>
+            <br>Cost:
+            <div class="flex-container-row">`;
+                for (var key in event.cost) {
+                    html += `<div class="flex-element">${key.capitalizeFirstLetter()}: ${event.cost[key]}</div>`;
+                }
+                    html += `
+            </div>
+
+            <span title="New lection give you 1 knowledge point"> 
+                Lectures (${window.done_lections}/${window.new_lections}) :
+            </span>`;
+        event.lectures.forEach(function (lecture) {
+            html += `
+            <div class="event_element">`;
+                var lecture_badge = lecture.is_performed ? '' : 'New!';
+                html += `
+                <span class="lecture_name" title="${lecture.text}">${lecture_badge} ${lecture.name}.</span>;
+            </div>`;
+        });
+            html += `
+        </div>`;
+    });
+    
+    html += `</div></div>`;
+    return html;
 };
 

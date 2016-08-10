@@ -18,7 +18,7 @@ function Building(name, types, price_ratio, price_resource, multiplying_formula,
     this.increase = function() {
         if (Player.volunteers < 1) {
             message('Not enough free volunteers');
-        } else if (this.workers > Civilization.buildings.teamwork.level ) {
+        } else if (this.workers + 1 > Civilization.updates.teamwork.level) {
             message('Not enough teamwork');
         } else {
             Player.volunteers--;
