@@ -102,3 +102,34 @@ function Lecture(lecturer_name, name, text, url, cost) {
  		Lecture.hype--;
  	}
  }
+
+ Lecture.getHTML = function() {
+
+ 	var html = `<hr>
+    <div>Offered lectures. Hype:  
+    	<span id = "hype"></span>
+    </div>
+    <button class="collapsar" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
+    <button id="new_lecture" class = "cheat" onclick="Lecture.generateLecture();">Generate new lecture</button>
+    <div id = "offered_lecture_collapse">
+    	<div class="container collapse in" id = "offered_lectures_container">`;
+
+
+
+    lectures.offered.forEach(function (lecture, id, arr) {
+        for (var name in lecture.cost) break;
+            var cost = lecture.cost[name];
+        html += `
+        <div class="offered_lecture_element">
+        	<button onclick = "Lecture.accept_lecture(${id});">Accept</button>
+       		<button onclick = "Lecture.skip_lecture(${id});">Skip</button>
+        	<span class="offered_lecture_name">
+        		${lecture.lecturer_name}. ${lecture.name} (${cost} ${name})
+        	</span>
+        </div>`;
+
+    });
+
+    html += `</div></div>`;
+    return html;
+ };

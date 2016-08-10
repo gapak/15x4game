@@ -11,19 +11,8 @@ function draw_all() {
     w("departments_container", Department.getHTML());
     w("resources_container", Storages.getHTML());
     w("events_container", Event.getHTML());
-    
-    var offered_lectures_html = "";
-    lectures.offered.forEach(function (lecture, id, arr) {
-        for (var name in lecture.cost) break;
-            var cost = lecture.cost[name];
-        offered_lectures_html += '<div class="offered_lecture_element"><button onclick = "Lecture.accept_lecture(' + id + ');">Accept</button>';
-        offered_lectures_html += '<button onclick = "Lecture.skip_lecture(' + id + ');">Skip</button>';
-        offered_lectures_html += '<span class="offered_lecture_name">' + lecture.lecturer_name + '. ' + lecture.name + 
-        ' (' + cost + " " + name + ')' + '</span></div>';
+    w("offered_lecture_container", Lecture.getHTML());
 
-    });
-
-    w("offered_lectures_container", offered_lectures_html);
     w("hype", Lecture.hype);   
     w("knowledge_indicator", Player.knowledge.toFixed(2));
     w("ap_indicator", Player.action_points.toFixed(2));

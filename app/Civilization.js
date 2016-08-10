@@ -109,8 +109,8 @@ Civilization.getHTML = function() {
         var price = upgrade_cost[resource_name];
 
         html += `<div class="flex-element"><button onclick="Civilization.upgradeWork('${key}');">Up: ${price.toFixed(2)} ${resource_name}</button></div>`;
-        html += `<div class="flex-element>
-            <span id="' + key + '_volunteers">Workers: ${work.workers}/${Civilization.updates.teamwork.level}</span>
+        html += `<div class="flex-element">
+            <span id="${key}_volunteers">Workers: ${work.workers}/${Civilization.updates.teamwork.level}</span>
             <button class = "" onclick="Civilization.increaseWork('${key}');"> + </button>
             <button class = "" onclick="Civilization.decreaseWork('${key}');"> - </button>
             </div>`;
