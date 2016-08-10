@@ -8,9 +8,8 @@ document.onmouseover = function(e) {
         var target = e.target;
         var tooltip = target.getAttribute('data-tooltip');
         if (!tooltip) return;
-
         var tooltipElem = document.createElement('div');
-        tooltipElem.className = 'tooltip';
+        tooltipElem.className = 'skills_tip';
         tooltipElem.innerHTML = "U will get " + Player.countQuantity(tooltip,target.innerText).toFixed(2) + " skill points";
         document.body.appendChild(tooltipElem);
         var coords = target.getBoundingClientRect();
@@ -25,16 +24,13 @@ document.onmouseover = function(e) {
 
         tooltipElem.style.left = left + 'px';
         tooltipElem.style.top = top + 'px';
-
         showingTooltip = tooltipElem;
     }
 };
 
- document.onmouseout = function(e) {
-
+document.onmouseout = function(e) {
  if (showingTooltip) {
  document.body.removeChild(showingTooltip);
  showingTooltip = null;
  }
-
- };
+};

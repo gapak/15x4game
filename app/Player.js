@@ -224,6 +224,40 @@ Player.withdrawArray = function(array) {
     return false;
 };
 
+
+Player.countSelfStudyQuantity = function(skill){
+    return 2 - (2*(this[skill] / 60));
+};
+
+Player.countBooksQuantity = function(){
+    return 2 - (2*(Gatherer.events.learn.books / 60));
+};
+
+Player.countWorkQuantity = function(skill){
+    return Math.max(0, 2*Math.sin(this[skill]/(Math.PI*6)));
+};
+
+Player.countPetProjectQuantity = function(skill){
+    return (this[skill]*this[skill]/60/60)*2;
+};
+
+Player.countQuantity=function(skill,btnName){
+    switch(btnName){
+        case "Self-study":
+            return Player.countSelfStudyQuantity(skill);
+            break;
+        case "Books":
+            return Player.countBooksQuantity();
+            break;
+        case "Work":
+            return Player.countWorkQuantity(skill);
+            break;
+        case "Pet-project":
+            return Player.countPetProjectQuantity(skill);
+            break;
+    }
+};
+
 Player.selfStudy = function(skill) {
     if (this.knowledge < 1) {
         message("You are weak-knowledgeed for study.");
@@ -233,7 +267,7 @@ Player.selfStudy = function(skill) {
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
 
     message("You studied " + skill + " yourself.");
-    this.learn(skill, 2 - (2*(this[skill] / 60)) );
+    this.learn(skill, Player.countSelfStudyQuantity(skill));
     Gatherer.learn("selfStudy");
 
     this.departments[skills_departments[skill]].setSupervision(this[skill]);
@@ -246,7 +280,7 @@ Player.books = function(skill) {
     }
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
     message("You read book about " + skill + ".");
-    this.learn(skill, 2 - (2*(Gatherer.events.learn.books / 60)));
+    this.learn(skill, Player.countBooksQuantity());
     Gatherer.learn("books");
 
     this.departments[skills_departments[skill]].setSupervision(this[skill]);
@@ -279,7 +313,7 @@ Player.work = function(skill) {
     }
 
     message("You learned some " + skill + " on the job.");
-    this.learn(skill, Math.max(0, 2*Math.sin(this[skill]/(Math.PI*6))));
+    this.learn(skill, Player.countWorkQuantity(skill));
     Gatherer.learn("work");
 
     this.departments[skills_departments[skill]].countOfWork ++;
@@ -295,7 +329,7 @@ Player.petProject = function(skill) {
 
     message("You studied " + skill + " working on your pet-project.");
 
-    this.learn(skill, (this[skill]*this[skill]/60/60)*2);
+    this.learn(skill, Player.countPetProjectQuantity(skill));
     Gatherer.learn("petProject");
 
     // ADD (1/10)% chance to achieve your startup company
