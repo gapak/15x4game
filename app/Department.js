@@ -68,7 +68,7 @@ function Department(name) {
     return this;
 }
 
-Department.getHtml = function() {
+Department.getHTML = function() {
     var html = `<hr><button class="collapsar" data-toggle="collapse" data-target="#departments_collapse">-</button>
     Departments: 
     <div class="collapse in" id="departments_collapse">
