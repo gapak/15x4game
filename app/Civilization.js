@@ -17,10 +17,6 @@
     }
 };
 
-Civilization.getGlobalBonus = function() {
-    return (1+(Civilization.global_bonus / 100));
-};
-
 Civilization.tick = function() {
   //  console.log(Player, Civilization);
     Player.culture_rate = 0;
@@ -65,6 +61,10 @@ Civilization.tick = function() {
         Player.knowledge += Civilization.works.education.getEfficiency() * 0.01 * 2 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
     }
 
+};
+
+Civilization.getGlobalBonus = function() {
+    return (1+(Civilization.global_bonus / 100));
 };
 
 Civilization.getHTML = function() {
