@@ -306,4 +306,3 @@ Player.petProject = function(skill) {
 
     this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
-
