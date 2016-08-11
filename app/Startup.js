@@ -6,6 +6,7 @@ function Startup(name, label, size, text, cost, reward) {
     this.text = text;
     this.cost = cost;
     this.reward = reward;
+    this.workplace = new Workplace(name, up_cost, ((size * 0.1) + 1.2), text);
 }
 
 Startup.generator = function (skill_name) {
