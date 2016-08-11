@@ -5,17 +5,16 @@ var Player = {
     volunteers: 0,
     volunteers_memory: 0,
 
+    // C1 resources
     culture: 0,
     culture_soft_cap: 0,
     culture_rate: 0,
 
-    departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
-
-    // skills
-    writing: 0,
-    drawing: 0,
-    programming: 0,
-    management: 0,
+    // C2 resources
+    cultural_approval: 0,
+    cultural_concept: 0,
+    cultural_project: 0,
+    cultural_reform: 0,
 
     knowledge: 0,
     max_knowledge: 0, // ?)
@@ -27,6 +26,14 @@ var Player = {
     design: 0,
     money: 0,
     ideas: 0,
+
+    departments: {'smm': new Department('smm'), 'design': new Department('design'), 'site': new Department('site'), 'docs': new Department('docs')},
+
+    // skills
+    writing: 0,
+    drawing: 0,
+    programming: 0,
+    management: 0,
 
     // Reputation
     kindness: 1,
@@ -42,7 +49,9 @@ var Player = {
     conventional_units: 100000,
 
     race_win_points: 0,
-    race_win_points_memory: 0
+    race_win_points_memory: 0,
+
+    td_trophy: 0
 };
 
 Player.addSupervision = function (department_name) {

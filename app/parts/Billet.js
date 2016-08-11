@@ -23,5 +23,25 @@ function Billet(name, base_cost_array, cost_grow_rate , text) {
         return cost;
     };
 
+    this.getHTML = function(key, secret_class, address) {
+        var upgrade_cost = this.getUpgradeCost();
+        var price = [];
+        for (var resource_name in upgrade_cost) {
+            price.push(`${upgrade_cost[resource_name].toFixed(2)} ${resource_name}`);
+        }
+        price = price.join(', ');
+
+        var html = `<div class="flex-element flex-container-column ${secret_class}" id="${key}_container">
+                        <div class="flex-element flex-container-row ">
+                            ${key.capitalizeFirstLetter()}
+                            <div class="${secret_class}">: <span id="${key}level">${this.level}</span></div>
+                        </div>
+                        <div class="flex-element"><button onclick="${address}('${key}');">Up: ${price}</button></div>
+                        <div class="flex-element">${this.text}</div>
+                    </div>`;
+
+        return html;
+    };
+
     return this;
 }
