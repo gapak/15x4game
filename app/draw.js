@@ -74,6 +74,7 @@ function draw_all() {
 
     w("space_container", Space.getHTML());
     w("rally_container", Rally.getHTML());
+    w("castle_container", Castle.getHTML());
 
     w("dungeon_battlefield_container", Dungeon.getBattlefieldString());
 

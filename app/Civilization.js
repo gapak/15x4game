@@ -79,18 +79,21 @@ Civilization.getHTML = function() {
     for (var key in Civilization.updates) {
         var update = Civilization.updates[key];
         var secret_class = (Player.found_secrets.indexOf(update.name) == -1) ? " init_hidden " : "";
-        html += `    <div class="flex-element flex-container-column ${secret_class}" id="${key}_container">
-                        <div class="flex-element flex-container-row ">
-                            ${key.capitalizeFirstLetter()}
-                            <div class="${secret_class}">: <span id="${key}level">${update.level}</span></div>
-                        </div>`;
-
+        html += update.getHTML(key, secret_class, 'Civilization.upgradeUpdate');
+        /*
         var upgrade_cost = update.getUpgradeCost();
         for (var resource_name in upgrade_cost) break;
         var price = upgrade_cost[resource_name];
 
-        html += `<div class="flex-element"><button onclick="Civilization.upgradeUpdate('${key}');">Up: ${price.toFixed(2)} ${resource_name}</button></div>
-             <div class="flex-element">${update.text}</div></div>`;
+
+        html += `    <div class="flex-element flex-container-column ${secret_class}" id="${key}_container">
+                        <div class="flex-element flex-container-row ">
+                            ${key.capitalizeFirstLetter()}
+                            <div class="${secret_class}">: <span id="${key}level">${update.level}</span></div>
+                        </div>
+                        <div class="flex-element"><button onclick="Civilization.upgradeUpdate('${key}');">Up: ${price.toFixed(2)} ${resource_name}</button></div>
+                        <div class="flex-element">${update.text}</div>
+                    </div>`;*/
     }
 
     html += `</div><br><div class="flex-container-row " id="culture_works">`;

@@ -70,8 +70,10 @@ function tick() {
     Dungeon.tick();
     Space.tick();
     Rally.tick();
-    draw_all();
+    Castle.tick();
     Lecture.tick();
     localStorage.setItem("Player", JSON.stringify(Player));
     localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
+
+    draw_all();
 }

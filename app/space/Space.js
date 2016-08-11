@@ -153,7 +153,7 @@ Space = {
                         action: {
                             name: 'Transform 100 iron to 1 cultural concept',
                             code: function () {
-                                if (Player.ship.withdraw('oil', 100)) {
+                                if (Player.ship.withdraw('iron', 100)) {
                                     Player.reward('cultural_concept', 1);
                                 }
                             }
