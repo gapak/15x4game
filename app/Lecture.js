@@ -39,7 +39,7 @@ function Lecture(lecturer_name, name, text, url, cost) {
  			//message(name + ". " + lecturer_name);
  	var cost = Lecture.generate_offered_lecture_cost();
 
- 	var new_lecture = new Lecture(name, lecturer_name, " ", "https://15x4.org/lecture/random/", cost);
+ 	var new_lecture = new Lecture (lecturer_name, name, " ", "https://15x4.org/lecture/random/", cost);
  	if (!old_lecturer) lectures.offered.push(new_lecture);
 
  	return new_lecture;

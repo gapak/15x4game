@@ -122,7 +122,7 @@ Event.getHTML = function () {
             <button id="hold_event_container" onclick="Event.holdEvent('${id}')">Hold Event</button>`;
             var secret_class = (Player.found_secrets.indexOf("cancel_event") == -1) ? "init_secret" : "";
             html += `
-            <button class="' + secret_class + '" onclick="Event.cancelEvent(\'' + id + '\')">Cancel Event</button>
+            <button class="${secret_class}" onclick="Event.cancelEvent('${id}')">Cancel Event</button>
             <br>Cost:
             <div class="flex-container-row">`;
                 for (var key in event.cost) {
@@ -139,7 +139,7 @@ Event.getHTML = function () {
             <div class="event_element">`;
                 var lecture_badge = lecture.is_performed ? '' : 'New!';
                 html += `
-                <span class="lecture_name" title="${lecture.text}">${lecture_badge} ${lecture.name}.</span>;
+                <span class="lecture_name" title="${lecture.text}">${lecture_badge} ${lecture.name}. ${lecture.lecturer_name}</span>
             </div>`;
         });
             html += `
