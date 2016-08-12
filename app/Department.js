@@ -59,7 +59,7 @@ function Department(name) {
     };
 
     this.getProductivity = function() {
-        var adjustment = 10 / 60 / 60;
+       
      //   console.log(this.name, rate, adjustment);
         return this.getEfficiency() * this.base_rate * adjustment;
     };

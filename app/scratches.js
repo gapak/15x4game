@@ -72,6 +72,7 @@ function tick() {
     Rally.tick();
     Castle.tick();
     Lecture.tick();
+    Startup.tick();
     localStorage.setItem("Player", JSON.stringify(Player));
     localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
 
