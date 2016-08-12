@@ -183,6 +183,12 @@ Player.reward = function(resource, quantity, silent) {
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
 };
 
+Player.rewardArray = function (array, silent) {
+    for (var key in array) {
+        this.reward(key, array[key], silent);
+    };
+};
+
 Player.getLimit = function (resource) {
     if (resources.indexOf(resource) == -1) return Infinity;
 
@@ -205,14 +211,7 @@ Player.withdraw = function(resource, quantity, silent) {
     return true;
 };
 
-Player.paid = function(resource, quantity) {
-    this[resource] -= quantity;
-    message("Paid " + quantity.toFixed(2) + " of " + resource);
-    Gatherer.decrease(resource, quantity);
-//    draw_all();
-};
-
-Player.withdrawArray = function(array) {
+Player.withdrawArray = function(array, silent) {
   //  console.log(array);
 
     var cost_checked = 1;
@@ -225,7 +224,7 @@ Player.withdrawArray = function(array) {
 
     if (cost_checked) {
         for (var key in array) {
-            Player.withdraw(key, array[key]);
+            Player.withdraw(key, array[key], silent);
         }
 //        draw_all();
         return true;
@@ -233,6 +232,12 @@ Player.withdrawArray = function(array) {
     return false;
 };
 
+Player.paid = function(resource, quantity) {
+    this[resource] -= quantity;
+    message("Paid " + quantity.toFixed(2) + " of " + resource);
+    Gatherer.decrease(resource, quantity);
+//    draw_all();
+};
 
 Player.countSelfStudyQuantity = function(skill){
     return 2 - (2*(this[skill] / 60));
@@ -342,10 +347,10 @@ Player.petProject = function(skill) {
     Gatherer.learn("petProject");
 
     // ADD (1/10)% chance to achieve your startup company
-    if (rand(1, 10) == 7) {
+    
         startups.found(skill);
         message("You have successfully founded a startup!");
-    }
+    
 
     this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };

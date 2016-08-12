@@ -31,21 +31,8 @@ function draw_all() {
     w("skills", skill_html);
     w("badges_container", badges.getHTML());
     w("objectives_container", objectives.getHTML());
-
-
-  
     w("actions_container", actions.getHTML());
-
-    
-    var startups_html = "";
-    startups.db.forEach(function (startup, id, arr) {
-        startups_html += '<div class="startup_element">';
-        startups_html += '<button onclick="startups.do(\'' + startup.name + '\')">do</button>';
-        startups_html += '<span class="startup_name">' + startup.label + '.</span>';
-        startups_html += '<span class="startup_text"> "' + startup.text + '" </span>';
-        startups_html += '</div>';
-    });
-    w("startups", startups_html);
+    w("startups_container", Startup.getHTML());
 
 
 

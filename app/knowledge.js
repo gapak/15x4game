@@ -15,6 +15,8 @@ var resources_base_limits = {'likes': 5000, 'design': 500, 'money': 50, 'ideas':
 
 var culture_rate = 1;
 
+var adjustment = 10 / 60 / 60;
+
 var skills_departments = {
     "writing" : 'smm',
     "drawing" : 'design',

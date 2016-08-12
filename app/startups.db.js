@@ -17,7 +17,7 @@ startups.found = function (skill_name) {
 
 
 
-startups.do = function (name) {
+/*startups.do = function (name) {
     if (Player.action_points < 1) {
         message("Not enough action points.");
         return false;
@@ -54,4 +54,4 @@ startups.do = function (name) {
 
     console.log(startup);
 
-};
+}; */
