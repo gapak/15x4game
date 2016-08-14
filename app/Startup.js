@@ -17,7 +17,7 @@ Startup.generator = function (skill_name) {
 
     var name = '';
     var label = '';
-    var text = 'qwerty';
+    var text = '';
     var cost = {};
     var reward = {};
 
@@ -39,8 +39,10 @@ Startup.generator = function (skill_name) {
 
     for (var i = 0; i < size; i++) {
         var cost_res = resources[rand(0,3)];
+        text += `Сonsumes ${cost_res}. `;
         cost[cost_res] = (cost[cost_res]) ? (resources_rates[cost_res] + cost[cost_res]) : resources_rates[cost_res];
         var reward_res = resources[rand(0,3)];
+        text += `Produce ${reward_res}. `;
         reward[reward_res] = (reward[reward_res]) ? (resources_rates[reward_res] + reward[reward_res]) : resources_rates[reward_res];
     }
 
