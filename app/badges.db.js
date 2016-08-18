@@ -3,10 +3,14 @@ var badges = {};
 
 badges.db = [
 
-    new Badge("tick 1", "Lost coordinator", "A month of your coordination is passed. You understand what's what."),
-    new Badge("tick 2", "Verified coordinator", "A ear of your coordination is passed. You steeled enough to avoid mistakes."),
-    new Badge("tick 3", "Experienced coordinator", "A ten ear of your coordination is passed. You ready to invent something new."),
-    new Badge("tick 4", "Hardened coordinator", "A century of your coordination is passed."),
+    new Badge("tick 1", "Lost coordinator", "A month of your coordination is passed. You understand what's what.",
+        function () { return (Gatherer.events.ticks > 30); }, function () {}),
+    new Badge("tick 2", "Verified coordinator", "A ear of your coordination is passed. You steeled enough to avoid mistakes.",
+        function () { return (Gatherer.events.ticks > 356); }, function () { Player.revealSecret('upgrade_department'); Player.revealSecret('cancel_event');  }),
+    new Badge("tick 3", "Experienced coordinator", "A ten ear of your coordination is passed. You ready to invent something new.",
+        function () { return (Gatherer.events.ticks > 356*10); }, function () { Player.revealSecret('invent');  }),
+    new Badge("tick 4", "Hardened coordinator", "A century of your coordination is passed.",
+        function () { return (Gatherer.events.ticks > 356*100); }, function () {}),
 
     new Badge("act 1", "", "You act 15 times."),
     new Badge("act 2", "", "You act 30 times."),
@@ -58,6 +62,8 @@ badges.db = [
     new Badge("culture 3", "", "You led a moral imperative."),
     new Badge("culture 4", "", "You are part of the cultural revolution."),
 
+
+
     new Badge("writing 1", "", "Mom thinks that you write as Dostoevsky."),
     new Badge("writing 2", "", "You think that you write as Dostoevsky."),
     new Badge("writing 3", "", "Everyone thinks that you write as Dostoevsky."),
@@ -79,26 +85,41 @@ badges.db = [
     new Badge("management 4", "", "You know that people do not listen to you."),
 
 
-    new Badge("likes 1", "", "You earned 1000 likes."),
-    new Badge("likes 2", "", "You earned 10000 likes."),
-    new Badge("likes 3", "", "You earned 100000 likes."),
-    new Badge("likes 4", "", "You earned 1000000 likes."),
+    new Badge("likes 1", "", "You earned 1000 likes.",
+        Badge.checkResourcesGenerator('likes', 1), function () {}),
+    new Badge("likes 2", "", "You earned 10000 likes.",
+        Badge.checkResourcesGenerator('likes', 2), function () {}),
+    new Badge("likes 3", "", "You earned 100000 likes.",
+        Badge.checkResourcesGenerator('likes', 3), function () {}),
+    new Badge("likes 4", "", "You earned 1000000 likes.",
+        Badge.checkResourcesGenerator('likes', 4), function () {}),
 
-    new Badge("design 1", "", "You earned 100 design."),
-    new Badge("design 2", "", "You earned 1000 design."),
-    new Badge("design 3", "", "You earned 10000 design."),
-    new Badge("design 4", "", "You earned 100000 design."),
+    new Badge("design 1", "", "You earned 100 design.",
+        Badge.checkResourcesGenerator('design', 1), function () {}),
+    new Badge("design 2", "", "You earned 1000 design.",
+        Badge.checkResourcesGenerator('design', 2), function () {}),
+    new Badge("design 3", "", "You earned 10000 design.",
+        Badge.checkResourcesGenerator('design', 3), function () {}),
+    new Badge("design 4", "", "You earned 100000 design.",
+        Badge.checkResourcesGenerator('design', 4), function () {}),
 
-    new Badge("money 1", "", "You earned 10 money."),
-    new Badge("money 2", "", "You earned 100 money."),
-    new Badge("money 3", "", "You earned 1000 money."),
-    new Badge("money 4", "", "You earned 10000 money."),
+    new Badge("money 1", "", "You earned 10 money.",
+        Badge.checkResourcesGenerator('money', 1), function () {}),
+    new Badge("money 2", "", "You earned 100 money.",
+        Badge.checkResourcesGenerator('money', 2), function () {}),
+    new Badge("money 3", "", "You earned 1000 money.",
+        Badge.checkResourcesGenerator('money', 3), function () {}),
+    new Badge("money 4", "", "You earned 10000 money.",
+        Badge.checkResourcesGenerator('money', 4), function () {}),
 
-    new Badge("ideas 1", "", "You earned 1 ideas."),
-    new Badge("ideas 2", "", "You earned 10 ideas."),
-    new Badge("ideas 3", "", "You earned 100 ideas."),
-    new Badge("ideas 4", "", "You earned 1000 ideas.")
-
+    new Badge("ideas 1", "", "You earned 1 ideas.",
+        Badge.checkResourcesGenerator('ideas', 1), function () {}),
+    new Badge("ideas 2", "", "You earned 10 ideas.",
+        Badge.checkResourcesGenerator('ideas', 2), function () {}),
+    new Badge("ideas 3", "", "You earned 100 ideas.",
+        Badge.checkResourcesGenerator('ideas', 3), function () {}),
+    new Badge("ideas 4", "", "You earned 1000 ideas.",
+        Badge.checkResourcesGenerator('ideas', 4), function () {})
 
 ];
 

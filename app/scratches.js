@@ -66,6 +66,7 @@ function tick() {
     message("A new day.");
     Player.harvest();
     Gatherer.tick();
+    Badge.tick();
     Civilization.tick();
     Dungeon.tick();
     Space.tick();
