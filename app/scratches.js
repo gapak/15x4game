@@ -1,6 +1,34 @@
 
 
 
+function message(text) {
+    if(text == "A new day."){LogPanel.day++;}
+    //else if (text.includes("Balance ratio")) {}
+    else{LogPanel.messages.push(new LogMessage(false,text));}
+    console.log(text);
+    //console.log(LogPanel.messages);
+}
+
+function tick() {
+    message("A new day.");
+    Player.harvest();
+    Gatherer.tick();
+    Badge.tick();
+    Civilization.tick();
+    Dungeon.tick();
+    Space.tick();
+    Rally.tick();
+    Castle.tick();
+    Lecture.tick();
+    Startup.tick();
+    localStorage.setItem("Player", JSON.stringify(Player));
+    localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
+
+    draw_all();
+}
+
+
+
 
 
 function is_reached() {
@@ -21,7 +49,15 @@ function is_reached() {
     return (this.requires.length == founded);
 }
 
-
+function sum( obj ) {
+    var sum = 0;
+    for( var el in obj ) {
+        if( obj.hasOwnProperty( el ) ) {
+            sum += parseFloat( obj[el] );
+        }
+    }
+    return sum;
+}
 
 
 /**
@@ -54,28 +90,3 @@ function sum( obj ) {
 
 
 
-function message(text) {
-    if(text == "A new day."){LogPanel.day++;}
-    //else if (text.includes("Balance ratio")) {}
-    else{LogPanel.messages.push(new LogMessage(false,text));}
-    console.log(text);
-    //console.log(LogPanel.messages);
-}
-
-function tick() {
-    message("A new day.");
-    Player.harvest();
-    Gatherer.tick();
-    Badge.tick();
-    Civilization.tick();
-    Dungeon.tick();
-    Space.tick();
-    Rally.tick();
-    Castle.tick();
-    Lecture.tick();
-    Startup.tick();
-    localStorage.setItem("Player", JSON.stringify(Player));
-    localStorage.setItem("lectures.db", JSON.stringify(lectures.db));
-
-    draw_all();
-}

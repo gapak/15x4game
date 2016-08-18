@@ -17,10 +17,14 @@ badges.db = [
     new Badge("act 3", "", "You act 45 times."),
     new Badge("act 4", "", "You act 60 times."),
 
-    new Badge("resources 1", "", "You collect some."),
-    new Badge("resources 2", "", "You collect many."),
-    new Badge("resources 3", "", "You have wealth."),
-    new Badge("resources 4", "", "You have a huge savings."),
+    new Badge("resources 1", "", "You collect some.",
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000); }, function () { Player.revealSecret('objectives'); }),
+    new Badge("resources 2", "", "You collect many.",
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 10); }, function () {}),
+    new Badge("resources 3", "", "You have wealth.",
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 100); }, function () { Player.revealSecret('sharing'); }),
+    new Badge("resources 4", "", "You have a huge savings.",
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 1000); }, function () {}),
 
     new Badge("volunteers 1", "Group", "Founded 15 volunteers."),
     new Badge("volunteers 2", "Company", "Founded 30 volunteers."),

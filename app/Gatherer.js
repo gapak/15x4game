@@ -58,12 +58,12 @@ Gatherer.increaseResource = function (resource, value) {
         if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
         */
     }
-
+/*
     if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); }
     if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2");  Player.revealSecret('objectives'); }
     if (this.events.increase_resource < 10000 && this.events.increase_resource + 1 >= 10000 ) { badges.achieve("resources 3"); Player.revealSecret('sharing'); }
     if (this.events.increase_resource < 100000 && this.events.increase_resource + 1 >= 100000 ) { badges.achieve("resources 4"); }
-
+*/
     this.events.increase_resource++;
 };
 
