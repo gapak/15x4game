@@ -54,12 +54,15 @@ var Player = {
     td_trophy: 0
 };
 
+Player.unit.team = 'ally';
+Player.unit.symbol = 'P';
+
+
+
 Player.addSupervision = function (department_name) {
     this.departments[department_name].isSupervision = 1;
     this.departments[department_name].setSupervision(this[this.departments[department_name].multiplying_skill]);
 };
-Player.unit.team = 'ally';
-Player.unit.symbol = 'P';
 
 Player.seek = function() {
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
@@ -178,7 +181,7 @@ Player.reward = function(resource, quantity, silent) {
         this[resource] += quantity;
     }
 
-    Gatherer.increaseResource(resource, limited_quantity);
+    Gatherer.collect(resource, limited_quantity);
 
     if (!silent) message("Gained " + quantity.toFixed(2) + " of " + resource);
 };

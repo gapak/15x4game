@@ -1,5 +1,6 @@
 
 var Gatherer = {
+    collection: {},
     events: {
         learn: {selfStudy: 0, books: 0, work: 0, petProject: 0},
         increase: 0,
@@ -9,6 +10,15 @@ var Gatherer = {
         ticks: 0,
         found: 0,
         search: 0
+    }
+};
+
+Gatherer.collect = function (resource, quantity) {
+    if (this.collection[resource]) {
+    this.collection[resource] += quantity;
+    }
+    else {
+        this.collection[resource] = quantity;
     }
 };
 
@@ -40,18 +50,20 @@ Gatherer.increaseResource = function (resource, value) {
         if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
     }
     else {
+        /*
         rate = resources_rates[resource];
         if (Player[resource] - value < (rate * 1) && Player[resource] >= (rate * 1)  ) { badges.achieve(resource + " 1"); }
         if (Player[resource] - value < (rate * 10) && Player[resource] >= (rate * 10)  ) { badges.achieve(resource + " 2"); }
         if (Player[resource] - value < (rate * 100) && Player[resource] >= (rate * 100)  ) { badges.achieve(resource + " 3"); }
         if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
+        */
     }
-
+/*
     if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); }
     if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2");  Player.revealSecret('objectives'); }
     if (this.events.increase_resource < 10000 && this.events.increase_resource + 1 >= 10000 ) { badges.achieve("resources 3"); Player.revealSecret('sharing'); }
     if (this.events.increase_resource < 100000 && this.events.increase_resource + 1 >= 100000 ) { badges.achieve("resources 4"); }
-
+*/
     this.events.increase_resource++;
 };
 
@@ -91,10 +103,12 @@ Gatherer.found = function (inflow) {
 };
 
 Gatherer.tick = function () {
+    /*
     if (this.events.ticks < 7 && this.events.ticks + 1 >= 7 ) {  }
     if (this.events.ticks < 30 && this.events.ticks + 1 >= 30 ) { badges.achieve("tick 1");    }
     if (this.events.ticks < 356 && this.events.ticks + 1 >= 356 ) { badges.achieve("tick 2"); Player.revealSecret('upgrade_department'); Player.revealSecret('cancel_event'); }
     if (this.events.ticks < 356*10 && this.events.ticks + 1 >= 356*10 ) { badges.achieve("tick 3"); Player.revealSecret('invent'); }
     if (this.events.ticks < 356*100 && this.events.ticks + 1 >= 356*100 ) { badges.achieve("tick 4"); }
+    */
     this.events.ticks++;
 };
