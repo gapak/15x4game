@@ -13,7 +13,7 @@ var Civilization = {
         popularization: new Workplace('popularization', {culture: culture_rate}, 1.3, "Slowly increase volunteers, consuming culture."),
         education: new Workplace('education', {culture: culture_rate}, 1.4, "Slowly increase knowledge, consuming enthusiasm."),
         motivation: new Workplace('motivation', {culture: culture_rate}, 1.5, "Increases global bonus, consuming culture."),
-        activism: new Workplace('activism', {culture: culture_rate}, 1.6, "Decreases global bonus, slowly increase action points."),
+        activism: new Workplace('activism', {culture: culture_rate}, 1.6, "Decreases global bonus, slowly increase enthusiasm and action points."),
     }
 };
 
@@ -42,6 +42,7 @@ Civilization.tick = function() {
         Player.culture_rate -= Civilization.works.activism.workers * 0.01;
         this.global_bonus -= Civilization.works.activism.getEfficiency() / Civilization.getGlobalBonus();
         var debuff = Player.volunteers_memory * 1000 + Player.action_points * 1000 + (Player.likes + Player.design * 10 + Player.money * 100 + Player.ideas * 1000);
+        Player.enthusiasm += Civilization.works.activism.getEfficiency() / Civilization.getGlobalBonus() * 1 *Math.max(0, (-1 * Math.pow((Player.enthusiasm-100)/100, 3)));
         Player.action_points += Civilization.works.activism.getEfficiency() / Civilization.getGlobalBonus() * 10 / (1 + debuff);
     }
 
