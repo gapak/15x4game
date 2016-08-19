@@ -55,6 +55,8 @@
     <script language="JavaScript" src="app/LogPanel.js"></script>
     <script language="JavaScript" src="app/tips.js"></script>
 
+    <script language="JavaScript" src="app/time.js"></script>
+
     <script language="JavaScript"></script>
 </head>
 
@@ -70,14 +72,14 @@
     </div>
 
 
-    <div class="container " id="enthusiasm_container">
+    <div class="container " id="enthusiasm_container" title="Collects slowly. Need for many kind of actions.">
         Enthusiasm: <span id="enthusiasm_indicator">0</span>/<span id="enthusiasm_max_indicator">100</span>
         <div id="enthusiasm" ></div>
     </div>
 
     <div class="container " id="volunteers_container">
-        Volunteers: <span id="volunteers_indicator">0</span>/<span id="volunteers_memory_indicator">0</span>
-        <button class = "init_secret"  id="seek_container" onclick="Player.seek()">Seek the volunteers</button>
+        Volunteers: <span id="volunteers_indicator" title="free volunteers produce culture">0</span>/<span id="volunteers_memory_indicator">0</span>
+        <button class = "init_secret"  id="seek_container" onclick="Player.seek()" title="try to find a friend">Seek the volunteers</button>
         <div id="volunteers" ></div>
     </div>
 

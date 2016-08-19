@@ -70,11 +70,7 @@ Player.addSupervision = function (department_name) {
 };
 
 Player.seek = function() {
-    if (this.enthusiasm <= 1) {
-        message("Not enough enthusiasm.");
-        return false;
-    }
-
+    if (!this.checkEnthusiasm()) return false;
     this.enthusiasm--;
 
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
@@ -90,6 +86,14 @@ Player.seek = function() {
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
+};
+
+Player.checkEnthusiasm = function () {
+    if (this.enthusiasm <= 1) {
+        message("Not enough enthusiasm.");
+        return false;
+    }
+    return true;
 };
 
 Player.reset = function () {

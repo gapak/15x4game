@@ -20,16 +20,16 @@ function Lecture(lecturer_name, name, text, url, cost) {
  	} 
  	else {
 	 	var first_name = ['Екатерина', 'Оксана', 'Александр', 'Максим', 'Евгений', 'Григорий', 'Николай'];
-	 	var second_name = ['Хомяк', 'Морж', 'Бро', 'Зло', 'Добро', 'Сыч', 'Попович'];
+	 	var second_name = ['Хомяк', 'Морж', 'Рак', 'Бро', 'Зло', 'Добро', 'Сыч', 'Попович'];
 	 	lecturer_name = first_name[Math.floor(Math.random() * first_name.length)] + " " + 
 	 						second_name[Math.floor(Math.random() * second_name.length)];
  	}
 
 
- 	var noun = ["Гарри Поттер", "15х4", "Биологическое оружие", "Космическая станция", "Атомные реакторы", "Садоводство", "Дзен", "Зомби", "Наркотики", "ГМО", "Хофштадтер"];
- 	var second_noun = ["методы", "фунции", "генератор", "оружие", "открытие", "создание", "искусство", "принципы", "основы", "попытка", "метафизика"];
- 	var adjective = ["рационального", "социального", "случайного", "массового", "наименьшего", "сознательного", "принципиального", "нормального", "культурного", "медленного", "качественного"];
- 	var supplement = ["мышления", "менеджмента", "значения", "поражения", "котика", "существования", "управления", "генератора", "употребления", "обьяснения", "познания"];
+ 	var noun = ["Гарри Поттер", "15х4", "Биологическое оружие", "Космическая станция", "Атомные реакторы", "Садоводство", "Дзен", "Зомби", "Наркотики", "ГМО", "Хофштадтер", "Проституция", "Торговля людьми", "Рыбалка"];
+ 	var second_noun = ["методы", "фунции", "генератор", "оружие", "открытие", "создание", "искусство", "принципы", "основы", "попытка", "метафизика", "последствия", "проявление", "последствия", "причины"];
+ 	var adjective = ["рационального", "социального", "случайного", "массового", "наименьшего", "сознательного", "принципиального", "нормального", "культурного", "медленного", "качественного", "Кантовского", "философского"];
+ 	var supplement = ["мышления", "менеджмента", "значения", "поражения", "котика", "существования", "управления", "генератора", "употребления", "обьяснения", "познания", "принципа", "императива"];
 
  	var name = noun[Math.floor(Math.random() * noun.length)] + " как " + 
  			second_noun[Math.floor(Math.random() * second_noun.length)] + " " + 
@@ -58,20 +58,31 @@ function Lecture(lecturer_name, name, text, url, cost) {
 	 	console.log("Lecture has accepted");
 	 	Lecture.accepted_lectures_counter++;
  	}
- }
+ };
 
- Lecture.skip_lecture = function(lecture_id) {
- 	if (Player.action_points < 1) {
-        message("Not enough action points.");
-        return false;
-    }
-    else {
-    	Player.action_points--;
-	 	var lecture = lectures.offered[lecture_id];
-	 	var name = lecture.lecturer_name;
-	 	lectures.offered[lecture_id] = Lecture.generateLecture(name);
- 	}
- }
+Lecture.skip_lecture = function(lecture_id) {
+	if (Player.action_points < 1) {
+		message("Not enough action points.");
+		return false;
+	}
+	else {
+		Player.action_points--;
+		var lecture = lectures.offered[lecture_id];
+		var name = lecture.lecturer_name;
+		lectures.offered[lecture_id] = Lecture.generateLecture(name);
+	}
+};
+
+Lecture.addTime = function(lecture_id) {
+	if (Player.action_points < 1) {
+		message("Not enough action points.");
+		return false;
+	}
+	else {
+		Player.action_points--;
+		lectures.offered[lecture_id].patience += (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness;
+	}
+};
 
  Lecture.generate_offered_lecture_cost = function () {
  	var random_resource = resources[Math.floor(Math.random() * resources.length)];
@@ -79,10 +90,10 @@ function Lecture(lecturer_name, name, text, url, cost) {
  	var offered_lecture_cost = {};
 
  	offered_lecture_cost[random_resource] = random_resource_cost;
- 	console.log(offered_lecture_cost);
+ //	console.log(offered_lecture_cost);
 	return offered_lecture_cost;
  	
- }
+ };
 
  Lecture.tick = function () {
  	lectures.offered.forEach(function (lecture, id) {
@@ -101,7 +112,7 @@ function Lecture(lecturer_name, name, text, url, cost) {
  		}
  		Lecture.hype--;
  	}
- }
+ };
 
  Lecture.getHTML = function() {
 
@@ -119,12 +130,17 @@ function Lecture(lecturer_name, name, text, url, cost) {
     lectures.offered.forEach(function (lecture, id, arr) {
         for (var name in lecture.cost) break;
             var cost = lecture.cost[name];
+
+		var timer = (lecture.patience < 60) ? ` (leave after ${lecture.patience.toFixed(0)}) ` : '';
+
         html += `
         <div class="offered_lecture_element">
         	<button onclick = "Lecture.accept_lecture(${id});">Accept</button>
-       		<button onclick = "Lecture.skip_lecture(${id});">Skip</button>
+       		<button onclick = "Lecture.skip_lecture(${id});">Change Theme</button>
+       		<button onclick = "Lecture.addTime(${id});">Add time</button>
         	<span class="offered_lecture_name">
-        		${lecture.lecturer_name}. ${lecture.name} (${cost} ${name})
+        		${lecture.lecturer_name}. ${lecture.name} (need ${cost} ${name})
+        		${timer}
         	</span>
         </div>`;
 

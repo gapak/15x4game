@@ -8,8 +8,11 @@ function Billet(name, base_cost_array, cost_grow_rate , text) {
     this.level = 1;
 
     this.upgrade = function() {
+        if (!Player.checkEnthusiasm()) return false;
+
         if (Player.withdrawArray(this.getUpgradeCost())) {
             this.level++;
+            Player.enthusiasm--;
             draw_all();
         }
     };

@@ -32,7 +32,7 @@ function Workplace(name, base_cost_array, cost_grow_rate, text) {
     };
 
     this.getEfficiency = function() {
-        return Civilization.getGlobalBonus() * this.workers * (1 + (0.1 * this.level));
+        return Civilization.getHappiness() * this.workers * (1 + (0.1 * this.level));
     };
 
     this.getProductivity = function() {

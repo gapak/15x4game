@@ -141,7 +141,7 @@ badges.getHTML = function () {
 
     var html = `<hr>
         <button class="collapsar" data-toggle="collapse" data-target="#badges_collapse">-</button>
-        Badges:
+        <span title="some achievements open next parts of game-play">Achievements:</span>
         <div class="collapse in" id="badges_collapse">
             <div id="badges">`;
 
