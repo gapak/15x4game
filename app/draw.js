@@ -3,6 +3,9 @@ function draw_all() {
         document.getElementById(element_id).innerHTML = text;
     }
 
+
+    w("enthusiasm_indicator", Player.enthusiasm.toFixed(2));
+
     w("day_indicator", LogPanel.day.toFixed());
     w("volunteers_indicator", Player.volunteers.toFixed(2));
     w("volunteers_memory_indicator", Player.volunteers_memory.toFixed(2));

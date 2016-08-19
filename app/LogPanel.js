@@ -12,7 +12,7 @@ function LogMessage(filter, text) {
 	this.text = text;
 };
 
-LogPanel.filters = ["Badge", "Not enough", "Paid"];
+LogPanel.filters = ["Badge", "Not enough", "Paid", "Reward"];
 
 var check_html ="";
 LogPanel.filters.forEach(function (filter) {

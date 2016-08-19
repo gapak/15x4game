@@ -1,6 +1,6 @@
 
 
-    var Civilization = {
+var Civilization = {
     global_bonus: 0,
 
     updates: {
@@ -11,7 +11,7 @@
     },
     works: {
         popularization: new Workplace('popularization', {culture: culture_rate}, 1.3, "Slowly increase volunteers, consuming culture."),
-        education: new Workplace('education', {culture: culture_rate}, 1.4, "Slowly increase knowledge, consuming culture."),
+        education: new Workplace('education', {culture: culture_rate}, 1.4, "Slowly increase knowledge, consuming enthusiasm."),
         motivation: new Workplace('motivation', {culture: culture_rate}, 1.5, "Increases global bonus, consuming culture."),
         activism: new Workplace('activism', {culture: culture_rate}, 1.6, "Decreases global bonus, slowly increase action points."),
     }
@@ -42,8 +42,13 @@ Civilization.tick = function() {
         Player.culture_rate -= Civilization.works.activism.workers * 0.01;
         this.global_bonus -= Civilization.works.activism.getEfficiency() / Civilization.getGlobalBonus();
         var debuff = Player.volunteers_memory * 1000 + Player.action_points * 1000 + (Player.likes + Player.design * 10 + Player.money * 100 + Player.ideas * 1000);
-        Player.action_points += Civilization.works.activism.getEfficiency() * 10 / (1 + debuff);
+        Player.action_points += Civilization.works.activism.getEfficiency() / Civilization.getGlobalBonus() * 10 / (1 + debuff);
     }
+
+    // low enthusiasm level reduce global bonus
+    this.global_bonus -= (50 - Player.enthusiasm/2);
+
+
 
     if (Civilization.works.popularization.workers > 0 &&
         Player.withdraw('culture', Civilization.works.popularization.workers * 0.01, 1)) {
@@ -55,10 +60,10 @@ Civilization.tick = function() {
     }
 
     if (Civilization.works.education.workers > 0 &&
-        Player.withdraw('culture', Civilization.works.education.workers * 0.01, 1)) {
-        Player.culture_rate -= Civilization.works.education.workers * 0.01;
+        Player.withdraw('enthusiasm', Civilization.works.education.workers * 0.01, 1)) {
+        //Player.culture_rate -= Civilization.works.education.workers * 0.01;
         Player.revealSecret('knowledge');
-        Player.knowledge += Civilization.works.education.getEfficiency() * 0.01 * 2 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
+        Player.knowledge += Civilization.works.education.getEfficiency() * 0.01 * 3 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
     }
 
 };
