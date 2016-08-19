@@ -4,6 +4,8 @@ function draw_all() {
     }
 
 
+    w("time_container", Time.getHTML());
+
     w("enthusiasm_indicator", Player.enthusiasm.toFixed(2));
 
     w("day_indicator", LogPanel.day.toFixed());

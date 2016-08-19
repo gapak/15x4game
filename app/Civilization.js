@@ -10,10 +10,14 @@ var Civilization = {
         sharing: new Billet('sharing', {culture: culture_rate * 10}, 1.9, "Expands maximum storage size."),
     },
     works: {
-        popularization: new Workplace('popularization', {culture: culture_rate}, 1.4, "Slowly increase volunteers, consuming culture."),
-        education: new Workplace('education', {culture: culture_rate}, 1.5, "Slowly increase knowledge, consuming enthusiasm."),
-        motivation: new Workplace('motivation', {culture: culture_rate}, 1.6, "Increases happiness, consuming culture."),
-        activism: new Workplace('activism', {culture: culture_rate}, 1.7, "Decreases happiness, slowly increase enthusiasm and action points."),
+        popularization: new Workplace('popularization', {culture: culture_rate}, 1.4, "Slowly increase volunteers, consuming culture.",
+            function () { return (Time.season == 'winter') ? 2 : 1; }),
+        education: new Workplace('education', {culture: culture_rate}, 1.5, "Slowly increase knowledge, consuming enthusiasm.",
+            function () { return (Time.season == 'autumn') ? 2 : 1; }),
+        motivation: new Workplace('motivation', {culture: culture_rate}, 1.6, "Increases happiness, consuming culture.",
+            function () { return (Time.season == 'spring') ? 2 : 1; }),
+        activism: new Workplace('activism', {culture: culture_rate}, 1.7, "Decreases happiness, slowly increase enthusiasm and action points.",
+            function () { return (Time.season == 'summer') ? 2 : 1; }),
     }
 };
 
@@ -106,6 +110,9 @@ Civilization.getHTML = function() {
     for (var key in Civilization.works) {
         var work = Civilization.works[key];
         var secret_class = (Player.found_secrets.indexOf(work.name) == -1) ? " init_hidden " : "";
+        html += work.getHTML(key, secret_class, 'Civilization.upgradeWork');
+
+        /*
         html += `    <div class="flex-element flex-container-column ${secret_class}" id="${key}_container">
                         <div class="flex-element flex-container-row ">
                             ${key.capitalizeFirstLetter()}
@@ -119,10 +126,10 @@ Civilization.getHTML = function() {
         html += `<div class="flex-element"><button onclick="Civilization.upgradeWork('${key}');">Up: ${price.toFixed(2)} ${resource_name}</button></div>`;
         html += `<div class="flex-element">
             <span id="${key}_volunteers">Workers: ${work.workers}/${Civilization.updates.teamwork.level}</span>
-            <button class = "" onclick="Civilization.increaseWork('${key}');"> + </button>
-            <button class = "" onclick="Civilization.decreaseWork('${key}');"> - </button>
+            <button class = "" onclick="Civilization.increase('${key}');"> + </button>
+            <button class = "" onclick="Civilization.decrease('${key}');"> - </button>
             </div>`;
-        html += `<div class="flex-element">${work.text}</div></div>`;
+        html += `<div class="flex-element">${work.text}</div></div>`; */
     }
 
     html += `</div></div></div>`;
@@ -138,11 +145,11 @@ Civilization.getUpgradeCostUpdate = function(update) {
     return this.updates[update].getUpgradeCost();
 };
 
-Civilization.increaseWork = function(work) {
+Civilization.increase = function(work) {
     this.works[work].increase();
 };
 
-Civilization.decreaseWork = function(work) {
+Civilization.decrease = function(work) {
     this.works[work].decrease();
 };
 
