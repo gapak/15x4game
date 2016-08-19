@@ -51,7 +51,6 @@ Event.holdEvent = function(event_id) {
                 Player.knowledge++;
                 Lecture.hype += 15;
                 Player.revealSecret('knowledge');
-                Player.revealSecret('skills');
             }
             lecture.is_performed++;
             Player.action_points += lecture.is_performed;

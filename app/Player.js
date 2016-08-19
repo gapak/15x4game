@@ -108,6 +108,7 @@ Player.shareKnowledge = function() {
         this.knowledge--;
         this.volunteers++;
         this.volunteers_memory++;
+        Gatherer.events.knowledge_sharing++;
         message("Reward: You share knowledge and found a volunteer.");
     }
     else {
@@ -192,7 +193,7 @@ Player.reward = function(resource, quantity, silent) {
 
     if (resources.indexOf(resource) != -1) {
         Player.revealSecret('resources'); 
-        Player.revealSecret('events');
+        //Player.revealSecret('events');
         var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
         if(this[resource] < this.getLimit(resource)) {
             this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
