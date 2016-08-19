@@ -54,7 +54,7 @@ function Building(name, types, price_ratio, price_resource, multiplying_formula,
     };
 
     this.getEfficiency = function() {
-        return Civilization.getGlobalBonus() * this.workers * (1 + (0.1 * this.level)) * this.multiplying_formula();
+        return Civilization.getHappiness() * this.workers * (1 + (0.1 * this.level)) * this.multiplying_formula();
     };
 
     this.getProductivity = function() {

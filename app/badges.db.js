@@ -17,13 +17,13 @@ badges.db = [
     new Badge("act 3", "", "You act 45 times."),
     new Badge("act 4", "", "You act 60 times."),
 
-    new Badge("resources 1", "", "You collect some.",
+    new Badge("resources 1", "Resources dabbling", "You collect some.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000); }, function () { Player.revealSecret('objectives'); }),
-    new Badge("resources 2", "", "You collect many.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 10); }, function () {}),
-    new Badge("resources 3", "", "You have wealth.",
+    new Badge("resources 2", "Resources collector", "You collect many.",
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 10); }, function () { Player.revealSecret('events'); }),
+    new Badge("resources 3", "Resources achiever", "You have wealth.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 100); }, function () { Player.revealSecret('sharing'); }),
-    new Badge("resources 4", "", "You have a huge savings.",
+    new Badge("resources 4", "Resources tycoon", "You have a huge savings.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 1000); }, function () {}),
 
     new Badge("volunteers 1", "Group", "Founded 15 volunteers."),
@@ -36,6 +36,16 @@ badges.db = [
     new Badge("learn 3", "", "You learn how to learning fast."),
     new Badge("learn 4", "", "You learn how to learning things you needed."),
 
+
+
+    new Badge("share 1", "Ready to learn", "You shared your knowledge 15 times.",
+        function () { return (Gatherer.events.knowledge_sharing > 15); }, function () { Player.revealSecret('skills'); Player.revealSecret('self_study'); }),
+    new Badge("share 2", "Ready to read", "You shared your knowledge 30 times.",
+        function () { return (Gatherer.events.knowledge_sharing > 30); }, function () { Player.revealSecret('books'); }),
+    new Badge("share 3", "Ready to work", "You shared your knowledge 45 times.",
+        function () { return (Gatherer.events.knowledge_sharing > 45); }, function () { Player.revealSecret('work'); }),
+    new Badge("share 4", "Ready to lead", "You shared your knowledge 60 times.",
+        function () { return (Gatherer.events.knowledge_sharing > 60); }, function () { Player.revealSecret('pet_project'); }),
 
 
     new Badge("selfStudy 1", "", "15 Self Studies"),
@@ -89,40 +99,40 @@ badges.db = [
     new Badge("management 4", "", "You know that people do not listen to you."),
 
 
-    new Badge("likes 1", "", "You earned 1000 likes.",
+    new Badge("likes 1", "Likes dabbling", "You earned 1000 likes.",
         Badge.checkResourcesGenerator('likes', 1), function () {}),
-    new Badge("likes 2", "", "You earned 10000 likes.",
+    new Badge("likes 2", "Likes collector", "You earned 10000 likes.",
         Badge.checkResourcesGenerator('likes', 2), function () {}),
-    new Badge("likes 3", "", "You earned 100000 likes.",
+    new Badge("likes 3", "Likes achiever", "You earned 100000 likes.",
         Badge.checkResourcesGenerator('likes', 3), function () {}),
-    new Badge("likes 4", "", "You earned 1000000 likes.",
+    new Badge("likes 4", "Likes tycoon", "You earned 1000000 likes.",
         Badge.checkResourcesGenerator('likes', 4), function () {}),
 
-    new Badge("design 1", "", "You earned 100 design.",
+    new Badge("design 1", "Design dabbling", "You earned 100 design.",
         Badge.checkResourcesGenerator('design', 1), function () {}),
-    new Badge("design 2", "", "You earned 1000 design.",
+    new Badge("design 2", "Design collector", "You earned 1000 design.",
         Badge.checkResourcesGenerator('design', 2), function () {}),
-    new Badge("design 3", "", "You earned 10000 design.",
+    new Badge("design 3", "Design achiever", "You earned 10000 design.",
         Badge.checkResourcesGenerator('design', 3), function () {}),
-    new Badge("design 4", "", "You earned 100000 design.",
+    new Badge("design 4", "Design tycoon", "You earned 100000 design.",
         Badge.checkResourcesGenerator('design', 4), function () {}),
 
-    new Badge("money 1", "", "You earned 10 money.",
+    new Badge("money 1", "Money dabbling", "You earned 10 money.",
         Badge.checkResourcesGenerator('money', 1), function () {}),
-    new Badge("money 2", "", "You earned 100 money.",
+    new Badge("money 2", "Money collector", "You earned 100 money.",
         Badge.checkResourcesGenerator('money', 2), function () {}),
-    new Badge("money 3", "", "You earned 1000 money.",
+    new Badge("money 3", "Money achiever", "You earned 1000 money.",
         Badge.checkResourcesGenerator('money', 3), function () {}),
-    new Badge("money 4", "", "You earned 10000 money.",
+    new Badge("money 4", "Money tycoon", "You earned 10000 money.",
         Badge.checkResourcesGenerator('money', 4), function () {}),
 
-    new Badge("ideas 1", "", "You earned 1 ideas.",
+    new Badge("ideas 1", "Ideas dabbling", "You earned 1 ideas.",
         Badge.checkResourcesGenerator('ideas', 1), function () {}),
-    new Badge("ideas 2", "", "You earned 10 ideas.",
+    new Badge("ideas 2", "Ideas collector", "You earned 10 ideas.",
         Badge.checkResourcesGenerator('ideas', 2), function () {}),
-    new Badge("ideas 3", "", "You earned 100 ideas.",
+    new Badge("ideas 3", "Ideas achiever", "You earned 100 ideas.",
         Badge.checkResourcesGenerator('ideas', 3), function () {}),
-    new Badge("ideas 4", "", "You earned 1000 ideas.",
+    new Badge("ideas 4", "Ideas tycoon", "You earned 1000 ideas.",
         Badge.checkResourcesGenerator('ideas', 4), function () {})
 
 ];
@@ -141,7 +151,7 @@ badges.getHTML = function () {
 
     var html = `<hr>
         <button class="collapsar" data-toggle="collapse" data-target="#badges_collapse">-</button>
-        Badges:
+        <span title="some achievements open next parts of game-play">Achievements:</span>
         <div class="collapse in" id="badges_collapse">
             <div id="badges">`;
 

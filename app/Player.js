@@ -1,6 +1,7 @@
 
 
 var Player = {
+    enthusiasm: 0,
 
     volunteers: 0,
     volunteers_memory: 0,
@@ -58,6 +59,10 @@ Player.unit.team = 'ally';
 Player.unit.symbol = 'P';
 
 
+Player.tick = function () {
+    this.enthusiasm += Math.max(0, (-1 * Math.pow((this.enthusiasm-100)/100, 3)));
+    this.harvest();
+};
 
 Player.addSupervision = function (department_name) {
     this.departments[department_name].isSupervision = 1;
@@ -65,14 +70,30 @@ Player.addSupervision = function (department_name) {
 };
 
 Player.seek = function() {
+    if (!this.checkEnthusiasm()) return false;
+    this.enthusiasm--;
+
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
-    if (this.volunteers_memory > 3) Player.revealSecret('culture');
+    if (this.volunteers_memory > 3) {
+        Player.revealSecret('culture');
+    }
+    else {
+        message('Reward: You found one more volunteers.');
+    }
     Gatherer.found(inflow);
 
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
+};
+
+Player.checkEnthusiasm = function () {
+    if (this.enthusiasm <= 1) {
+        message("Not enough enthusiasm.");
+        return false;
+    }
+    return true;
 };
 
 Player.reset = function () {
@@ -87,7 +108,8 @@ Player.shareKnowledge = function() {
         this.knowledge--;
         this.volunteers++;
         this.volunteers_memory++;
-        message("You share knowledge and found a volunteer.");
+        Gatherer.events.knowledge_sharing++;
+        message("Reward: You share knowledge and found a volunteer.");
     }
     else {
         message("Not enough knowledge.");
@@ -171,7 +193,7 @@ Player.reward = function(resource, quantity, silent) {
 
     if (resources.indexOf(resource) != -1) {
         Player.revealSecret('resources'); 
-        Player.revealSecret('events');
+        //Player.revealSecret('events');
         var limited_quantity = Math.min(quantity, this.getLimit(resource) - this[resource]);
         if(this[resource] < this.getLimit(resource)) {
             this[resource] += Math.min(quantity, this.getLimit(resource) - this[resource]);
@@ -189,7 +211,7 @@ Player.reward = function(resource, quantity, silent) {
 Player.rewardArray = function (array, silent) {
     for (var key in array) {
         this.reward(key, array[key], silent);
-    };
+    }
 };
 
 Player.getLimit = function (resource) {
@@ -200,7 +222,7 @@ Player.getLimit = function (resource) {
     var storage_t3 = (Storages.buildings.tier3[resource].level - 1) * 3 * resources_rates[resource];
     var storage_t4 = (Storages.buildings.tier4[resource].level - 1) * 4 * resources_rates[resource];
 
-    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + (Civilization.updates.sharing.level * 0.01));
+    return (resources_base_limits[resource] + storage_t1 + storage_t2 + storage_t3 + storage_t4) * (1 + ((Civilization.updates.sharing.level - 1) * 0.01));
 };
 
 Player.withdraw = function(resource, quantity, silent) {

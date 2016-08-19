@@ -2,6 +2,8 @@
 var Gatherer = {
     collection: {},
     events: {
+        knowledge_sharing: 0,
+
         learn: {selfStudy: 0, books: 0, work: 0, petProject: 0},
         increase: 0,
         increase_skill: 0,
