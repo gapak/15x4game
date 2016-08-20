@@ -301,7 +301,7 @@ Player.countQuantity=function(skill,btnName){
 
 Player.selfStudy = function(skill) {
     if (this.knowledge < 1) {
-        message("You are weak-knowledgeed for study.");
+        message("You are weak-knowledged for study.");
         return false;
     }
 
@@ -316,7 +316,7 @@ Player.selfStudy = function(skill) {
 
 Player.books = function(skill) {
     if (this.knowledge < 1) {
-        message("You are weak-knowledgeed for reading.");
+        message("You are weak-knowledged for reading.");
         return false;
     }
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
@@ -329,7 +329,7 @@ Player.books = function(skill) {
 
 Player.work = function(skill) {
     if (this.knowledge < 1) {
-        message("You are weak-knowledgeed for the job.");
+        message("You are weak-knowledged for the job.");
         return false;
     }
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
@@ -337,19 +337,19 @@ Player.work = function(skill) {
     switch(skill) {
         case "writing":
             message("You worked as a copywriter.");
-            this.reward("money", Math.max(this[skill], 0));
+            this.reward("likes", resources_rates["likes"] * Math.max(this[skill], 0));
             break;
         case "drawing":
             message("You worked as a designer.");
-            this.reward("money", Math.max((this[skill]*2)-30, 0));
+            this.reward("design", resources_rates["design"] * Math.max((this[skill]*2)-30, 0));
             break;
         case "programming":
             message("You worked as a coder.");
-            this.reward("money", Math.max((this[skill]*4)-120, 0));
+            this.reward("money", resources_rates["money"] * Math.max((this[skill]*4)-120, 0));
             break;
         case "management":
             message("You worked as a PM.");
-            this.reward("money", Math.max((this[skill]*10)-450, 0));
+            this.reward("ideas", resources_rates["ideas"] * Math.max((this[skill]*10)-450, 0));
             break;
     }
 
@@ -363,7 +363,7 @@ Player.work = function(skill) {
 
 Player.petProject = function(skill) {
     if (this.knowledge < 1) {
-        message("You are weak-knowledgeed for working.");
+        message("You are weak-knowledged for working.");
         return false;
     }
     if (!this.checkReputation('thoughtfulness')) this.knowledge--;
