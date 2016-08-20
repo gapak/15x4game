@@ -101,6 +101,7 @@ Player.reset = function () {
     this.volunteers_memory = 0;
     savedLectures = {};
     localStorage.removeItem('Player');
+    localStorage.removeItem('lectures.db');
     location.reload();
 };
 
