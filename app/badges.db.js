@@ -39,13 +39,13 @@ badges.db = [
 
 
     new Badge("share 1", "Ready to learn", "You shared your knowledge 15 times.",
-        function () { return (Gatherer.events.knowledge_sharing > 15); }, function () { Player.revealSecret('skills'); Player.revealSecret('self_study'); }),
+        function () { return (Gatherer.events.knowledge_sharing >= 15); }, function () { Player.revealSecret('skills'); Player.revealSecret('self_study'); }),
     new Badge("share 2", "Ready to read", "You shared your knowledge 30 times.",
-        function () { return (Gatherer.events.knowledge_sharing > 30); }, function () { Player.revealSecret('books'); }),
+        function () { return (Gatherer.events.knowledge_sharing >= 30); }, function () { Player.revealSecret('books'); }),
     new Badge("share 3", "Ready to work", "You shared your knowledge 45 times.",
-        function () { return (Gatherer.events.knowledge_sharing > 45); }, function () { Player.revealSecret('work'); }),
+        function () { return (Gatherer.events.knowledge_sharing >= 45); }, function () { Player.revealSecret('work'); }),
     new Badge("share 4", "Ready to lead", "You shared your knowledge 60 times.",
-        function () { return (Gatherer.events.knowledge_sharing > 60); }, function () { Player.revealSecret('pet_project'); }),
+        function () { return (Gatherer.events.knowledge_sharing >= 60); }, function () { Player.revealSecret('pet_project'); }),
 
 
     new Badge("selfStudy 1", "", "15 Self Studies"),

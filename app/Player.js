@@ -99,7 +99,9 @@ Player.checkEnthusiasm = function () {
 Player.reset = function () {
     this.volunteers = 0;
     this.volunteers_memory = 0;
+    savedLectures = {};
     localStorage.removeItem('Player');
+    location.reload();
 };
 
 Player.shareKnowledge = function() {
@@ -378,12 +380,4 @@ Player.petProject = function(skill) {
     
 
     this.departments[skills_departments[skill]].setSupervision(this[skill]);
-};
-
-Player.reset = function() {
-    Player.volunteers = 0;
-    console.log(Player.volunteers);
-    Player.volunteers_memory = 0;
-    console.log(Player.volunteers_memory);
-    savedLectures = {};
 };

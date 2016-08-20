@@ -14,12 +14,14 @@ skills.getHTML = function() {
         html += `
         <div class="flex-element flex-container-column" id="${skill}">
         	<span id="${skill}_indicator"> ${skill.capitalizeFirstLetter()}: ${Player[skill].toFixed(2)}/60</span>
-        	<button data-tooltip='${skill}' onclick="Player.selfStudy('${skill}')">Self-study</button>
-        	<button data-tooltip='${skill}' onclick="Player.books('${skill}')">Books</button>
-        	<button data-tooltip='${skill}' onclick="Player.work('${skill}')">Work</button>
-        	<button data-tooltip='${skill}' onclick="Player.petProject('${skill}')">Pet-project</button>
+        	${(Player.found_secrets.indexOf('self_study') !== -1) ? `<button data-tooltip='${skill}' onclick="Player.selfStudy('${skill}')">Self-study</button>` : ''}
+        	${(Player.found_secrets.indexOf('books') !== -1) ? `<button data-tooltip='${skill}' onclick="Player.books('${skill}')">Books</button>` : ''}
+        	${(Player.found_secrets.indexOf('work') !== -1) ? `<button data-tooltip='${skill}' onclick="Player.work('${skill}')">Work</button>` : ''}
+        	${(Player.found_secrets.indexOf('pet_project') !== -1) ? `<button data-tooltip='${skill}' onclick="Player.petProject('${skill}')">Pet-project</button>` : ''}
         </div>`;
     });
     html += `</div></div>`;
     return html;
 };
+
+
