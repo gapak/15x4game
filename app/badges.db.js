@@ -32,6 +32,7 @@ badges.db = [
     new Badge("volunteers 4", "Organization", "Founded 60 volunteers."),
 
     new Badge("learn 1", "", "You learn how to learning."),
+       // function () { return (Gatherer.events.increase_skill < 15 && Gatherer.events.increase_skill + 1 >= 15)}),
     new Badge("learn 2", "", "You learn how to learning right."),
     new Badge("learn 3", "", "You learn how to learning fast."),
     new Badge("learn 4", "", "You learn how to learning things you needed."),

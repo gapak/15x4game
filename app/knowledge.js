@@ -1,8 +1,5 @@
 
 
-
-var skills = ["writing", "drawing", "programming", "management"];
-
 var resources = ['likes', 'design', 'money', 'ideas'];
 
 var space_resources = ['iron', 'oil', 'uranium', 'iridium'];
