@@ -22,7 +22,7 @@ function draw_all() {
     w("knowledge_indicator", Player.knowledge.toFixed(2));
 
 
-    var skill_html = "";
+    /*var skill_html = "";
     skills.forEach(function(skill) {
         skill_html += '<div class="flex-element flex-container-column" id="' + skill + '">';
         skill_html += '<span id="' + skill + '_indicator">' + skill.capitalizeFirstLetter() + ': ' + Player[skill].toFixed(2) + '/60</span>';
@@ -31,9 +31,9 @@ function draw_all() {
         if (Player.found_secrets.indexOf('work') !== -1) skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.work(\'' + skill + '\')">Work</button>';
         if (Player.found_secrets.indexOf('pet_project') !== -1) skill_html += '<button data-tooltip=\'' + skill + '\' onclick="Player.petProject(\'' + skill + '\')">Pet-project</button>';
         skill_html += '</div>';
-    });
+    });*/
 
-    w("skills", skill_html);
+    w("skills_container", skills.getHTML());
     w("badges_container", badges.getHTML());
     w("objectives_container", objectives.getHTML());
     w("actions_container", actions.getHTML());

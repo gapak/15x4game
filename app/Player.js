@@ -379,3 +379,11 @@ Player.petProject = function(skill) {
 
     this.departments[skills_departments[skill]].setSupervision(this[skill]);
 };
+
+Player.reset = function() {
+    Player.volunteers = 0;
+    console.log(Player.volunteers);
+    Player.volunteers_memory = 0;
+    console.log(Player.volunteers_memory);
+    savedLectures = {};
+};

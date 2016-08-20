@@ -33,6 +33,7 @@
     <script language="JavaScript" src="app/Department.js"></script>
     <script language="JavaScript" src="app/Player.js"></script>
     <script language="JavaScript" src="app/Storages.js"></script>
+    <script language="JavaScript" src="app/skills.js"></script>
 
     <script language="JavaScript" src="app/Badge.js"></script>
     <script language="JavaScript" src="app/badges.db.js"></script>
@@ -109,14 +110,8 @@
             </button>
         </div>
 
-        <div class="container init_secret" id="skills_container">
-            <hr>
-            <button class="collapsar" data-toggle="collapse" data-target="#skills_collapse">-</button>
-            Skills:
-            <div class="collapse in" id="skills_collapse">
-                <div class="flex-container-row" id="skills"></div>
-            </div>
-        </div>
+    <div class="container init_secret" id="skills_container"></div>
+
 
         <div class="container init_secret" id="actions_container"></div>
 
@@ -125,6 +120,10 @@
         <div class="container init_secret" id="objectives_container"></div>
 
         <div class="container init_secret" id="badges_container"></div>
+
+        <div class="container" id="reset_container">
+            <button onclick="Player.reset()" id="reset_button">Reset</button>
+        </div>
 
         <div class="container init_secret" id="reputations_container">
             <hr>
