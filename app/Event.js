@@ -58,6 +58,7 @@ Event.holdEvent = function(event_id) {
         });
 
         events.db.splice(event_id, 1);
+        Gatherer.holdEvent();
         this.invent();
         draw_all();
     }

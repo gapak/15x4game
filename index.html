@@ -38,6 +38,9 @@
     <script language="JavaScript" src="app/Badge.js"></script>
     <script language="JavaScript" src="app/badges.db.js"></script>
 
+    <script language="JavaScript" src="app/Goal.js"></script>
+    <script language="JavaScript" src="app/goals.db.js"></script>
+
     <script language="JavaScript" src="app/Startup.js"></script>
     <script language="JavaScript" src="app/startups.db.js"></script>
 
@@ -54,6 +57,7 @@
     <script language="JavaScript" src="app/lectures.db.js"></script>
 
     <script language="JavaScript" src="app/LogPanel.js"></script>
+
     <script language="JavaScript" src="app/tips.js"></script>
 
     <script language="JavaScript" src="app/time.js"></script>
@@ -70,15 +74,12 @@
 
         <hr>
 
-        <div class="container " id="welcome_container">
-        <span id="welcome_indicator">
-            You do not have to be a scientist to save the planet. Act wisely, and share your knowledge!
-        </span>
+        <div class="container flex-container-column" id="goals_container">
         </div>
 
         <hr>
 
-        <div class="container " id="enthusiasm_container" title="Collects slowly. Need for many kind of actions.">
+        <div class="container " id="enthusiasm_container" title="Collects slowly. Need for seeking volunteers and upgrade things.">
             Enthusiasm: <span id="enthusiasm_indicator">0</span>/<span id="enthusiasm_max_indicator">100</span>
             <div id="enthusiasm"></div>
         </div>
@@ -234,7 +235,6 @@
         Player.revealSecret('seek');
         Player.revealSecret('popularization');
         Player.revealSecret('communication');
-        Player.revealSecret('attentiveness');
         //Player.revealSecret('motivation');
         events.db.push(Event.generator());
 

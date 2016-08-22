@@ -6,8 +6,8 @@ var Civilization = {
     updates: {
         communication: new Billet('communication', {culture: culture_rate}, 1.6, "Raises culture soft-cap."),
         attentiveness: new Billet('attentiveness', {culture: culture_rate}, 1.7, "Soften culture soft-cap."),
-        teamwork: new Billet('teamwork', {culture: culture_rate}, 1.8, "Expands the maximum size of the teams."),
-        sharing: new Billet('sharing', {culture: culture_rate * 10}, 1.9, "Expands maximum storage size."),
+        teamwork: new Billet('teamwork', {culture: culture_rate * 5}, 1.6, "Expands the maximum size of the teams."),
+        sharing: new Billet('sharing', {culture: culture_rate * 10}, 1.7, "Expands maximum storage size."),
     },
     works: {
         popularization: new Workplace('popularization', {culture: culture_rate}, 1.4, "Slowly increase volunteers, consuming culture.",
@@ -46,7 +46,7 @@ Civilization.tick = function() {
         Player.culture_rate -= Civilization.works.activism.workers * 0.01;
         this.happiness -= Civilization.works.activism.getEfficiency() / Civilization.getHappiness();
         var debuff = Player.volunteers_memory * 1000 + Player.action_points * 1000 + (Player.likes + Player.design * 10 + Player.money * 100 + Player.ideas * 1000);
-        Player.enthusiasm += Civilization.works.activism.getEfficiency() / Civilization.getHappiness() * 1 *Math.max(0, (-1 * Math.pow((Player.enthusiasm-100)/100, 3)));
+        Player.enthusiasm += Civilization.works.activism.getEfficiency() / Civilization.getHappiness() * 0.1 * Math.max(0, (-1 * Math.pow((Player.enthusiasm-100)/100, 3)));
         Player.action_points += Civilization.works.activism.getEfficiency() / Civilization.getHappiness() * 50 / (1 + debuff);
     }
 

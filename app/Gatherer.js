@@ -3,6 +3,7 @@ var Gatherer = {
     collection: {},
     events: {
         knowledge_sharing: 0,
+        hold_events: 0,
 
         learn: {selfStudy: 0, books: 0, work: 0, petProject: 0},
         increase: 0,
@@ -22,6 +23,10 @@ Gatherer.collect = function (resource, quantity) {
     else {
         this.collection[resource] = quantity;
     }
+};
+
+Gatherer.holdEvent = function () {
+    this.events.hold_events++;
 };
 
 Gatherer.increaseSkill = function (skill, value) {
@@ -77,6 +82,8 @@ Gatherer.search = function () { // ?
 };
 
 Gatherer.found = function (inflow) {
+    return false;
+
     if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); Player.revealSecret('teamwork'); }
     if (Player.volunteers_memory < 30 && Player.volunteers_memory + inflow >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
     if (Player.volunteers_memory < 45 && Player.volunteers_memory + inflow >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
