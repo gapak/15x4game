@@ -24,7 +24,7 @@ objectives.db = [
     new Objective('sold_for_ideas_1', 'Repetition', 'Importantly! Do not forget apples', ['ideas 1'], {ideas: 1}),
     new Objective('sold_for_ideas_2', 'Astro-event', 'Ideas knowledge not fall down from the sky', ['sold_for_ideas_1'], {ideas: 10}),
     new Objective('sold_for_ideas_3', 'Party', 'The best ideas are born during leisure', ['sold_for_ideas_2'], {ideas: 100}),
-    new Objective('sold_for_ideas_4', 'Festival', 'You knowledge be very experienced if you don\'t die', ['sold_for_ideas_3'], {ideas: 1000}),
+    new Objective('sold_for_ideas_4', 'Festival', 'You will be very experienced if you don\'t die', ['sold_for_ideas_3'], {ideas: 1000}),
 
 ];
 

@@ -97,7 +97,7 @@ Lecture.addTime = function(lecture_id) {
 
  Lecture.tick = function () {
  	lectures.offered.forEach(function (lecture, id) {
- 		if (lectures.offered[id].patience > 0) lectures.offered[id].patience--;
+ 		if (lectures.offered[id].patience > 1) lectures.offered[id].patience--;
  		else {
  			message("Lecturer has disappointed and gone");
  			lectures.offered.splice(id, 1);
@@ -136,8 +136,8 @@ Lecture.addTime = function(lecture_id) {
         html += `
         <div class="offered_lecture_element">
         	<button onclick = "Lecture.accept_lecture(${id});">Accept</button>
-       		<button onclick = "Lecture.skip_lecture(${id});">Change Theme</button>
-       		<button onclick = "Lecture.addTime(${id});">Add time</button>
+       		${(Player.found_secrets.indexOf('add_time') !== -1) ? `<button onclick = "Lecture.addTime(${id});">Add time</button>` : ''}
+       		${(Player.found_secrets.indexOf('change_theme') !== -1) ? `<button onclick = "Lecture.skip_lecture(${id});">Change Theme</button>` : ''}
         	<span class="offered_lecture_name">
         		${lecture.lecturer_name}. ${lecture.name} (need ${cost} ${name})
         		${timer}

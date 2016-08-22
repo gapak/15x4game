@@ -8,6 +8,10 @@ function Billet(name, base_cost_array, cost_grow_rate , text) {
     this.level = 1;
 
     this.upgrade = function() {
+        if (this.level >= 60) {
+            message("Max level");
+            return false;
+        }
         if (!Player.checkEnthusiasm()) return false;
 
         if (Player.withdrawArray(this.getUpgradeCost())) {
