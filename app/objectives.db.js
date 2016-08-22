@@ -17,7 +17,7 @@ objectives.db = [
     new Objective('sold_for_design_4', 'Handbooks', 'Let everyone see how you are organized', ['sold_for_design_3'], {design: 100000}),
     
     new Objective('sold_for_money_1', 'Purse', 'You spend a pocket money on a project', ['money 1'], {money: 10}),
-    new Objective('sold_for_money_2', 'Safe', 'Several people share their money for your project', ['sold_for_money_1'], {money: 100}),
+    new Objective('sold_for_money_2', 'Safe', 'Several people share their money for a project', ['sold_for_money_1'], {money: 100}),
     new Objective('sold_for_money_3', 'Bank account', 'You have a few benefactors', ['sold_for_money_2'], {money: 1000}),
     new Objective('sold_for_money_4', 'Charitable Foundation', 'You\'re so big company that now you have your own fund', ['sold_for_money_3'], {money: 10000}),
 

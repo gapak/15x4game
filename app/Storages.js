@@ -35,7 +35,11 @@ Storages.getHTML = function () {
 
 	var resources_html = "";
     var storages_html = "";
+
+
     resources.forEach(function(resource) {
+		storages_html += `<div class="flex-container-column">`;
+
         resources_html += `
        	<div class="flex-element resource_element"> 
         	${resource.capitalizeFirstLetter()}: 
@@ -44,7 +48,7 @@ Storages.getHTML = function () {
 
         var sb = Storages.buildings;  
 
-        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_1`) == -1) ? "init_secret" : "";
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_1`) == -1) ? "init_hidden" : "";
         storages_html += `
         	<div class="flex-element ${secret_class}" id="sold_for_${resource}_1_container">
 	        	${sb.tier1[resource].name}: ${sb.tier1[resource].level}
@@ -53,7 +57,7 @@ Storages.getHTML = function () {
 	            </button>
 	        </div>`;
 
-        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_2`) == -1) ? "init_secret" : "";
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_2`) == -1) ? "init_hidden" : "";
         storages_html += `
         	<div class="flex-element ${secret_class}">
 	        	${sb.tier2[resource].name}: ${sb.tier2[resource].level}
@@ -62,7 +66,7 @@ Storages.getHTML = function () {
 	            </button>
 	        </div>`;
 
-        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_3`) == -1) ? "init_secret" : "";
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_3`) == -1) ? "init_hidden" : "";
         storages_html += `
         	<div class="flex-element ${secret_class}">
 	        	${sb.tier3[resource].name}: ${sb.tier3[resource].level}
@@ -71,7 +75,7 @@ Storages.getHTML = function () {
 	            </button>
 	        </div>`;
 
-        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_4`) == -1) ? "init_secret" : "";
+        var secret_class = (Player.found_secrets.indexOf(`sold_for_${resource}_4`) == -1) ? "init_hidden" : "";
         storages_html += `
         	<div class="flex-element ${secret_class}">
 	        	${sb.tier4[resource].name}:  ${sb.tier4[resource].level} 
@@ -79,11 +83,14 @@ Storages.getHTML = function () {
 	            	${Storages.getUpgradeCostBuilding(4, resource)[resource].toFixed(2)} ${resource} 
 	            </button>
 	        </div>`;
-        	resources_html += `
-        </div>`;    
+
+        resources_html += `</div>`;
+
+		storages_html += '</div>';
     });
 
-    	html += `
+
+	html += `
 	    <div class="flex-element flex-container-row"> ${resources_html}</div>
 	    <div id="resources_collapse" class="flex-element flex-container-column"> 
 	    	<div class="flex-element flex-container-row">

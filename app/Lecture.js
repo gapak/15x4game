@@ -6,7 +6,7 @@ function Lecture(lecturer_name, name, text, url, cost) {
     this.text = text;
     this.url = url;
 	this.cost = cost;
-    this.patience = (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge;
+    this.patience = (420 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness + Player.enthusiasm;
     this.is_performed = 0;
 }
 
@@ -80,7 +80,7 @@ Lecture.addTime = function(lecture_id) {
 	}
 	else {
 		Player.action_points--;
-		lectures.offered[lecture_id].patience += (500 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness;
+		lectures.offered[lecture_id].patience += (420 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness + Player.enthusiasm;
 	}
 };
 
