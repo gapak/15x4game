@@ -33,11 +33,6 @@ Gatherer.increaseSkill = function (skill, value) {
     if (Player[skill] - value < 45 && Player[skill] >= 45 ) { badges.achieve(skill + " 3"); }
     if (Player[skill] - value < 60 && Player[skill] >= 60 ) { badges.achieve(skill + " 4"); }
 
-    /*if (this.events.increase_skill < 15 && this.events.increase_skill + 1 >= 15 ) { badges.achieve("learn 1"); }
-    if (this.events.increase_skill < 30 && this.events.increase_skill + 1 >= 30 ) { badges.achieve("learn 2"); }
-    if (this.events.increase_skill < 45 && this.events.increase_skill + 1 >= 45 ) { badges.achieve("learn 3"); }
-    if (this.events.increase_skill < 60 && this.events.increase_skill + 1 >= 60 ) { badges.achieve("learn 4"); }
-    */
     this.events.increase_skill++;
 };
 
@@ -51,15 +46,6 @@ Gatherer.increaseResource = function (resource, value) {
         if (Player[resource] - value < (rate * 100) && Player[resource] >= (rate * 100)  ) { badges.achieve(resource + " 3"); }
         if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
     }
-    else {
-        /*
-        rate = resources_rates[resource];
-        if (Player[resource] - value < (rate * 1) && Player[resource] >= (rate * 1)  ) { badges.achieve(resource + " 1"); }
-        if (Player[resource] - value < (rate * 10) && Player[resource] >= (rate * 10)  ) { badges.achieve(resource + " 2"); }
-        if (Player[resource] - value < (rate * 100) && Player[resource] >= (rate * 100)  ) { badges.achieve(resource + " 3"); }
-        if (Player[resource] - value < (rate * 1000) && Player[resource] >= (rate * 1000)  ) { badges.achieve(resource + " 4"); }
-        */
-    }
 /*
     if (this.events.increase_resource < 100 && this.events.increase_resource + 1 >= 100 ) { badges.achieve("resources 1"); }
     if (this.events.increase_resource < 1000 && this.events.increase_resource + 1 >= 1000 ) { badges.achieve("resources 2");  Player.revealSecret('objectives'); }
@@ -71,12 +57,6 @@ Gatherer.increaseResource = function (resource, value) {
 
 
 Gatherer.decrease = function (skill, value) {
-    /*
-    if (Player[skill] < 15 && Player[skill] + value >= 15 ) { badges.achieve(skill + " 1"); }
-    if (Player[skill] < 30 && Player[skill] + value >= 30 ) { badges.achieve(skill + " 2"); }
-    if (Player[skill] < 45 && Player[skill] + value >= 45 ) { badges.achieve(skill + " 3"); }
-    if (Player[skill] < 60 && Player[skill] + value >= 60 ) { badges.achieve(skill + " 4"); }
-    */
     this.events.decrease++;
 };
 
