@@ -33,11 +33,11 @@ Gatherer.increaseSkill = function (skill, value) {
     if (Player[skill] - value < 45 && Player[skill] >= 45 ) { badges.achieve(skill + " 3"); }
     if (Player[skill] - value < 60 && Player[skill] >= 60 ) { badges.achieve(skill + " 4"); }
 
-    if (this.events.increase_skill < 15 && this.events.increase_skill + 1 >= 15 ) { badges.achieve("learn 1"); }
+    /*if (this.events.increase_skill < 15 && this.events.increase_skill + 1 >= 15 ) { badges.achieve("learn 1"); }
     if (this.events.increase_skill < 30 && this.events.increase_skill + 1 >= 30 ) { badges.achieve("learn 2"); }
     if (this.events.increase_skill < 45 && this.events.increase_skill + 1 >= 45 ) { badges.achieve("learn 3"); }
     if (this.events.increase_skill < 60 && this.events.increase_skill + 1 >= 60 ) { badges.achieve("learn 4"); }
-
+    */
     this.events.increase_skill++;
 };
 
@@ -97,11 +97,11 @@ Gatherer.search = function () { // ?
 };
 
 Gatherer.found = function (inflow) {
-    if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); Player.revealSecret('teamwork'); }
+   if (Player.volunteers_memory < 15 && Player.volunteers_memory + inflow >= 15) { badges.achieve("volunteers 1"); Player.revealSecret('education'); Player.revealSecret('teamwork'); }
     if (Player.volunteers_memory < 30 && Player.volunteers_memory + inflow >= 30) { badges.achieve("volunteers 2"); Player.revealSecret('departments'); }
     if (Player.volunteers_memory < 45 && Player.volunteers_memory + inflow >= 45) { badges.achieve("volunteers 3"); Player.revealSecret('motivation'); }
     if (Player.volunteers_memory < 60 && Player.volunteers_memory + inflow >= 60) { badges.achieve("volunteers 4"); Player.revealSecret('activism'); }
-
+    
 };
 
 Gatherer.tick = function () {

@@ -26,16 +26,23 @@ badges.db = [
     new Badge("resources 4", "Resources tycoon", "You have a huge savings.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 1000); }, function () {}),
 
-    new Badge("volunteers 1", "Group", "Founded 15 volunteers."),
-    new Badge("volunteers 2", "Company", "Founded 30 volunteers."),
-    new Badge("volunteers 3", "Community", "Founded 45 volunteers."),
-    new Badge("volunteers 4", "Organization", "Founded 60 volunteers."),
+    new Badge("volunteers 1", "Group", "Founded 15 volunteers.", 
+        function (inflow) { return (Player.volunteers_memory >= 15); }, function () { Player.revealSecret('education'); Player.revealSecret('teamwork'); }),
+    new Badge("volunteers 2", "Company", "Founded 30 volunteers.",
+        function (inflow) { return (Player.volunteers_memory >= 30); }, function () { Player.revealSecret('department'); }),
+    new Badge("volunteers 3", "Community", "Founded 45 volunteers.",
+        function (inflow) { return (Player.volunteers_memory >= 45); }, function () { Player.revealSecret('motivation'); }),
+    new Badge("volunteers 4", "Organization", "Founded 60 volunteers.",
+        function (inflow) { return (Player.volunteers_memory >= 60); }, function () { Player.revealSecret('activism'); }),
 
-    new Badge("learn 1", "", "You learn how to learning."),
-       // function () { return (Gatherer.events.increase_skill < 15 && Gatherer.events.increase_skill + 1 >= 15)}),
-    new Badge("learn 2", "", "You learn how to learning right."),
-    new Badge("learn 3", "", "You learn how to learning fast."),
-    new Badge("learn 4", "", "You learn how to learning things you needed."),
+    new Badge("learn 1", "", "You learn how to learning.",
+        function () { return (Gatherer.events.increase_skill >= 15); }),
+    new Badge("learn 2", "", "You learn how to learning right.",
+        function () { return (Gatherer.events.increase_skill >= 30); }),
+    new Badge("learn 3", "", "You learn how to learning fast.",
+        function () { return (Gatherer.events.increase_skill >= 45); }),
+    new Badge("learn 4", "", "You learn how to learning things you needed.",
+        function () { return (Gatherer.events.increase_skill >= 60); }),
 
 
 
