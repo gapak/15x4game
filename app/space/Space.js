@@ -1,9 +1,22 @@
 
 
-
 var SpaceHelper = {};
+
 SpaceHelper.generateMarket = function() {
     return {'iron': {price: 100, count: 100}, 'oil': {price: 100, count: 100}, 'uranium': {price: 100, count: 100}, 'iridium': {price: 100, count: 100}};
+};
+
+SpaceHelper.generateBeltAction = function(type) {
+    return {
+        'name': 'Mine '+type,
+        'code': function () {
+            if (Player.ship.checkSpace()) {
+                if (Player.withdrawEnthusiasm()) {
+                    Player.ship.reward(type, 1);
+                }
+            }
+        }
+    }
 };
 
 
@@ -45,8 +58,10 @@ Space = {
                         action: {
                             name: 'Transform 1000 conventional units to 1 oil',
                             code: function () {
-                                if (Player.withdraw('conventional_units', 1000)) {
-                                    Player.ship.reward('oil', 1);
+                                if (Player.ship.checkSpace()) {
+                                    if (Player.withdraw('conventional_units', 1000)) {
+                                        Player.ship.reward('oil', 1);
+                                    }
                                 }
                             }
                         },
@@ -106,17 +121,18 @@ Space = {
                 ],
 
                 belts: [
-                    {name: 'Main-belt', produce: 'iron', rocks: []},
-                    {name: 'Greek camp', produce: 'iron', rocks: []},
-                    {name: 'Trojan camp', produce: 'iron', rocks: []},
-                    {name: 'Centaurs tribe', produce: 'iron', rocks: []}
+                    {name: 'Main-belt', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}},
+                    {name: 'Greek camp', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}},
+                    {name: 'Trojan camp', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}},
+                    {name: 'Centaurs tribe', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}}
                 ]
             },
             {
                 name: 'Orsala',
 
                 planets: [
-                    {name: 'Gliese',
+                    {
+                        name: 'Gliese',
                         action: {
                             name: 'Transform 100 oil to 1 cultural reform',
                             code: function () {
@@ -128,7 +144,6 @@ Space = {
                         services: {store: {}, trade: {}}},
                     {
                         name: 'Arette',
-                        produce: 'iridium',
                         action: {
                             name: 'Transform 1000 conventional units to 1 iridium',
                             code: function () {
@@ -139,7 +154,8 @@ Space = {
                         },
                         services: {store: {}, trade: {}}
                     },
-                    {name: 'Kepler',
+                    {
+                        name: 'Kepler',
                         action: {
                             name: 'Transform 1000 conventional units to Repair',
                             code: function () {
@@ -149,7 +165,8 @@ Space = {
                             }
                         },
                         services: {store: {}, trade: {}}},
-                    {name: 'Ko Pur',
+                    {
+                        name: 'Ko Pur',
                         action: {
                             name: 'Transform 100 iron to 1 cultural concept',
                             code: function () {
@@ -189,10 +206,10 @@ Space = {
                 ],
 
                 belts: [
-                    {name: 'Main-belt', produce: 'uranium', rocks: []},
-                    {name: 'Maya camp', produce: 'uranium', rocks: []},
-                    {name: 'Aztec camp', produce: 'uranium', rocks: []},
-                    {name: 'Leviathan shore', produce: 'uranium', rocks: []}
+                    {name: 'Main-belt', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}},
+                    {name: 'Maya camp', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}},
+                    {name: 'Aztec camp', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}},
+                    {name: 'Leviathan shore', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}}
                 ]
             }
         ]
@@ -308,6 +325,7 @@ Space.getSpaceString = function () {
             var html = `
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
+            html +=`<button onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
             html +=`<button onclick="Space.start()">Moving away from the belt.</button>`;
             html +=`</div></div>`;
             return html;

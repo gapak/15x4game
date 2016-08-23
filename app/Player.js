@@ -96,6 +96,14 @@ Player.checkEnthusiasm = function () {
     return true;
 };
 
+Player.withdrawEnthusiasm = function () {
+    if (this.checkEnthusiasm()) {
+        this.enthusiasm--;
+        return true;
+    }
+    return false;
+};
+
 Player.reset = function () {
     this.volunteers = 0;
     this.volunteers_memory = 0;

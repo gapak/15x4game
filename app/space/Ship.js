@@ -7,6 +7,14 @@ function Ship() {
         resources: {'iron': 0, 'oil': 0, 'uranium': 0, 'iridium': 0}
     };
 
+    this.checkSpace = function () {
+        if (this.getCargoCapacity() > this.getCargoFullness()) {
+            return true;
+        }
+        message("Not enough free space");
+        return false;
+    };
+
     this.reward = function(resource, quantity, silent) {
         if (quantity < 0) return false;
         if (Player.checkReputation('generosity', silent)) quantity *= 2;
