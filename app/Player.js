@@ -96,6 +96,14 @@ Player.checkEnthusiasm = function () {
     return true;
 };
 
+Player.withdrawEnthusiasm = function () {
+    if (this.checkEnthusiasm()) {
+        this.enthusiasm--;
+        return true;
+    }
+    return false;
+};
+
 Player.reset = function () {
     this.volunteers = 0;
     this.volunteers_memory = 0;
@@ -230,6 +238,7 @@ Player.getLimit = function (resource) {
 
 Player.withdraw = function(resource, quantity, silent) {
     if (this[resource] - quantity < 0) {
+        if (!silent) message(`Not enough ${resource}.`);
         return false;
     }
     this[resource] -= quantity;

@@ -1,9 +1,22 @@
 
 
-
 var SpaceHelper = {};
+
 SpaceHelper.generateMarket = function() {
     return {'iron': {price: 100, count: 100}, 'oil': {price: 100, count: 100}, 'uranium': {price: 100, count: 100}, 'iridium': {price: 100, count: 100}};
+};
+
+SpaceHelper.generateBeltAction = function(type) {
+    return {
+        'name': 'Mine '+type,
+        'code': function () {
+            if (Player.ship.checkSpace()) {
+                if (Player.withdrawEnthusiasm()) {
+                    Player.ship.reward(type, 1);
+                }
+            }
+        }
+    }
 };
 
 
@@ -18,6 +31,7 @@ Space = {
     flight: {
         counter: 0,
         length: 0,
+        warp_active: 0,
         target: {id: null, type: null, obj: null},
         arrival_function: {}
     },
@@ -45,8 +59,10 @@ Space = {
                         action: {
                             name: 'Transform 1000 conventional units to 1 oil',
                             code: function () {
-                                if (Player.withdraw('conventional_units', 1000)) {
-                                    Player.ship.reward('oil', 1);
+                                if (Player.ship.checkSpace()) {
+                                    if (Player.withdraw('conventional_units', 1000)) {
+                                        Player.ship.reward('oil', 1);
+                                    }
                                 }
                             }
                         },
@@ -82,7 +98,7 @@ Space = {
                     {
                         name: 'Education University',
                         action: {
-                            name: 'Transform 100 likes to 1 uranium',
+                            name: 'Transform 1000 likes to 1 uranium',
                             code: function () {
                                 if (Player.withdraw('likes', 1000)) {
                                     Player.ship.reward('uranium', 1);
@@ -97,7 +113,7 @@ Space = {
                             name: 'Transform 10 money to 1 iridium',
                             code: function () {
                                 if (Player.withdraw('money', 10)) {
-                                    Player.ship.reward('iridium,', 1);
+                                    Player.ship.reward('iridium', 1);
                                 }
                             }
                         },
@@ -106,17 +122,18 @@ Space = {
                 ],
 
                 belts: [
-                    {name: 'Main-belt', produce: 'iron', rocks: []},
-                    {name: 'Greek camp', produce: 'iron', rocks: []},
-                    {name: 'Trojan camp', produce: 'iron', rocks: []},
-                    {name: 'Centaurs tribe', produce: 'iron', rocks: []}
+                    {name: 'Main-belt', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}},
+                    {name: 'Greek camp', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}},
+                    {name: 'Trojan camp', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}},
+                    {name: 'Centaurs tribe', action: SpaceHelper.generateBeltAction('iron'), rocks: {name: 'iron', count: 60}}
                 ]
             },
             {
                 name: 'Orsala',
 
                 planets: [
-                    {name: 'Gliese',
+                    {
+                        name: 'Gliese',
                         action: {
                             name: 'Transform 100 oil to 1 cultural reform',
                             code: function () {
@@ -128,7 +145,6 @@ Space = {
                         services: {store: {}, trade: {}}},
                     {
                         name: 'Arette',
-                        produce: 'iridium',
                         action: {
                             name: 'Transform 1000 conventional units to 1 iridium',
                             code: function () {
@@ -139,7 +155,8 @@ Space = {
                         },
                         services: {store: {}, trade: {}}
                     },
-                    {name: 'Kepler',
+                    {
+                        name: 'Kepler',
                         action: {
                             name: 'Transform 1000 conventional units to Repair',
                             code: function () {
@@ -149,7 +166,8 @@ Space = {
                             }
                         },
                         services: {store: {}, trade: {}}},
-                    {name: 'Ko Pur',
+                    {
+                        name: 'Ko Pur',
                         action: {
                             name: 'Transform 100 iron to 1 cultural concept',
                             code: function () {
@@ -189,10 +207,10 @@ Space = {
                 ],
 
                 belts: [
-                    {name: 'Main-belt', produce: 'uranium', rocks: []},
-                    {name: 'Maya camp', produce: 'uranium', rocks: []},
-                    {name: 'Aztec camp', produce: 'uranium', rocks: []},
-                    {name: 'Leviathan shore', produce: 'uranium', rocks: []}
+                    {name: 'Main-belt', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}},
+                    {name: 'Maya camp', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}},
+                    {name: 'Aztec camp', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}},
+                    {name: 'Leviathan shore', action: SpaceHelper.generateBeltAction('uranium'), rocks: {name: 'uranium', count: 60}}
                 ]
             }
         ]
@@ -201,12 +219,16 @@ Space = {
 
 Space.tick = function () {
     if (this.state == 'flight') {
-        this.flight.counter++;
-        if (this.flight.counter == this.flight.length) {
+        this.flight.counter += this.calcSpeed();
+        if (this.flight.counter >= this.flight.length) {
             message("Arrival!");
             this.flight_arrival_function();
         }
     }
+};
+
+Space.calcSpeed = function () {
+    return (Player.ship.getSpeed()/100) * ((this.flight.warp_active ? 10 : 1));
 };
 
 Space.getHTML = function () {
@@ -226,8 +248,8 @@ Space.getHTML = function () {
     });
     html += `</div>
     <div class="flex-element flex-container-row">
-        <div class="flex-element">Cargo: ${Player.ship.getCargoFullness()}/${Player.ship.getCargoCapacity()}</div>
-        <div class="flex-element">Speed: 100/100</div>
+        <div class="flex-element">Cargo: ${Player.ship.getCargoFullness().toFixed(2)}/${Player.ship.getCargoCapacity()}</div>
+        <div class="flex-element">Speed: ${(Space.calcSpeed()*100).toFixed(0)}/100</div>
         <div class="flex-element">Armor: 100/100</div>
         <div class="flex-element">Shield: 100/100</div>
     </div>
@@ -244,10 +266,13 @@ Space.getHTML = function () {
 Space.getSpaceTitle = function () {
     var html = `Space. `;
 
-
-
     if (Space.state == 'flight') {
-        html += 'You in warp.';
+        if (Space.flight.warp_active) {
+            html += 'You in warp.';
+        }
+        else {
+            html += 'You in flight.';
+        }
     }
     else {
         if (Space.current_object.type == 'system') {
@@ -289,9 +314,9 @@ Space.getSpaceString = function () {
             var html = `
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
-            html +=`<div>Sped: ${Player.ship.getSpeed()}. </div>`;
             html +=`<div>Destination: ${Space.flight.target.obj.name} ${Space.flight.target.type}. </div>`;
-            html +=`<div>Progress: ${Space.flight.counter}/${Space.flight.length} </div>`;
+            html +=`<div>Progress: ${Space.flight.counter.toFixed(0)}/${Space.flight.length} </div>`;
+            html +=`<button onclick="Space.flyFast()">Activate Warp Drive</button>`;
             html +=`</div></div>`;
             return html;
         },
@@ -308,6 +333,7 @@ Space.getSpaceString = function () {
             var html = `
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
+            html +=`<button onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
             html +=`<button onclick="Space.start()">Moving away from the belt.</button>`;
             html +=`</div></div>`;
             return html;
@@ -334,21 +360,38 @@ Space.startFly = function(type, id) {
 
     if (type == 'system') {
         this.flight.target.obj = Space.map.systems[id];
-        this.current_system = id;
+        if (Space.current_object.type == 'system') {
+            this.current_system = id;
+            this.flight.length = 420;
+        }
+        else {
+            this.flight.length = 60;
+        }
     }
     else {
         this.flight.target.obj = Space.map.systems[Space.current_system][type + 's'][id];
+        this.flight.length = 60;
     }
     this.flight.counter = 0;
-    this.flight.length = 5;
     this.flight_arrival_function = function () {
         Space.state = Space.flight.target.type;
         Space.current_object.id = Space.flight.target.id;
         Space.current_object.type = Space.flight.target.type;
+        Space.flight.warp_active = 0;
         Space.flight.target = {id: null, type: null, obj: null};
     }
 
 
+};
+
+Space.flyFast = function() {
+    if (Player.action_points < 1) {
+        message("Not enough action points.");
+        return false;
+    }
+    message('Warp drive active');
+    Player.action_points--;
+    Space.flight.warp_active = 1;
 };
 
 Space.start = function() {
