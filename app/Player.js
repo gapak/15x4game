@@ -47,7 +47,7 @@ var Player = {
     unit: new Unit(),
 
     ship: new Ship(),
-    conventional_units: 100000,
+    conventional_units: 0,
 
     race_win_points: 0,
     race_win_points_memory: 0,

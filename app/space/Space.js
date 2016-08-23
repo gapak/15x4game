@@ -439,9 +439,9 @@ Space.buy = function(resource, count, price) {
         message(resource.capitalizeFirstLetter() + " out of stock")
         return false;
     }
-    Space.getCurrentObject().services.trade[resource].count--;
-    console.log(arguments);
+
     if (Player.withdraw('conventional_units', price)) {
+        Space.getCurrentObject().services.trade[resource].count--;
         Player.ship.reward(resource, 1);
     }
 };
