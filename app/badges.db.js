@@ -213,25 +213,45 @@ badges.db = [
 
 
 
-    new Badge("writing 1", "", "Mom thinks that you write as Dostoevsky."),
-    new Badge("writing 2", "", "You think that you write as Dostoevsky."),
-    new Badge("writing 3", "", "Everyone thinks that you write as Dostoevsky."),
-    new Badge("writing 4", "", "Dostoevsky thinks you write as Dostoevsky."),
+    new Badge("writing 1", "", "Mom thinks that you write as Dostoevsky.",
+        function () { return Player[writing] >= 15; }, function () { badges.achieve(writing + " 1"); }),
+    new Badge("writing 2", "", "You think that you write as Dostoevsky.",
+        function () { return Player[writing] >= 30; }, function () { badges.achieve(writing + " 2"); 
+            Player.addSupervision(skills_departments[writing]); }),
+    new Badge("writing 3", "", "Everyone thinks that you write as Dostoevsky.",
+        function () { return Player[writing] >= 45; }, function () { badges.achieve(writing + " 3"); }),
+    new Badge("writing 4", "", "Dostoevsky thinks you write as Dostoevsky.",
+        function () { return Player[writing] >= 60; }, function () { badges.achieve(writing + " 4"); }),
 
-    new Badge("drawing 1", "", "You can draw a cat."),
-    new Badge("drawing 2", "", "You can draw a man."),
-    new Badge("drawing 3", "", "You can draw site."),
-    new Badge("drawing 4", "", "You do can draw a cat."),
+    new Badge("drawing 1", "", "You can draw a cat.",
+        function () { return Player[drawing] >= 15; }, function () { badges.achieve(drawing + " 1"); }),
+    new Badge("drawing 2", "", "You can draw a man.",
+        function () { return Player[drawing] >= 30; }, function () { badges.achieve(drawing + " 2");
+        Player.addSupervision(skills_departments[drawing]); }),
+    new Badge("drawing 3", "", "You can draw site.",
+        function () { return Player[drawing] >= 45; }, function () { badges.achieve(drawing + " 3"); }),
+    new Badge("drawing 4", "", "You do can draw a cat.",
+        function () { return Player[drawing] >= 60; }, function () { badges.achieve(drawing + " 4"); }),
 
-    new Badge("programming 1", "", "You feel the difference between a code and a broken encoding."),
-    new Badge("programming 2", "", "You feel the difference between a Class and an Object."),
-    new Badge("programming 3", "", "You feel the difference between Mixins and Traits."),
-    new Badge("programming 4", "", "You feel the difference between the Wrapper, the Proxy, the Facade and the Composite."),
+    new Badge("programming 1", "", "You feel the difference between a code and a broken encoding.",
+        function () { return Player[programming] >= 15; }, function () { badges.achieve(programming + " 1"); }),
+    new Badge("programming 2", "", "You feel the difference between a Class and an Object.",
+        function () { return Player[programming] >= 30; }, function () { badges.achieve(programming + " 2"); 
+        Player.addSupervision(skills_departments[programming]); }),
+    new Badge("programming 3", "", "You feel the difference between Mixins and Traits.",
+        function () { return Player[programming] >= 45; }, function () { badges.achieve(programming + " 3"); }),
+    new Badge("programming 4", "", "You feel the difference between the Wrapper, the Proxy, the Facade and the Composite.",
+        function () { return Player[programming] >= 60; }, function () { badges.achieve(programming + " 4"); }),
 
-    new Badge("management 1", "", "You think that people do not listen to you."),
-    new Badge("management 2", "", "You think that people are listening to you."),
-    new Badge("management 3", "", "You know that people are listening to you."),
-    new Badge("management 4", "", "You know that people do not listen to you."),
+    new Badge("management 1", "", "You think that people do not listen to you.",
+        function () { return Player[management] >= 15; }, function () { badges.achieve(management + " 1"); }),
+    new Badge("management 2", "", "You think that people are listening to you.",
+        function () { return Player[management] >= 30; }, function () { badges.achieve(management + " 2"); 
+        Player.addSupervision(skills_departments[management]); }),
+    new Badge("management 3", "", "You know that people are listening to you.",
+        function () { return Player[management] >= 45; }, function () { badges.achieve(management + " 3"); }),
+    new Badge("management 4", "", "You know that people do not listen to you.",
+        function () { return Player[management] >= 60; }, function () { badges.achieve(management + " 4"); }),
 
 
     new Badge("act 1", "", "You act 15 times."),
