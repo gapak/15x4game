@@ -141,7 +141,7 @@ badges.db = [
     new Badge("volunteers 3", "Community", "Founded 45 volunteers.",
         function () { return (Player.volunteers_memory >= 45); }, function () { Player.revealSecret('motivation'); goals.achieve('volunteers 3'); }),
     new Badge("volunteers 4", "Organization", "Founded 60 volunteers.",
-        function () { return (Player.volunteers_memory >= 60); }, function () { Goal.displayed_goals_count++; }),
+        function () { return (Player.volunteers_memory >= 60); }, function () { goals.achieve('volunteers 4'); Goal.displayed_goals_count++; }),
 
 
     new Badge("share 1", "Ready to learn", "You shared your knowledge 15 times.",

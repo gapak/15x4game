@@ -2,8 +2,27 @@
 
 var SpaceHelper = {};
 
-SpaceHelper.generateMarket = function() {
-    return {'iron': {price: 100, count: 100}, 'oil': {price: 100, count: 100}, 'uranium': {price: 100, count: 100}, 'iridium': {price: 100, count: 100}};
+SpaceHelper.price_guide = {
+    solar:  {iron: 80, oil: 90, uranium: 120, iridium: 110},
+    orsala: {iron: 120, oil: 110, uranium: 80, iridium: 90},
+};
+
+SpaceHelper.generateMarket = function(base_prices) {
+    return {
+        'iron': SpaceHelper.generateOrder(base_prices.iron),
+        'oil': SpaceHelper.generateOrder(base_prices.oil),
+        'uranium': SpaceHelper.generateOrder(base_prices.uranium),
+        'iridium': SpaceHelper.generateOrder(base_prices.iridium)
+    };
+};
+
+SpaceHelper.generateOrder = function (base_price) {
+    var count = rand(80, 120);
+    var medium_price = parseInt(((100 * base_price) / count).toFixed(0));
+    var sell_price = rand(medium_price, medium_price+10);
+    var buy_price = rand(medium_price-10, medium_price);
+    console.log(base_price, count, medium_price, sell_price, buy_price);
+    return {'sell_price': sell_price, 'buy_price': buy_price, count: count};
 };
 
 SpaceHelper.generateBeltAction = function(type) {
@@ -52,7 +71,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.solar)}
                     },
                     {
                         name: 'Earth', produce: 'oil',
@@ -66,7 +85,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.solar)}
                     },
                     {
                         name: 'Mars',
@@ -78,7 +97,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.solar)}
                     },
                     {
                         name: 'Titan',
@@ -90,7 +109,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.solar)}
                     }
                 ],
 
@@ -105,7 +124,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: [], trade: {}}
+                        services: {store: [], trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.solar)}
                     },
                     {
                         name: 'Business Center',
@@ -117,7 +136,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: [], trade: {}}
+                        services: {store: [], trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.solar)}
                     }
                 ],
 
@@ -142,7 +161,8 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}},
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.orsala)}
+                    },
                     {
                         name: 'Arette',
                         action: {
@@ -153,7 +173,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.orsala)}
                     },
                     {
                         name: 'Kepler',
@@ -165,7 +185,8 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}},
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.orsala)}
+                    },
                     {
                         name: 'Ko Pur',
                         action: {
@@ -176,7 +197,8 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: {}, trade: {}}}
+                        services: {store: {}, trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.orsala)}
+                    }
                 ],
 
                 stations: [
@@ -190,7 +212,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: [], trade: SpaceHelper.generateMarket()}
+                        services: {store: [], trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.orsala)}
                     },
                     {
                         name: 'Pirate Hangout',
@@ -202,7 +224,7 @@ Space = {
                                 }
                             }
                         },
-                        services: {store: [], trade: {}}
+                        services: {store: [], trade: SpaceHelper.generateMarket(SpaceHelper.price_guide.orsala)}
                     }
                 ],
 
@@ -237,14 +259,19 @@ Space.getHTML = function () {
     <button class="collapsar" data-toggle="collapse" data-target="#space_collapse">-</button>
     <div class="flex-element" id="space_title_container">${Space.getSpaceTitle()}</div>
     <div class="flex-element flex-container-row">`;
+
     space_resources.forEach(function (resource) {
-        var secret_class = (['planet', 'station'].indexOf(Space.state) == -1) ? ' init_secret ' : ' ';
         html += `
                 <div class="flex-element">
-                ${resource}: ${Player.ship.cargo.resources[resource]}
-                <button class="${secret_class}" onclick="Space.buy('${resource}')">buy</button>
-                <button class="${secret_class}" onclick="Space.sell('${resource}')">sell</button>
-                </div>`;
+                ${resource}: ${Player.ship.cargo.resources[resource]}`;
+                if (['planet', 'station'].indexOf(Space.state) !== -1) {
+                    var order = Space.getCurrentObject().services.trade[resource];
+                    html += `
+                        <button onclick="Space.buy('${resource}', ${order.count}, ${order.buy_price})">Buy ${order.buy_price}</button>
+                        <button onclick="Space.sell('${resource}', ${order.count}, ${order.sell_price})">Sell ${order.sell_price}</button>
+                        <span>in stock: ${order.count}</span>`;
+                }
+        html += `</div>`;
     });
     html += `</div>
     <div class="flex-element flex-container-row">
@@ -260,8 +287,6 @@ Space.getHTML = function () {
     </div>`;
     return html;
 };
-
-
 
 Space.getSpaceTitle = function () {
     var html = `Space. `;
@@ -286,7 +311,6 @@ Space.getSpaceTitle = function () {
     html += `You Conventional Units: ${Player.conventional_units}`;
     return html;
 };
-
 
 Space.getSpaceString = function () {
     var states = {
@@ -352,6 +376,16 @@ Space.getSpaceString = function () {
     return states[this.state]();
 };
 
+
+Space.getCurrentObject = function () {
+    if (this.state == 'system') {
+        return Space.map.systems[Space.current_system];
+    }
+    else {
+        return Space.map.systems[Space.current_system][`${Space.current_object.type}s`][Space.current_object.id];
+    }
+};
+
 Space.startFly = function(type, id) {
     console.log(type, id);
     this.state = 'flight';
@@ -398,20 +432,23 @@ Space.start = function() {
     this.startFly('system', this.current_system);
 };
 
-Space.buy = function (resource) {
-    var count = 0;
-    var price = 0;
+Space.buy = function(resource, count, price) {
+    if (!Player.ship.checkSpace()) return false;
+
+    if (count < 1) {
+        message(resource.capitalizeFirstLetter() + " out of stock")
+        return false;
+    }
+    Space.getCurrentObject().services.trade[resource].count--;
+    console.log(arguments);
     if (Player.withdraw('conventional_units', price)) {
-        Player.ship.reward('iridium', count);
+        Player.ship.reward(resource, 1);
     }
 };
 
-Space.sell = function (resource) {
-    var count = 0;
-    var price = 0;
-    if (Player.ship.withdraw('iridium', count)) {
-
-        Player.withdraw('conventional_units', price)
+Space.sell = function(resource, count, price) {
+    if (Player.ship.withdraw(resource, 1)) {
+        Player.reward('conventional_units', price)
     }
 };
 
