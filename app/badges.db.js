@@ -5,9 +5,9 @@ badges.db = [
 
     new Badge("tick 1", "Lost coordinator", "A month of your coordination is passed. You understand what's what.",
         function () { return (Gatherer.events.ticks > 30); }, function () {}),
-    new Badge("tick 2", "Verified coordinator", "A ear of your coordination is passed. You steeled enough to avoid mistakes.",
+    new Badge("tick 2", "Verified coordinator", "A year of your coordination is passed. You steeled enough to avoid mistakes.",
         function () { return (Gatherer.events.ticks > 356); }, function () {}),
-    new Badge("tick 3", "Experienced coordinator", "A ten ear of your coordination is passed. You ready to invent something new.",
+    new Badge("tick 3", "Experienced coordinator", "A ten year of your coordination is passed. You ready to invent something new.",
         function () { return (Gatherer.events.ticks > 356*10); }, function () {}),
     new Badge("tick 4", "Hardened coordinator", "A century of your coordination is passed. You elder and htonic.",
         function () { return (Gatherer.events.ticks > 356*100); }, function () {}),
