@@ -6,7 +6,7 @@ var Civilization = {
     updates: {
         communication: new Billet('communication', {culture: culture_rate}, 1.6, "Raises culture soft-cap."),
         attentiveness: new Billet('attentiveness', {culture: culture_rate}, 1.7, "Soften culture soft-cap."),
-        teamwork: new Billet('teamwork', {culture: culture_rate * 5}, 1.6, "Expands the maximum size of the teams."),
+        teamwork: new Billet('teamwork', {culture: culture_rate * 5}, 1.4, "Expands the maximum size of the teams."),
         sharing: new Billet('sharing', {culture: culture_rate * 10}, 1.7, "Expands maximum storage size."),
     },
     works: {
