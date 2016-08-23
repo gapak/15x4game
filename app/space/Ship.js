@@ -44,7 +44,7 @@ function Ship() {
     };
 
     this.getSpeed = function () {
-        return this.speed;
+        return (0.5 * this.speed) + ((0.5 * this.speed) * 0.01 * (this.getCargoCapacity() - this.getCargoFullness()));
     };
 
 }

@@ -238,6 +238,7 @@ Player.getLimit = function (resource) {
 
 Player.withdraw = function(resource, quantity, silent) {
     if (this[resource] - quantity < 0) {
+        if (!silent) message(`Not enough ${resource}.`);
         return false;
     }
     this[resource] -= quantity;
