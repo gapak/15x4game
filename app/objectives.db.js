@@ -16,25 +16,25 @@ objectives.db = [
     new Objective('sold_for_knowledge_4', 'Purposefulness', 'Description', ['learn 4', 'sold_for_knowledge_3'], {knowledge: 40}),
     */
 
-    new Objective('sold_for_likes_1', 'Social network group', 'Allows to make groups in the VC and FB', ['likes 1'], {likes: 1000}),
-    new Objective('sold_for_likes_2', 'Instagram', 'Upload photos from event', ['sold_for_likes_1'], {likes: 10000}),
-    new Objective('sold_for_likes_3', 'Youtube channel', 'Upload lectures video', ['sold_for_likes_2'], {likes: 100000}),
-    new Objective('sold_for_likes_4', 'Site', 'Let all information about you knowledge be available in one place', ['sold_for_likes_3'], {likes: 10000000}),
+    new Objective('sold_for_likes_1', 'Social network group. Storages for likes', 'Allows to make groups in the VC and FB', ['likes 1'], {likes: 1000}),
+    new Objective('sold_for_likes_2', 'Instagram. Storages for likes', 'Upload photos from event', ['sold_for_likes_1'], {likes: 10000}),
+    new Objective('sold_for_likes_3', 'Youtube channel. Storages for likes', 'Upload lectures video', ['sold_for_likes_2'], {likes: 100000}),
+    new Objective('sold_for_likes_4', 'Site. Storages for likes', 'Let all information about you knowledge be available in one place', ['sold_for_likes_3'], {likes: 10000000}),
 
-    new Objective('sold_for_design_1', 'Business cards', 'The face of your company', ['design 1'], {design: 100}),
-    new Objective('sold_for_design_2', 'Posters', 'A more quality poster is leads to greater attendance', ['sold_for_design_1'], {design: 1000}),
-    new Objective('sold_for_design_3', 'Booklets', 'Show an ingenious engineering solution for all', ['sold_for_design_2'], {design: 10000}),
-    new Objective('sold_for_design_4', 'Handbooks', 'Let everyone see how you are organized', ['sold_for_design_3'], {design: 100000}),
+    new Objective('sold_for_design_1', 'Business cards. Storages for design', 'The face of your company', ['design 1'], {design: 100}),
+    new Objective('sold_for_design_2', 'Posters. Storages for design', 'A more quality poster is leads to greater attendance', ['sold_for_design_1'], {design: 1000}),
+    new Objective('sold_for_design_3', 'Booklets. Storages for design', 'Show an ingenious engineering solution for all', ['sold_for_design_2'], {design: 10000}),
+    new Objective('sold_for_design_4', 'Handbooks. Storages for design', 'Let everyone see how you are organized', ['sold_for_design_3'], {design: 100000}),
     
-    new Objective('sold_for_money_1', 'Purse', 'You spend a pocket money on a project', ['money 1'], {money: 10}),
-    new Objective('sold_for_money_2', 'Safe', 'Several people share their money for a project', ['sold_for_money_1'], {money: 100}),
-    new Objective('sold_for_money_3', 'Bank account', 'You have a few benefactors', ['sold_for_money_2'], {money: 1000}),
-    new Objective('sold_for_money_4', 'Charitable Foundation', 'You\'re so big company that now you have your own fund', ['sold_for_money_3'], {money: 10000}),
+    new Objective('sold_for_money_1', 'Purse. Storages for money', 'You spend a pocket money on a project', ['money 1'], {money: 10}),
+    new Objective('sold_for_money_2', 'Safe. Storages for money', 'Several people share their money for a project', ['sold_for_money_1'], {money: 100}),
+    new Objective('sold_for_money_3', 'Bank account. Storages for money', 'You have a few benefactors', ['sold_for_money_2'], {money: 1000}),
+    new Objective('sold_for_money_4', 'Charitable Foundation. Storages for money', 'You\'re so big company that now you have your own fund', ['sold_for_money_3'], {money: 10000}),
 
-    new Objective('sold_for_ideas_1', 'Repetition', 'Importantly! Do not forget apples', ['ideas 1'], {ideas: 1}),
-    new Objective('sold_for_ideas_2', 'Astro-event', 'Ideas knowledge not fall down from the sky', ['sold_for_ideas_1'], {ideas: 10}),
-    new Objective('sold_for_ideas_3', 'Party', 'The best ideas are born during leisure', ['sold_for_ideas_2'], {ideas: 100}),
-    new Objective('sold_for_ideas_4', 'Festival', 'You will be very experienced if you don\'t die', ['sold_for_ideas_3'], {ideas: 1000}),
+    new Objective('sold_for_ideas_1', 'Repetition. Storages for ideas', 'Importantly! Do not forget apples', ['ideas 1'], {ideas: 1}),
+    new Objective('sold_for_ideas_2', 'Astro-event. Storages for ideas', 'Ideas knowledge not fall down from the sky', ['sold_for_ideas_1'], {ideas: 10}),
+    new Objective('sold_for_ideas_3', 'Party. Storages for ideas', 'The best ideas are born during leisure', ['sold_for_ideas_2'], {ideas: 100}),
+    new Objective('sold_for_ideas_4', 'Festival. Storages for ideas', 'You will be very experienced if you don\'t die', ['sold_for_ideas_3'], {ideas: 1000}),
 
 ];
 
