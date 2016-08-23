@@ -1,10 +1,20 @@
 
 var objectives = {};
 objectives.db = [
+
+    new Objective('computer', 'Computer', 'A useful tool for work and entertainment.', [], {likes: 15000, design: 1500, money: 150, ideas: 15}),
+
+    new Objective('dungeon', 'Dungeon', 'The game.', ['computer'], {likes: 20000}, function () { Player.revealSecret('dungeon'); }),
+    new Objective('space', 'Space', 'The game.', ['computer'], {design: 2000}, function () { Player.revealSecret('space'); }),
+    new Objective('rally', 'Rally', 'The game.', ['computer'], {money: 200}, function () { Player.revealSecret('rally'); }),
+    new Objective('castle', 'Enlightener', 'The game about education and enlighting.', ['computer'], {ideas: 20}, function () { Player.revealSecret('castle'); }),
+
+    /*
     new Objective('sold_for_knowledge_1', 'Perseverance', 'Description', ['learn 1'], {knowledge: 10}),
     new Objective('sold_for_knowledge_2', 'Discipline', 'Description', ['learn 2', 'sold_for_knowledge_1'], {knowledge: 20}),
     new Objective('sold_for_knowledge_3', 'Motivation', 'Description', ['learn 3', 'sold_for_knowledge_2'], {knowledge: 30}),
     new Objective('sold_for_knowledge_4', 'Purposefulness', 'Description', ['learn 4', 'sold_for_knowledge_3'], {knowledge: 40}),
+    */
 
     new Objective('sold_for_likes_1', 'Social network group. Storages for likes', 'Allows to make groups in the VC and FB', ['likes 1'], {likes: 1000}),
     new Objective('sold_for_likes_2', 'Instagram. Storages for likes', 'Upload photos from event', ['sold_for_likes_1'], {likes: 10000}),
@@ -38,6 +48,9 @@ objectives.buy = function (name) {
             message("Objective reached: " + objective.name);
             array[0].reached = 1;
             Player.revealSecret(objective.name);
+            if (typeof objective.init_code === 'function') {
+                objective.init_code();
+            }
         }
     });
 };
@@ -62,7 +75,7 @@ objectives.getHTML = function () {
                     html += `${objective.label}. ${objective.text} [`;
             
                 for (var key in objective.cost) {
-                   html += `${key}: ${objective.cost[key]}`;
+                   html += `${key}: ${objective.cost[key]} `;
                 }
                 html += `] 
             </span>
