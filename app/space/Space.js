@@ -316,7 +316,7 @@ Space.getSpaceString = function () {
                 <div class="flex-element flex-container-column">`;
             html +=`<div>Destination: ${Space.flight.target.obj.name} ${Space.flight.target.type}. </div>`;
             html +=`<div>Progress: ${Space.flight.counter.toFixed(0)}/${Space.flight.length} </div>`;
-            html +=`<button onclick="Space.flyFast()">Activate Warp Drive</button>`;
+            if (Space.flight.warp_active !== 1) { html +=`<button onclick="Space.flyFast()">Activate Warp Drive</button>`; }
             html +=`</div></div>`;
             return html;
         },

@@ -1,14 +1,14 @@
 var Time = {
     ticks: 0,
     day: 0,
-    ear: 0,
+    year: 0,
     season: 'winter'
 };
 
 Time.tick = function () {
     Time.ticks++;
     Time.day = Time.ticks % 356;
-    Time.ear = Math.floor(Time.ticks / 356);
+    Time.year = Math.floor(Time.ticks / 356);
     Time.season = ['winter', 'spring', 'summer', 'autumn'][Math.floor((Time.ticks % 356) / (356 / 4))];
 
     message("A new day.");
@@ -33,7 +33,7 @@ Time.tick = function () {
 Time.getHTML = function () {
     var html = `
 <div>
-    <span> Ear: ${this.ear} </span>    
+    <span> Year: ${this.year} </span>    
     <span> Day: ${this.day} </span>    
     <span> Season: ${this.season} </span>    
 </div>

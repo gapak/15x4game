@@ -5,9 +5,9 @@ badges.db = [
 
     new Badge("tick 1", "Lost coordinator", "A month of your coordination is passed. You understand what's what.",
         function () { return (Gatherer.events.ticks > 30); }, function () {}),
-    new Badge("tick 2", "Verified coordinator", "A ear of your coordination is passed. You steeled enough to avoid mistakes.",
+    new Badge("tick 2", "Verified coordinator", "A year of your coordination is passed. You steeled enough to avoid mistakes.",
         function () { return (Gatherer.events.ticks > 356); }, function () {}),
-    new Badge("tick 3", "Experienced coordinator", "A ten ear of your coordination is passed. You ready to invent something new.",
+    new Badge("tick 3", "Experienced coordinator", "A ten year of your coordination is passed. You ready to invent something new.",
         function () { return (Gatherer.events.ticks > 356*10); }, function () {}),
     new Badge("tick 4", "Hardened coordinator", "A century of your coordination is passed. You elder and htonic.",
         function () { return (Gatherer.events.ticks > 356*100); }, function () {}),
@@ -61,7 +61,7 @@ badges.db = [
 
 
     new Badge("popularization 1", "Light of Science", "Popularization upgraded to level 15.",
-        function () { return (Civilization.works.popularization.level >= 15); }, function () { Player.revealSecret('education');  goals.achieve('popularization 1'); }),
+        function () { return (Civilization.works.popularization.level >= 15); }, function () { Player.revealSecret('education'); goals.achieve('popularization 1'); }),
     new Badge("popularization 2", "Trend to quantum", "Popularization upgraded to level 30.",
         function () { return (Civilization.works.popularization.level >= 30); }, function () {}),
     new Badge("popularization 3", "Viral ideas", "Popularization upgraded to level 45.",
@@ -79,7 +79,7 @@ badges.db = [
         function () { return (Civilization.works.education.level >= 60); }, function () {}),
 
     new Badge("motivation 1", "Working with target", "Motivation upgraded to level 15.",
-        function () { return (Civilization.works.motivation.level >= 15); }, function () { Player.revealSecret('activism'); }),
+        function () { return (Civilization.works.motivation.level >= 15); }, function () { Player.revealSecret('activism'); goals.achieve('motivation 1'); }),
     new Badge("motivation 2", "Working with sense", "Motivation upgraded to level 30.",
         function () { return (Civilization.works.motivation.level >= 30); }, function () {}),
     new Badge("motivation 3", "Target of life", "Motivation upgraded to level 45.",
