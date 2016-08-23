@@ -28,7 +28,7 @@ var Storages = {
 	}	
 };
 
-Storages.getHTML = function () {
+Storages.getR1HTML = function () {
     var html = `<hr><button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
     Resources:
     <div id="resources">`;
@@ -102,6 +102,24 @@ Storages.getHTML = function () {
     return html;
 };
 
+Storages.getC2HTML = function () {
+    var html = `<hr><button class="collapsar" data-toggle="collapse" data-target="#resources_collapse">-</button>
+    Cultural Artifacts:
+    <div id="C2_resources" class="flex-element flex-container-row">`;
+   
+    C2_resources.forEach(function(C2_resource) {		
+        html += `
+       	<div class="flex-element resource_element"> 
+        	${C2_resource.capitalizeFirstLetter()}: 
+            ${Player[C2_resource].toFixed(2)} 
+            <span class="flex-element" id="${C2_resource}_indicator"></span>`;    
+        	html += `
+        </div>`;	
+    });
+
+    html += `</div>`;
+    return html;
+};
 
 
 Storages.increaseBuilding = function(tier, building) {

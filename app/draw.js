@@ -16,7 +16,8 @@ function draw_all() {
 
     w("culture_container", Civilization.getHTML());
     w("departments_container", Department.getHTML());
-    w("resources_container", Storages.getHTML());
+    w("resources_container", Storages.getR1HTML());
+    w("С2_resources_container", Storages.getC2HTML());
     w("events_container", Event.getHTML());
     w("offered_lecture_container", Lecture.getHTML());
 
