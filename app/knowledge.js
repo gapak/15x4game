@@ -2,6 +2,8 @@
 
 var resources = ['likes', 'design', 'money', 'ideas'];
 
+var C2_resources = ['cultural_approval', 'cultural_concept', 'cultural_project', 'cultural_reform'];
+
 var space_resources = ['iron', 'oil', 'uranium', 'iridium'];
 
 var skill_to_resource = {'writing': 'likes', 'drawing': 'design', 'programming': 'money', 'management': 'ideas'};
