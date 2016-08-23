@@ -10,7 +10,7 @@ LogPanel = {
 function LogMessage(filter, text) {
 	this.filter = filter;
 	this.text = text;
-};
+}
 
 LogPanel.filters = ["Badge", "Not enough", "Paid", "Gained", "Reward", "Max", "lecturer", "Lecturer"];
 
@@ -25,7 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function FilterLogs(){
 	var check = document.getElementsByName("log_filter");
-	check.forEach(function(item){
+    for (var key in check) {
+        var item = check[key];
 		if(item.checked==true){
 			LogPanel.messages.forEach(function(logMessage){
 				if(logMessage.text.includes(item.value)){
@@ -39,5 +40,5 @@ function FilterLogs(){
 				}
 			});
 		}
-	});
-};
+	}
+}
