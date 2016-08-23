@@ -14,13 +14,13 @@ badges.db = [
 
     
     new Badge("resources 1", "Resources dabbling", "You collect some.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000); }, function () { Player.revealSecret('objectives'); goals.achieve('resources 1'); }),
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500); }, function () { Player.revealSecret('objectives'); goals.achieve('resources 1'); }),
     new Badge("resources 2", "Resources collector", "You collect many.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 10); }, function () { Player.revealSecret('events'); goals.achieve('resources 2'); }),
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 10); }, function () { Player.revealSecret('events'); goals.achieve('resources 2'); }),
     new Badge("resources 3", "Resources achiever", "You have wealth.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 100); }, function () { Player.revealSecret('sharing'); goals.achieve('resources 3'); }),
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 100); }, function () { Player.revealSecret('sharing'); goals.achieve('resources 3'); }),
     new Badge("resources 4", "Resources tycoon", "You have a huge savings.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 1000 * 1000); }, function () {}),
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 1000); }, function () {}),
 
 
     new Badge("communication 1", "Talking", "Communication upgraded to level 15.",
