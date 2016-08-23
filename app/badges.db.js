@@ -144,13 +144,6 @@ badges.db = [
         function () { return (Player.volunteers_memory >= 60); }, function () { Goal.displayed_goals_count++; }),
 
 
-    new Badge("learn 1", "", "You learn how to learning."),
-       // function () { return (Gatherer.events.increase_skill < 15 && Gatherer.events.increase_skill + 1 >= 15)}),
-    new Badge("learn 2", "", "You learn how to learning right."),
-    new Badge("learn 3", "", "You learn how to learning fast."),
-    new Badge("learn 4", "", "You learn how to learning things you needed."),
-
-
     new Badge("share 1", "Ready to learn", "You shared your knowledge 15 times.",
         function () { return (Gatherer.events.knowledge_sharing >= 15); }, function () { Player.revealSecret('skills'); Player.revealSecret('self_study'); goals.achieve('share 1'); }),
     new Badge("share 2", "Ready to read", "You shared your knowledge 30 times.",
@@ -180,6 +173,15 @@ badges.db = [
     new Badge("accepted_lectures 4", "Main brunch", "You accepted 60 lectures.",
         function () { return (lectures.db.length >= 60 + 60); }, function () {}),
 
+
+    new Badge("learn 1", "", "You learn how to learning.",
+        function () { return (Gatherer.events.increase_skill >= 15); }),
+    new Badge("learn 2", "", "You learn how to learning right.",
+        function () { return (Gatherer.events.increase_skill >= 30); }),
+    new Badge("learn 3", "", "You learn how to learning fast.",
+        function () { return (Gatherer.events.increase_skill >= 45); }),
+    new Badge("learn 4", "", "You learn how to learning things you needed.",
+        function () { return (Gatherer.events.increase_skill >= 60); }),
 
     new Badge("selfStudy 1", "", "15 Self Studies"),
     new Badge("selfStudy 2", "", "30 Self Studies"),
