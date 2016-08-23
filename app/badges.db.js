@@ -61,7 +61,7 @@ badges.db = [
 
 
     new Badge("popularization 1", "Light of Science", "Popularization upgraded to level 15.",
-        function () { return (Civilization.works.popularization.level >= 15); }, function () { Player.revealSecret('education');  goals.achieve('popularization 1'); }),
+        function () { return (Civilization.works.popularization.level >= 15); }, function () { Player.revealSecret('education'); goals.achieve('popularization 1'); }),
     new Badge("popularization 2", "Trend to quantum", "Popularization upgraded to level 30.",
         function () { return (Civilization.works.popularization.level >= 30); }, function () {}),
     new Badge("popularization 3", "Viral ideas", "Popularization upgraded to level 45.",
@@ -79,7 +79,7 @@ badges.db = [
         function () { return (Civilization.works.education.level >= 60); }, function () {}),
 
     new Badge("motivation 1", "Working with target", "Motivation upgraded to level 15.",
-        function () { return (Civilization.works.motivation.level >= 15); }, function () { Player.revealSecret('activism'); }),
+        function () { return (Civilization.works.motivation.level >= 15); }, function () { Player.revealSecret('activism'); goals.achieve('motivation 1'); }),
     new Badge("motivation 2", "Working with sense", "Motivation upgraded to level 30.",
         function () { return (Civilization.works.motivation.level >= 30); }, function () {}),
     new Badge("motivation 3", "Target of life", "Motivation upgraded to level 45.",
