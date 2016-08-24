@@ -65,8 +65,8 @@ Castle.tick = function() {
 
 Castle.getHTML = function() {
     var html = `    <hr>
-        <button class="collapsar" data-toggle="collapse" data-target="#castle_collapse">-</button>
-        <div>Education. Base HP: ${this.base_hp} Wave: ${this.current_wave_counter}. <button onclick="Castle.sendNextWave();">Next Wave</button></div>
+        <button class="btn btn-default" class="collapsar" data-toggle="collapse" data-target="#castle_collapse">-</button>
+        <div>Education. Base HP: ${this.base_hp} Wave: ${this.current_wave_counter}. <button class="btn btn-default" onclick="Castle.sendNextWave();">Next Wave</button></div>
         <div class="collapse in" id="castle_collapse">
             <div class="flex-container-column" id="castle">
                 <div class="flex-container-row" id="castle_towers">`;

@@ -75,12 +75,12 @@ function Workplace(name, base_cost_array, cost_grow_rate, text, custom_modificat
         </div>
         ${season_bonus_html}
     <div class="flex-element">
-        <button onclick="${address}('${key}');">Up: ${price}</button>
+        <button class="btn btn-default" onclick="${address}('${key}');">Up: ${price}</button>
     </div>
     <div class="flex-element">
         <span id="${key}_volunteers">Workers: ${this.workers}/${Civilization.updates.teamwork.level}</span>
-        <button class = "" onclick="Civilization.increase('${key}');"> + </button>
-        <button class = "" onclick="Civilization.decrease('${key}');"> - </button>
+        <button class="btn btn-default" onclick="Civilization.increase('${key}');"> + </button>
+        <button class="btn btn-default" onclick="Civilization.decrease('${key}');"> - </button>
     </div>
     
     <div class="flex-element">

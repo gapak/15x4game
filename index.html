@@ -68,7 +68,7 @@
 <body>
 
 <div class="main_container">
-    <div id="main_content" class="main_content80">
+    <div id="main_content" class="main_content80 main_content">
 
         <div class="container " id="time_container"></div>
 
@@ -87,9 +87,11 @@
         <div class="container " id="volunteers_container">
             Volunteers: <span id="volunteers_indicator" title="free volunteers produce culture">0</span>/<span
                 id="volunteers_memory_indicator">0</span>
-            <button class="init_secret" id="seek_container" onclick="Player.seek()" title="try to find a friend">Seek
-                the volunteers
+
+            <button class="init_secret btn btn-primary" id="seek_container" onclick="Player.seek()" title="try to find a friend">
+                Seek the volunteers
             </button>
+
             <div id="volunteers"></div>
         </div>
 
@@ -107,12 +109,12 @@
                 Knowledge:
                 <span id="knowledge_indicator">0</span>
             </div>
-            <button class="" title="Exchange knowledge to volunteer." onclick="Player.shareKnowledge()">Share Your
-                Knowledge
+            <button class="btn btn-default" title="Exchange knowledge to volunteer." onclick="Player.shareKnowledge()">
+                Share Your Knowledge
             </button>
         </div>
 
-    <div class="container init_secret" id="skills_container"></div>
+        <div class="container init_secret" id="skills_container"></div>
 
 
         <div class="container init_secret" id="actions_container"></div>
@@ -129,7 +131,7 @@
 
         <div class="container init_secret" id="dungeon_container">
             <hr>
-            <button class="collapsar" data-toggle="collapse" data-target="#dungeon_collapse">-</button>
+            <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#dungeon_collapse">-</button>
             Dungeon
             <div class="collapse in" id="dungeon_collapse">
                 <div id="dungeon" class="flex-container-column">
@@ -145,19 +147,19 @@
                     <div class="flex-element flex-container-row">
                         <div class="flex-element">
                             Weapon_STAT: 0
-                            <button onclick="">Up</button>
+                            <button class="btn btn-default" onclick="">Up</button>
                         </div>
                         <div class="flex-element">
                             Armor_STAT: 0
-                            <button onclick="">Up</button>
+                            <button class="btn btn-default" onclick="">Up</button>
                         </div>
                         <div class="flex-element">
                             HP_STAT: 0
-                            <button onclick="">Up</button>
+                            <button class="btn btn-default" onclick="">Up</button>
                         </div>
                         <div class="flex-element">
                             MP_STAT: 0
-                            <button onclick="">Up</button>
+                            <button class="btn btn-default" onclick="">Up</button>
                         </div>
                     </div>
                     <div class="flex-element flex-container-row">
@@ -201,29 +203,30 @@
         <div class="container init_secret" id="badges_container"></div>
 
         <hr>
+
         <div class="reset_container container" id="reset_container">
-            <button onclick="Player.reset()" id="reset_button" title="Retired, my Lord?">Reset</button>
+            <button onclick="Player.reset()" id="reset_button" class="btn btn-default" title="Retired, my Lord?">Reset</button>
         </div>
-
     </div>
 
+    <aside class="sidebar" id="log_panel_container">
+        <p>
+            Log Panel
+            <button onclick="LogPanel.clear()" class="btn btn-default">ClearLog</button>
 
-    <div>
-        <aside class="sidebar" id="log_panel_container">
-            <span>Log Panel</span>
-            <button onclick="LogPanel.clear()">ClearLog</button>
-            <button id="log_panel_button" class="collapsar" data-toggle="collapse" data-target="#log_panel_collapse"
-                    style="top: 0px;" onclick="LogPanel.hide()">-
+            <button id="log_panel_button" class="collapsar btn btn-default" data-toggle="collapse" data-target="#log_panel_collapse"
+                    onclick="LogPanel.hide()">
+                    <span class="glyphicon glyphicon-eye-open"></span>
             </button>
-            <div>Day: <span id="day_indicator">0</span></div>
+        </p>
+        <div>Day: <span id="day_indicator">0</span></div>
+        <hr>
+        <div class="collapse in" id="log_panel_collapse">
+            <div id="log_panel_filters"></div>
             <hr>
-            <div class="collapse in" id="log_panel_collapse">
-                <div id="log_panel_filters"></div>
-                <hr>
-                <div id="log_message"></div>
-            </div>
-        </aside>
-    </div>
+            <div id="log_message"></div>
+        </div>
+    </aside>
 
 </div>
 
