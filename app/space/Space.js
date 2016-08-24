@@ -256,7 +256,7 @@ Space.calcSpeed = function () {
 Space.getHTML = function () {
     var html = `
     <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#space_collapse">-</button>
+    <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#space_collapse">-</button>
     <div class="flex-element" id="space_title_container">${Space.getSpaceTitle()}</div>
     <div class="flex-element flex-container-row">`;
 
@@ -267,8 +267,8 @@ Space.getHTML = function () {
                 if (['planet', 'station'].indexOf(Space.state) !== -1) {
                     var order = Space.getCurrentObject().services.trade[resource];
                     html += `
-                        <button onclick="Space.buy('${resource}', ${order.count}, ${order.buy_price})">Buy ${order.buy_price}</button>
-                        <button onclick="Space.sell('${resource}', ${order.count}, ${order.sell_price})">Sell ${order.sell_price}</button>
+                        <button class="btn btn-default" onclick="Space.buy('${resource}', ${order.count}, ${order.buy_price})">Buy ${order.buy_price}</button>
+                        <button class="btn btn-default" onclick="Space.sell('${resource}', ${order.count}, ${order.sell_price})">Sell ${order.sell_price}</button>
                         <span>in stock: ${order.count}</span>`;
                 }
         html += `</div>`;
@@ -319,17 +319,17 @@ Space.getSpaceString = function () {
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
             Space.map.systems[Space.current_system].planets.forEach(function (planet, id) {
-                html += `<div><button onclick="Space.startFly('planet', ${id})">Fly</button> to ${planet.name} planet</div>`;
+                html += `<div><button class="btn btn-default" onclick="Space.startFly('planet', ${id})">Fly</button> to ${planet.name} planet</div>`;
             });
             Space.map.systems[Space.current_system].belts.forEach(function (belt, id) {
-                html += `<div><button onclick="Space.startFly('belt', ${id})">Fly</button> to ${belt.name} belt</div>`;
+                html += `<div><button class="btn btn-default" onclick="Space.startFly('belt', ${id})">Fly</button> to ${belt.name} belt</div>`;
             });
             Space.map.systems[Space.current_system].stations.forEach(function (station, id) {
-                html += `<div><button onclick="Space.startFly('station', ${id})">Fly</button> to ${station.name} station</div>`;
+                html += `<div><button class="btn btn-default" onclick="Space.startFly('station', ${id})">Fly</button> to ${station.name} station</div>`;
             });
             Space.map.systems.forEach(function (system, id) {
                 if (id == Space.current_system) return;
-                html += `<div><button onclick="Space.startFly('system', ${id})">Jump</button> to ${system.name} system</div>`;
+                html += `<div><button class="btn btn-default" onclick="Space.startFly('system', ${id})">Jump</button> to ${system.name} system</div>`;
             });
             html +=`</div></div>`;
             return html;
@@ -340,7 +340,7 @@ Space.getSpaceString = function () {
                 <div class="flex-element flex-container-column">`;
             html +=`<div>Destination: ${Space.flight.target.obj.name} ${Space.flight.target.type}. </div>`;
             html +=`<div>Progress: ${Space.flight.counter.toFixed(0)}/${Space.flight.length} </div>`;
-            if (Space.flight.warp_active !== 1) { html +=`<button onclick="Space.flyFast()">Activate Warp Drive</button>`; }
+            if (Space.flight.warp_active !== 1) { html +=`<button class="btn btn-default" onclick="Space.flyFast()">Activate Warp Drive</button>`; }
             html +=`</div></div>`;
             return html;
         },
@@ -348,8 +348,8 @@ Space.getSpaceString = function () {
             var html = `
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
-            html +=`<button onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
-            html +=`<button onclick="Space.start()">Start from the planet</button>`;
+            html +=`<button class="btn btn-default" onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
+            html +=`<button class="btn btn-default" onclick="Space.start()">Start from the planet</button>`;
             html +=`</div></div>`;
             return html;
         },
@@ -357,8 +357,8 @@ Space.getSpaceString = function () {
             var html = `
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
-            html +=`<button onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
-            html +=`<button onclick="Space.start()">Moving away from the belt.</button>`;
+            html +=`<button class="btn btn-default" onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
+            html +=`<button class="btn btn-default" onclick="Space.start()">Moving away from the belt.</button>`;
             html +=`</div></div>`;
             return html;
         },
@@ -366,8 +366,8 @@ Space.getSpaceString = function () {
             var html = `
             <div class="flex-element flex-container-column">
                 <div class="flex-element flex-container-column">`;
-            html +=`<button onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
-            html +=`<button onclick="Space.start()">Start from the station</button>`;
+            html +=`<button class="btn btn-default" onclick="Space.map.systems[${Space.current_system}]['${Space.current_object.type}s'][${Space.current_object.id}].action.code()">${Space.map.systems[Space.current_system][Space.current_object.type + 's'][Space.current_object.id].action.name}</button>`;
+            html +=`<button class="btn btn-default" onclick="Space.start()">Start from the station</button>`;
             html +=`</div></div>`;
             return html;
         },

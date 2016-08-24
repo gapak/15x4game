@@ -69,7 +69,7 @@ function Department(name) {
 }
 
 Department.getHTML = function() {
-    var html = `<hr><button class="collapsar" data-toggle="collapse" data-target="#departments_collapse">-</button>
+    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#departments_collapse">-</button>
     Departments: 
     <div class="collapse in" id="departments_collapse">
     <div class="flex-container-row" id="departments">`;
@@ -86,15 +86,15 @@ Department.getHTML = function() {
             <div class="flex-element">${key.capitalizeFirstLetter()}</div>
             <div class = "${secret_class} flex-element">
                 Level: <span id="${key}level"> ${department.level}</span>
-                <button onclick = "Player.upgradeDepartment('${key}');">
+                <button class="btn btn-default" onclick = "Player.upgradeDepartment('${key}');">
                     Up: ${price.toFixed(2)} ${resource_name} 
                 </button>
             </div>
                 
             <div>Workers: <span id="${key}_volunteers">  
                 ${department.workers} / ${(Civilization.updates.teamwork.level)} </span>
-                <button class = "" onclick="Player.increaseDepartment('${key}');">+</button>
-                <button class = "" onclick="Player.decreaseDepartment('${key}');">-</button>
+                <button class="btn btn-default" onclick="Player.increaseDepartment('${key}');">+</button>
+                <button class="btn btn-default" onclick="Player.decreaseDepartment('${key}');">-</button>
             </div>
 
             <div class="flex-element">

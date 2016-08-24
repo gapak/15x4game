@@ -71,7 +71,7 @@ actions.do = function (name) {
 
 actions.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar" data-toggle="collapse" data-target="#actions_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#actions_collapse">-</button>
         <div id="your_ap">Action Points: <span id="ap_indicator">${Player.action_points.toFixed(2)}</span></div>
         Actions:
         <div class="collapse in" id="actions_collapse">
@@ -83,7 +83,7 @@ actions.getHTML = function () {
             Player.revealSecret('actions');
             html += `
             <div class="action_element">
-                <button onclick="actions.do('${action.name}')">do</button>
+                <button onclick="actions.do('${action.name}')" class="btn btn-default">do</button>
                 <span class="action_name">${action.name}.</span>
                 <span class="action_text">"${action.text}"</span>
            </div>`;

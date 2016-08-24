@@ -50,7 +50,7 @@ Rally.tick = function () {
 Rally.getHTML = function () {
     var html = `    
     <hr>
-    <button class="collapsar" data-toggle="collapse" data-target="#rally_collapse">-</button>
+    <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#rally_collapse">-</button>
     Rally. Wins: ${Player.race_win_points_memory}, new wins: ${Player.race_win_points}.
     <div class="collapse in" id="rally_collapse">
         <div id="rally" class="flex-container-column">`;
@@ -61,7 +61,7 @@ Rally.getHTML = function () {
     html += `<div class="flex-element flex-container-row">`;
     for (var skill_id in this.skills) {
         var skill = this.skills[skill_id];
-        var upd_button = (Player.race_win_points >= 1) ? `<button onclick="Rally.upgradeSkill('${skill_id}')">Up</button>` : '';
+        var upd_button = (Player.race_win_points >= 1) ? `<button class="btn btn-default" onclick="Rally.upgradeSkill('${skill_id}')">Up</button>` : '';
         html += `
                 <div class="flex-element">
                 Skill ${skill.name}: ${skill.level} ${upd_button}
@@ -72,7 +72,7 @@ Rally.getHTML = function () {
     html += `<div class="flex-element flex-container-row">`;
     for (var part_id in this.car) {
         var part = this.car[part_id];
-        var upd_button = `<button onclick="Rally.upgradeCar('${part_id}')">Up: ${JSON.stringify(Rally.getUpgradeCost(part_id))}</button>`;
+        var upd_button = `<button class="btn btn-default" onclick="Rally.upgradeCar('${part_id}')">Up: ${JSON.stringify(Rally.getUpgradeCost(part_id))}</button>`;
         html += `
                 <div class="flex-element">
                 Part ${part.name}: ${part.level} ${upd_button}
@@ -85,7 +85,7 @@ Rally.getHTML = function () {
         html += `<div class="flex-element flex-container-row">`;
         for (var strategy_id in this.strategies) {
             var strategy = this.strategies[strategy_id];
-            var strategy_lable = (this.current_strategy == strategy_id) ? "Selected" : '<button onclick="Rally.selectStrategy(\'' + strategy_id + '\');">Select</button>';
+            var strategy_lable = (this.current_strategy == strategy_id) ? "Selected" : '<button class="btn btn-default" onclick="Rally.selectStrategy(\'' + strategy_id + '\');">Select</button>';
 
             html += `
                     <div class="flex-element">
@@ -103,7 +103,7 @@ Rally.getHTML = function () {
         html += `</div>`;
     }
     else {
-        html += '       <button onclick="Rally.start();">Start Rally</button>';
+        html += '       <button class="btn btn-default" onclick="Rally.start();">Start Rally</button>';
     }
         html += `   </div>
                 </div>
