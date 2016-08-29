@@ -57,7 +57,7 @@ objectives.buy = function (name) {
 
 objectives.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar" data-toggle="collapse" data-target="#objectives_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#objectives_collapse">-</button>
         Objectives:
         <div class="collapse in" id="objectives_collapse">
             <div id="objectives">`;
@@ -70,7 +70,7 @@ objectives.getHTML = function () {
         <div class="objective_element">
             <span class="objective_name">`;
                 if (!objective.reached) {
-                    html += `<button onclick="objectives.buy('${objective.name}')">buy</button>`;
+                    html += `<button class="btn btn-default" onclick="objectives.buy('${objective.name}')">buy</button>`;
                 }
                     html += `${objective.label}. ${objective.text} [`;
             
