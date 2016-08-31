@@ -57,7 +57,7 @@ objectives.buy = function (name) {
 
 objectives.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#objectives_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#objectives_collapse"></button>
         Objectives:
         <div class="collapse in" id="objectives_collapse">
             <div id="objectives">`;

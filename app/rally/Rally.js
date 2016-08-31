@@ -50,7 +50,7 @@ Rally.tick = function () {
 Rally.getHTML = function () {
     var html = `    
     <hr>
-    <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#rally_collapse">-</button>
+    <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#rally_collapse"></button>
     Rally. Wins: ${Player.race_win_points_memory}, new wins: ${Player.race_win_points}.
     <div class="collapse in" id="rally_collapse">
         <div id="rally" class="flex-container-column">`;
