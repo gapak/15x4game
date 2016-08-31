@@ -69,7 +69,7 @@ function Department(name) {
 }
 
 Department.getHTML = function() {
-    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#departments_collapse">-</button>
+    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#departments_collapse"></button>
     Departments: 
     <div class="collapse in" id="departments_collapse">
     <div class="flex-container-row" id="departments">`;

@@ -256,7 +256,7 @@ Space.calcSpeed = function () {
 Space.getHTML = function () {
     var html = `
     <hr>
-    <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#space_collapse">-</button>
+    <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#space_collapse"></button>
     <div class="flex-element" id="space_title_container">${Space.getSpaceTitle()}</div>
     <div class="flex-element flex-container-row">`;
 
