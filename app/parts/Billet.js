@@ -12,11 +12,11 @@ function Billet(name, base_cost_array, cost_grow_rate , text) {
             message("Max level");
             return false;
         }
-        if (!Player.checkEnthusiasm()) return false;
+        if (!Player.checkActionPoints()) return false;
 
         if (Player.withdrawArray(this.getUpgradeCost())) {
             this.level++;
-            Player.enthusiasm--;
+            Player.withdrawActionPoints();
             draw_all();
         }
     };
@@ -43,7 +43,7 @@ function Billet(name, base_cost_array, cost_grow_rate , text) {
                             ${key.capitalizeFirstLetter()}
                             <div class="${secret_class}">: <span id="${key}level">${this.level}</span></div>
                         </div>
-                        <div class="flex-element"><button onclick="${address}('${key}');">Up: ${price}</button></div>
+                        <div class="flex-element"><button class="btn btn-default" onclick="${address}('${key}');">Up: ${price}</button></div>
                         <div class="flex-element">${this.text}</div>
                     </div>`;
 

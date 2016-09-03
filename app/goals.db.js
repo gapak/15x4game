@@ -2,7 +2,9 @@
 var goals = {};
 
 goals.db = [
-    new Goal("culture", "First of all try to find some friends"),
+    new Goal("prepare", "First of all prepare to action. Collect 15 action points."),
+    new Goal("culture", "Try to find some friends"),
+    new Goal("hype", "Try to rise hype and find lecture"),
     new Goal("volunteers 1", "For growing you must found 15 volunteers."),
     new Goal("communication 1", "Upgrade communication to level 15 for unlock attentiveness."),
     new Goal("popularization 1", "Upgrade popularization to level 15 for unlock education."),

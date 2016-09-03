@@ -73,7 +73,7 @@ Startup.tick = function () {
 
 Startup.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar" data-toggle="collapse" data-target="#startups_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#startups_collapse"></button>
         Startups:
         <div class="collapse in" id="startups_collapse">
             <div id="startups">`;
@@ -94,12 +94,12 @@ Startup.getHTML = function () {
         //console.log(upgrade_cost);
         html += `
         <div class="flex-element">
-            <button onclick="Startup.upgrade('${id}');">Up: ${price}</button>
+            <button class="btn btn-default" onclick="Startup.upgrade('${id}');">Up: ${price}</button>
         </div>
 
             <span id="${id}_volunteers">Workers: ${startups.db[id].workplace.workers}/${Civilization.updates.teamwork.level}</span>
-            <button class = "" onclick="Startup.increaseWorker('${id}');"> + </button>
-            <button class = "" onclick="Startup.decreaseWorker('${id}');"> - </button>
+            <button class="btn btn-default" onclick="Startup.increaseWorker('${id}');"> + </button>
+            <button class="btn btn-default" onclick="Startup.decreaseWorker('${id}');"> - </button>
         </div>`;
     });
 

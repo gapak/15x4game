@@ -33,9 +33,9 @@ Time.tick = function () {
 Time.getHTML = function () {
     var html = `
 <div>
-    <span> Year: ${this.year} </span>    
-    <span> Day: ${this.day} </span>    
-    <span> Season: ${this.season} </span>    
+    <span> Year: ${this.year} </span>
+    <span> Day: ${this.day} </span>
+    <span> Season: ${this.season} </span>
 </div>
     `;
 

@@ -24,6 +24,7 @@ function Ship() {
 
     this.withdraw = function(resource, quantity, silent) {
         if (this.cargo.resources[resource] - quantity < 0) {
+            if (!silent) message(`Not enough ${resource}.`);
             return false;
         }
         this.cargo.resources[resource] -= quantity;

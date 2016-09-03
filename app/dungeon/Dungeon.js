@@ -66,7 +66,7 @@ Dungeon.getPlaceString = function (id) {
 };
 
 Dungeon.getMenuString = function () {
-    return '<button onclick="Dungeon.go();">Go to dungeon</button>';
+    return '<button class="btn btn-default" onclick="Dungeon.go();">Go to dungeon</button>';
 };
 
 Dungeon.go = function () {
