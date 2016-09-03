@@ -143,7 +143,7 @@ Lecture.generate_offered_lecture_cost = function () {
         <div>Offered lectures. Hype:  
             <span id = "hype"></span>
         </div>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#offered_lecture_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#offered_lecture_collapse"></button>
         <button id="new_lecture" class = "cheat btn btn-default" onclick="Lecture.generateLecture();">Generate new lecture</button>
         <div id = "offered_lecture_collapse">
             <div class="container collapse in" id = "offered_lectures_container">`;

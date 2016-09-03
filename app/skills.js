@@ -2,7 +2,7 @@ var skills = ["writing", "drawing", "programming", "management"];
 
 skills.getHTML = function() {
     var html = `<hr>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#skills_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#skills_collapse"></button>
         Skills:
         <div class="collapse in" id="skills_collapse">
             <div class="flex-container-row" id="skills">`;

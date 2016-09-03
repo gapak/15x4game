@@ -73,7 +73,7 @@ Startup.tick = function () {
 
 Startup.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#startups_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#startups_collapse"></button>
         Startups:
         <div class="collapse in" id="startups_collapse">
             <div id="startups">`;

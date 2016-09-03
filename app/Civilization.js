@@ -78,7 +78,7 @@ Civilization.getHappiness = function() {
 
 Civilization.getHTML = function() {
     var html = `    <hr>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#culture_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#culture_collapse"></button>
         <div>Community. <span title="many factors can change happiness">Happiness bonus: <span id="global_bonus_indicator">${Civilization.happiness.toFixed(2)}</span>%</span></div>
         <div>Culture: <span id="culture_indicator">${Player.culture.toFixed(2)}</span>/<span id="culture_limit_indicator">${Player.culture_soft_cap.toFixed(2)}</span> (<span id="culture_rate_indicator">${Player.culture_rate.toFixed(2)}</span>/sec)</div>
         <div class="collapse in" id="culture_collapse">

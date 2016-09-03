@@ -94,7 +94,7 @@ Event.inventButton = function () {
 
 Event.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#events_collapse">-</button>
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#events_collapse"></button>
             Events:
         <button class="init_secret btn btn-default"  id="invent_container" onclick="Event.inventButton();">Invent a New Event</button>
         <div class="collapse in" id="events_collapse">

@@ -29,7 +29,7 @@ var Storages = {
 };
 
 Storages.getR1HTML = function () {
-    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#resources_collapse">-</button>
+    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#resources_collapse"></button>
     Resources:
     <div id="resources">`;
 
@@ -103,7 +103,7 @@ Storages.getR1HTML = function () {
 };
 
 Storages.getC2HTML = function () {
-    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#resources_collapse">-</button>
+    var html = `<hr><button class="collapsar btn btn-default" data-toggle="collapse" data-target="#resources_collapse"></button>
     Cultural Artifacts:
     <div id="C2_resources" class="flex-element flex-container-row">`;
    

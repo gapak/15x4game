@@ -71,8 +71,11 @@ actions.do = function (name) {
 
 actions.getHTML = function () {
     var html = `<hr>
-        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#actions_collapse">-</button>
-        <div id="your_ap">Action Points: <span id="ap_indicator">${Player.action_points.toFixed(2)}</span></div>`
+        <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#actions_collapse"></button>
+        <div id="your_ap">Action Points: <span id="ap_indicator">${Player.action_points.toFixed(2)}</span></div>
+        Actions:
+        <div class="collapse in" id="actions_collapse">
+            <div id="actions">`;
 
         var reached_actions = actions.db.filter(function (action) {
             return action.is_reached();
