@@ -77,22 +77,31 @@
         <div class="container flex-container-column" id="goals_container">
         </div>
 
-        <hr>
-
         <div class="container " id="enthusiasm_container" title="Collects slowly. Need for seeking volunteers and upgrade things.">
+            <hr>
             Enthusiasm: <span id="enthusiasm_indicator">0</span>/<span id="enthusiasm_max_indicator">100</span>
             <div id="enthusiasm"></div>
         </div>
 
-        <div class="container " id="volunteers_container">
-            Volunteers: <span id="volunteers_indicator" title="free volunteers produce culture">0</span>/<span
-                id="volunteers_memory_indicator">0</span>
-
-            <button class="init_secret btn btn-primary" id="seek_container" onclick="Player.seek()" title="try to find a friend">
-                Seek the volunteers
+        <div class="container init_secret" id="prepare_container">
+            <hr>
+            <button class=" btn btn-primary" id="prepare_btn" onclick="Player.prepare();" title="Produce action points">
+                Prepare to actions
             </button>
+        </div>
 
-            <div id="volunteers"></div>
+        <div class="container init_secret" id="action_points_container"></div>
+
+        <div class="container init_secret" id="volunteers_container">
+            <hr>
+            <div>
+                Volunteers: <span id="volunteers_indicator" title="free volunteers produce culture">0</span>/<span id="volunteers_memory_indicator">0</span>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="seek_container" onclick="Player.seek();" title="Produce volunteers and hype">
+                    Tell your friends about project
+                </button>
+            </div>
         </div>
 
         <div class="container init_secret" id="culture_container"></div>
@@ -109,15 +118,12 @@
                 Knowledge:
                 <span id="knowledge_indicator">0</span>
             </div>
-            <button class="btn btn-default" title="Exchange knowledge to volunteer." onclick="Player.shareKnowledge()">
+            <button class="btn btn-default" title="Exchange knowledge to volunteer, improve your prepare-to-actions and unlock learning in future." onclick="Player.shareKnowledge()">
                 Share Your Knowledge
             </button>
         </div>
 
         <div class="container init_secret" id="skills_container"></div>
-
-
-        <div class="container init_secret" id="actions_container"></div>
 
         <div class="container init_secret" id="startups_container"></div>
 
@@ -205,7 +211,8 @@
         <hr>
 
         <div class="reset_container container" id="reset_container">
-            <button onclick="Player.reset()" id="reset_button" class="btn btn-default" title="Retired, my Lord?">Reset</button>
+            <button onclick="if (!confirm('Are you sure to start next game? Your volunteers and lecturer come width you.')) return false; Player.reset();" id="reset_button" class="btn btn-default" title="Retired, my Lord?">Reset</button>
+            <button onclick="if (!confirm('Are you sure to start new game? All your progress will be erased.')) return false; Player.wipe();" id="wipe_button" class="btn btn-default" title="It is a mistake">Wipe</button>
         </div>
     </div>
 
@@ -236,11 +243,10 @@
         draw_all();
 
         var t = setInterval(Time.tick, 1000);
-        Player.revealSecret('seek');
+        Player.revealSecret('prepare');
         Player.revealSecret('popularization');
         Player.revealSecret('communication');
         //Player.revealSecret('motivation');
-        events.db.push(Event.generator());
 
         var savedPlayer = JSON.parse(localStorage.getItem("Player"));
         if (savedPlayer) {

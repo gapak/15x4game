@@ -21,7 +21,7 @@ SpaceHelper.generateOrder = function (base_price) {
     var medium_price = parseInt(((100 * base_price) / count).toFixed(0));
     var sell_price = rand(medium_price, medium_price+10);
     var buy_price = rand(medium_price-10, medium_price);
-    console.log(base_price, count, medium_price, sell_price, buy_price);
+//    console.log(base_price, count, medium_price, sell_price, buy_price);
     return {'sell_price': sell_price, 'buy_price': buy_price, count: count};
 };
 

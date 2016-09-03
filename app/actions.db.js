@@ -77,18 +77,27 @@ actions.getHTML = function () {
         <div class="collapse in" id="actions_collapse">
             <div id="actions">`;
 
-        actions.db.filter(function (action) {
+        var reached_actions = actions.db.filter(function (action) {
             return action.is_reached();
-        }).forEach(function (action, id, arr) {
-            Player.revealSecret('actions');
-            html += `
+        });
+
+        if (reached_actions.length > 0) {
+            html += `Actions:
+        <div class="collapse in" id="actions_collapse">
+            <div id="actions_container">`;
+
+            reached_actions.forEach(function (action, id, arr) {
+                Player.revealSecret('actions');
+                html += `
             <div class="action_element">
                 <button onclick="actions.do('${action.name}')" class="btn btn-default">do</button>
                 <span class="action_name">${action.name}.</span>
                 <span class="action_text">"${action.text}"</span>
            </div>`;
-        });
-        html += `</div></div>`;
+            });
+            html += `</div>`;
+        }
+        html += `</div>`;
         return html;
 };
 

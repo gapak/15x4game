@@ -67,7 +67,7 @@ Civilization.tick = function() {
         Player.withdraw('enthusiasm', Civilization.works.education.workers * 0.01, 1)) {
         //Player.culture_rate -= Civilization.works.education.workers * 0.01;
         Player.revealSecret('knowledge');
-        Player.knowledge += Civilization.works.education.getEfficiency() * 5 * 0.01 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 5*Player.knowledge + 0.5*Player.volunteers_memory));
+        Player.knowledge += Civilization.works.education.getEfficiency() * 5 * 0.01 / (2 * (1 + Player.writing + Player.drawing + Player.programming + Player.management + 100*Player.knowledge + 0.5*Player.volunteers_memory));
     }
 
 };
