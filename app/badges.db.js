@@ -16,7 +16,7 @@ badges.db = [
     new Badge("resources 1", "Resources dabbling", "You collect some.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500); }, function () { Player.revealSecret('objectives'); goals.achieve('resources 1'); }),
     new Badge("resources 2", "Resources collector", "You collect many.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 10); }, function () { Player.revealSecret('events'); goals.achieve('resources 2'); }),
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 10); }, function () { Player.revealSecret('events'); events.db.push(Event.generator()); goals.achieve('resources 2'); }),
     new Badge("resources 3", "Resources achiever", "You have wealth.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 100); }, function () { Player.revealSecret('sharing'); goals.achieve('resources 3'); }),
     new Badge("resources 4", "Resources tycoon", "You have a huge savings.",
@@ -137,7 +137,7 @@ badges.db = [
     new Badge("volunteers 1", "Group", "Founded 15 volunteers.",
         function () { return (Player.volunteers_memory >= 15); }, function () { Player.revealSecret('teamwork'); goals.achieve('volunteers 1'); Goal.displayed_goals_count++; }),
     new Badge("volunteers 2", "Company", "Founded 30 volunteers.",
-        function () { return (Player.volunteers_memory >= 30); }, function () { Player.revealSecret('departments'); goals.achieve('volunteers 2'); }),
+        function () { return (Player.volunteers_memory >= 30); }, function () { Player.revealSecret('departments'); goals.achieve('volunteers 2'); Goal.displayed_goals_count++;}),
     new Badge("volunteers 3", "Community", "Founded 45 volunteers.",
         function () { return (Player.volunteers_memory >= 45); }, function () { Player.revealSecret('motivation'); goals.achieve('volunteers 3'); }),
     new Badge("volunteers 4", "Organization", "Founded 60 volunteers.",
@@ -165,13 +165,13 @@ badges.db = [
 
 
     new Badge("accepted_lectures 1", "A new brunch", "You accepted 15 lectures.",
-        function () { return (lectures.db.length >= 60 + 15); }, function () { Player.revealSecret('add_time'); goals.achieve('accepted_lectures 1'); }),
+        function () { return (lectures.db.length >= 15); }, function () { Player.revealSecret('add_time'); goals.achieve('accepted_lectures 1'); }),
     new Badge("accepted_lectures 2", "Stable brunch", "You accepted 30 lectures.",
-        function () { return (lectures.db.length >= 60 + 30); }, function () { Player.revealSecret('change_theme'); goals.achieve('accepted_lectures 2');  }),
+        function () { return (lectures.db.length >= 30); }, function () { Player.revealSecret('change_theme'); goals.achieve('accepted_lectures 2');  }),
     new Badge("accepted_lectures 3", "Old brunch", "You accepted 45 lectures.",
-        function () { return (lectures.db.length >= 60 + 45); }, function () {}),
+        function () { return (lectures.db.length >= 45); }, function () {}),
     new Badge("accepted_lectures 4", "Main brunch", "You accepted 60 lectures.",
-        function () { return (lectures.db.length >= 60 + 60); }, function () {}),
+        function () { return (lectures.db.length >= 60); }, function () {}),
 
 
     new Badge("learn 1", "", "You learn how to learning.",

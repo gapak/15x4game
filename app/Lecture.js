@@ -2,25 +2,32 @@
 
 function Lecture(lecturer_name, name, text, url, cost) {
     this.lecturer_name = lecturer_name;
-        this.name = name;
-        this.text = text;
-        this.url = url;
+    this.name = name;
+    this.text = text;
+    this.url = url;
     this.cost = cost;
-        this.patience = (420 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness + Player.enthusiasm;
-        this.is_performed = 0;
+    this.patience = (420 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness + Player.enthusiasm;
+    this.is_performed = 0;
 }
 
-    Lecture.hype = 0;
-    Lecture.accepted_lectures_counter = 0;
+Lecture.hype = 0;
+Lecture.accepted_lectures_counter = 0;
 
- Lecture.generateLecture = function(old_lecturer) {
+Lecture.generateLecture = function(old_lecturer) {
+    var new_lecture = null;
     var lecturer_name = "";
     if (old_lecturer) {
         lecturer_name = old_lecturer;
     } 
     else {
+        if (lectures.classic.length != 0 && rand(0, 1) == 1) { // classic lectures hook
+            new_lecture = lectures.classic[Math.floor(Math.random() * lectures.classic.length)];
+            new_lecture.cost = Lecture.generate_offered_lecture_cost();
+            return new_lecture;
+        }
+
         var first_name = ['Екатерина', 'Оксана', 'Александр', 'Максим', 'Евгений', 'Григорий', 'Николай'];
-        var second_name = ['Хомяк', 'Морж', 'Рак', 'Бро', 'Зло', 'Добро', 'Сыч', 'Попович'];
+        var second_name = ['Хомяк', 'Морж', 'Рак', 'Бро', 'Зло', 'Добро', 'Сыч', 'Попович', 'Черепущак', 'Кот'];
         lecturer_name = first_name[Math.floor(Math.random() * first_name.length)] + " " + 
                             second_name[Math.floor(Math.random() * second_name.length)];
     }
@@ -39,8 +46,8 @@ function Lecture(lecturer_name, name, text, url, cost) {
             //message(name + ". " + lecturer_name);
     var cost = Lecture.generate_offered_lecture_cost();
 
-    var new_lecture = new Lecture (lecturer_name, name, " ", "https://15x4.org/lecture/random/", cost);
-    if (!old_lecturer) lectures.offered.push(new_lecture);
+    new_lecture = new Lecture (lecturer_name, name, " ", "https://15x4.org/lecture/random/", cost);
+    //if (!old_lecturer) lectures.offered.push(new_lecture);
 
     return new_lecture;
  };
@@ -51,7 +58,7 @@ function Lecture(lecturer_name, name, text, url, cost) {
                 return false;
     }
 
-    if (Player.withdrawArray(lectures.offered[lecture_id].cost)) {
+    if (Player.withdrawArray(lectures.offered[lecture_id].cost * (1 + Lecture.accepted_lectures_counter))) {
             Player.action_points--;
             lectures.db.push(lectures.offered[lecture_id]);
         lectures.offered.splice(lecture_id, 1);
@@ -84,10 +91,19 @@ Lecture.addTime = function(lecture_id) {
     }
 };
 
- Lecture.generate_offered_lecture_cost = function () {
-    var random_resource = resources[Math.floor(Math.random() * resources.length)];
-    var random_resource_cost = resources_rates[random_resource] * (1 + Lecture.accepted_lectures_counter);
+Lecture.generate_offered_lecture_cost = function () {
+    var random_resource = '';
+    var random_resource_cost = 0;
     var offered_lecture_cost = {};
+
+    if (Player.volunteers < 30 || rand(0, 4) == 3) {
+        random_resource = 'culture';
+        random_resource_cost = culture_rate * 10;
+    }
+    else {
+        random_resource = resources[Math.floor(Math.random() * resources.length)];
+        random_resource_cost = resources_rates[random_resource];
+    }
 
     offered_lecture_cost[random_resource] = random_resource_cost;
  // console.log(offered_lecture_cost);
@@ -106,11 +122,18 @@ Lecture.addTime = function(lecture_id) {
 
     if (Lecture.hype > 0) {
         if (rand(0, 100) < Lecture.hype * 0.1) {
-            Lecture.generateLecture();
+            lectures.offered.push(Lecture.generateLecture());
             message("New lecturer had come");
             Player.revealSecret('offered_lecture');
         }
-        Lecture.hype--;
+
+        if (Lecture.hype > 60) {
+            Lecture.hype--;
+        }
+        else {
+            Lecture.hype -= (Lecture.hype / 60);
+            Lecture.hype = Lecture.hype.toFixed(2) - 0.01;
+        }
     }
  };
 
@@ -128,10 +151,13 @@ Lecture.addTime = function(lecture_id) {
 
 
         lectures.offered.forEach(function (lecture, id, arr) {
-                for (var name in lecture.cost) break;
-                        var cost = lecture.cost[name];
+            goals.achieve('hype');
 
-        var timer = (lecture.patience < 60) ? ` (leave after ${lecture.patience.toFixed(0)}) ` : '';
+            for (var name in lecture.cost) break;
+
+            var cost = lecture.cost[name] * (1 + Lecture.accepted_lectures_counter);
+
+            var timer = (lecture.patience < 60) ? ` (leave after ${lecture.patience.toFixed(0)}) ` : '';
 
                 html += `
                 <div class="offered_lecture_element">

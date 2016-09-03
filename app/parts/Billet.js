@@ -12,11 +12,11 @@ function Billet(name, base_cost_array, cost_grow_rate , text) {
             message("Max level");
             return false;
         }
-        if (!Player.checkEnthusiasm()) return false;
+        if (!Player.checkActionPoints()) return false;
 
         if (Player.withdrawArray(this.getUpgradeCost())) {
             this.level++;
-            Player.enthusiasm--;
+            Player.withdrawActionPoints();
             draw_all();
         }
     };

@@ -21,6 +21,7 @@ var Player = {
     max_knowledge: 0, // ?)
 
     action_points: 0,
+    prepare_counter: 0,
 
     // R1 resources
     likes: 0,
@@ -70,8 +71,7 @@ Player.addSupervision = function (department_name) {
 };
 
 Player.seek = function() {
-    if (!this.checkEnthusiasm()) return false;
-    this.enthusiasm--;
+    if (!this.withdrawActionPoints()) return false;
 
     var inflow = 1 / (0.05 * 0.01 * Math.pow(this.volunteers_memory, 4) + 1);
 
@@ -80,18 +80,47 @@ Player.seek = function() {
         Player.revealSecret('culture');
     }
     else {
-        message('Reward: You found one more volunteers.');
+        message('Reward: You found one more volunteer.');
     }
     Gatherer.found(inflow);
+    Lecture.hype++;
 
     this.volunteers += inflow;
     this.volunteers_memory += inflow;
     draw_all();
 };
 
+Player.prepare = function() {
+    if (!this.withdrawEnthusiasm()) return false;
+
+    var inflow = 10 / (10 + ( (Player.prepare_counter) / (3 + (0.1 * Gatherer.events.knowledge_sharing) ) ) );
+    Player.prepare_counter++;
+    Player.reward('action_points', inflow);
+    Player.revealSecret('action_points');
+
+    if (this.action_points >= 15 && this.prepare_counter >= 15) {
+        goals.achieve('prepare');
+        Player.revealSecret('volunteers');
+        //Player.revealSecret('seek');
+    }
+    else {
+        message('Reward: You prepare to action.');
+    }
+
+    draw_all();
+};
+
 Player.checkEnthusiasm = function () {
     if (this.enthusiasm <= 1) {
         message("Not enough enthusiasm.");
+        return false;
+    }
+    return true;
+};
+
+Player.checkActionPoints = function () {
+    if (this.action_points <= 1) {
+        message("Not enough action points.");
         return false;
     }
     return true;
@@ -105,7 +134,19 @@ Player.withdrawEnthusiasm = function () {
     return false;
 };
 
+Player.withdrawActionPoints = function () {
+    if (this.checkActionPoints()) {
+        this.action_points--;
+        return true;
+    }
+    return false;
+};
+
 Player.reset = function () {
+    location.reload();
+};
+
+Player.wipe = function () {
     this.volunteers = 0;
     this.volunteers_memory = 0;
     savedLectures = {};
