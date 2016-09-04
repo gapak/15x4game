@@ -16,7 +16,7 @@ badges.db = [
     new Badge("resources 1", "Resources dabbling", "You collect some.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500); }, function () { Player.revealSecret('objectives'); goals.achieve('resources 1'); }),
     new Badge("resources 2", "Resources collector", "You collect many.",
-        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 10); }, function () { Player.revealSecret('events'); events.db.push(Event.generator()); goals.achieve('resources 2'); }),
+        function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 10); }, function () { goals.achieve('resources 2'); }),
     new Badge("resources 3", "Resources achiever", "You have wealth.",
         function () { return ((Gatherer.collection.likes * 1 + Gatherer.collection.design * 10 + Gatherer.collection.money * 100 + Gatherer.collection.ideas * 1000) > 500 * 100); }, function () { Player.revealSecret('sharing'); goals.achieve('resources 3'); }),
     new Badge("resources 4", "Resources tycoon", "You have a huge savings.",
@@ -163,7 +163,8 @@ badges.db = [
     new Badge("hold_events 4", "", "You was hold 60 events.",
         function () { return (Gatherer.events.hold_events >= 60); }, function () {}),
 
-
+    new Badge("accepted_lectures 0", "First event", "You accepted 4 lectures.",
+        function () { return (lectures.db.length >= 4); }, function () { Player.revealSecret('events'); events.db.push(Event.generator()); goals.achieve('accepted_lectures 0'); }),
     new Badge("accepted_lectures 1", "A new brunch", "You accepted 15 lectures.",
         function () { return (lectures.db.length >= 15); }, function () { Player.revealSecret('add_time'); goals.achieve('accepted_lectures 1'); }),
     new Badge("accepted_lectures 2", "Stable brunch", "You accepted 30 lectures.",

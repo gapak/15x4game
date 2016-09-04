@@ -11,7 +11,8 @@ goals.db = [
     new Goal("volunteers 2", "For growing you must found 30 volunteers."),
 
     new Goal("resources 1", "Collect some resources for unlock objectives"),
-    new Goal("resources 2", "Collect many resources for unlock events"),
+    
+    new Goal("accepted_lectures 0", "Accept 4 lectures for unlock events"),
 
     new Goal("teamwork 1", "Upgrade teamwork to level 15 for able to upgrade departments."),
     new Goal("share 1", "Share you knowledge 15 times for able to increase your skill."),

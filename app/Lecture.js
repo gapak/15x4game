@@ -8,6 +8,14 @@ function Lecture(lecturer_name, name, text, url, cost) {
     this.cost = cost;
     this.patience = (420 - Player.volunteers_memory) * 0.1 + Lecture.hype + Player.knowledge + Civilization.happiness + Player.enthusiasm;
     this.is_performed = 0;
+
+    this.getCost = function () {
+        var cost = {};
+        for (var key in this.cost) {
+            cost[key] = this.cost[key] * (1 + Lecture.accepted_lectures_counter);
+        }
+        return cost;
+    }
 }
 
 Lecture.hype = 0;
@@ -53,15 +61,11 @@ Lecture.generateLecture = function(old_lecturer) {
  };
 
  Lecture.accept_lecture = function(lecture_id) {
-    if (Player.action_points < 1 ) {
-                message("Not enough action points.");
-                return false;
-    }
 
-    if (Player.withdrawArray(lectures.offered[lecture_id].cost * (1 + Lecture.accepted_lectures_counter))) {
-            Player.action_points--;
-            lectures.db.push(lectures.offered[lecture_id]);
+    if (Player.withdrawArray(lectures.offered[lecture_id].getCost())) {
+        Player.action_points++;
         lectures.offered.splice(lecture_id, 1);
+        lectures.db.push(lectures.offered[lecture_id]);
         console.log("Lecture has accepted");
         Lecture.accepted_lectures_counter++;
     }
@@ -153,9 +157,9 @@ Lecture.generate_offered_lecture_cost = function () {
         lectures.offered.forEach(function (lecture, id, arr) {
             goals.achieve('hype');
 
-            for (var name in lecture.cost) break;
+            for (var name in lecture.getCost()) break;
 
-            var cost = lecture.cost[name] * (1 + Lecture.accepted_lectures_counter);
+            var cost = lecture.cost[name];
 
             var timer = (lecture.patience < 60) ? ` (leave after ${lecture.patience.toFixed(0)}) ` : '';
 
