@@ -32,6 +32,18 @@ button {
     width: 100%;
 }
 
+.time-reset-container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.time-reset-container #time_container {
+    flex: 1;
+}
+
 .skills_tip {
     position: fixed;
     padding: 10px 20px;
@@ -94,11 +106,6 @@ button {
 .container {
     width: initial;
     position: relative;
-}
-
-.reset_container {
-    position: fixed;
-    bottom: 10px;
 }
 
 .text-center {
