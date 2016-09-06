@@ -64,10 +64,11 @@ Lecture.generateLecture = function(old_lecturer) {
 
     if (Player.withdrawArray(lectures.offered[lecture_id].getCost())) {
         Player.action_points++;
-        lectures.offered.splice(lecture_id, 1);
         lectures.db.push(lectures.offered[lecture_id]);
+        lectures.offered.splice(lecture_id, 1);
         console.log("Lecture has accepted");
         Lecture.accepted_lectures_counter++;
+
     }
  };
 
@@ -157,10 +158,11 @@ Lecture.generate_offered_lecture_cost = function () {
         lectures.offered.forEach(function (lecture, id, arr) {
             goals.achieve('hype');
 
-            for (var name in lecture.getCost()) break;
+            var real_cost = lecture.getCost();
 
-            var cost = lecture.cost[name];
+            for (var name in real_cost) break;
 
+            var cost = real_cost[name];
             var timer = (lecture.patience < 60) ? ` (leave after ${lecture.patience.toFixed(0)}) ` : '';
 
                 html += `
