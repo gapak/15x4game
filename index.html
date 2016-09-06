@@ -67,175 +67,178 @@
 
 <body>
 
-<div class="main_container">
-    <div id="main_content" class="main_content80 main_content">
 
-        <div class="container " id="time_container"></div>
+    <div class="main_container">
+        <div id="main_content" class="main_content80 main_content">
+            <div class="time-reset-container">
+                <div id="time_container"></div>
 
-        <hr>
-
-        <div class="container flex-container-column" id="goals_container">
-        </div>
-
-        <div class="container " id="enthusiasm_container" title="Collects slowly. Need for seeking volunteers and upgrade things.">
-            <hr>
-            Enthusiasm: <span id="enthusiasm_indicator">0</span>/<span id="enthusiasm_max_indicator">100</span>
-            <div id="enthusiasm"></div>
-        </div>
-
-        <div class="container init_secret" id="prepare_container">
-            <hr>
-            <button class=" btn btn-primary" id="prepare_btn" onclick="Player.prepare();" title="Produce action points">
-                Prepare to actions
-            </button>
-        </div>
-
-        <div class="container init_secret" id="action_points_container"></div>
-
-        <div class="container init_secret" id="volunteers_container">
-            <hr>
-            <div>
-                Volunteers: <span id="volunteers_indicator" title="free volunteers produce culture">0</span>/<span id="volunteers_memory_indicator">0</span>
+                <div id="reset_container">
+                    <button onclick="if (!confirm('Are you sure to start next game? Your volunteers and lecturer come width you.')) return false; Player.reset();" id="reset_button" class="btn btn-default" title="Retired, my Lord?">Reset</button>
+                    <button onclick="if (!confirm('Are you sure to start new game? All your progress will be erased.')) return false; Player.wipe();" id="wipe_button" class="btn btn-default" title="It is a mistake">Wipe</button>
+                </div>
             </div>
-            <div>
-                <button class="btn btn-primary" id="seek_container" onclick="Player.seek();" title="Produce volunteers and hype">
-                    Tell your friends about project
+
+            <div class="container">
+                <hr>
+            </div>
+
+            <div class="container flex-container-column" id="goals_container">
+            </div>
+
+            <div class="container " id="enthusiasm_container" title="Collects slowly. Need for seeking volunteers and upgrade things.">
+                <hr>
+                Enthusiasm: <span id="enthusiasm_indicator">0</span>/<span id="enthusiasm_max_indicator">100</span>
+                <div id="enthusiasm"></div>
+            </div>
+
+            <div class="container init_secret" id="prepare_container">
+                <hr>
+                <button class=" btn btn-primary" id="prepare_btn" onclick="Player.prepare();" title="Produce action points">
+                    Prepare to actions
                 </button>
             </div>
-        </div>
 
-        <div class="container init_secret" id="culture_container"></div>
-        <div class="container init_secret" id="departments_container"></div>
-        <div class="container init_secret" id="resources_container"></div>
-        <div class="container init_secret" id="С2_resources_container"></div>
-        <div class="container init_secret" id="events_container"></div>
-        <div class="container init_secret" id="offered_lecture_container"></div>
+            <div class="container init_secret" id="action_points_container"></div>
 
-        <div class="container init_secret" id="knowledge_container">
-            <hr>
-            <div id="your_knowledge"
-                 title="Points that you spend to creation yourself.">
-                Knowledge:
-                <span id="knowledge_indicator">0</span>
+            <div class="container init_secret" id="volunteers_container">
+                <hr>
+                <div>
+                    Volunteers: <span id="volunteers_indicator" title="free volunteers produce culture">0</span>/<span id="volunteers_memory_indicator">0</span>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="seek_container" onclick="Player.seek();" title="Produce volunteers and hype">
+                        Tell your friends about project
+                    </button>
+                </div>
             </div>
-            <button class="btn btn-default" title="Exchange knowledge to volunteer, improve your prepare-to-actions and unlock learning in future." onclick="Player.shareKnowledge()">
-                Share Your Knowledge
-            </button>
-        </div>
 
-        <div class="container init_secret" id="skills_container"></div>
+            <div class="container init_secret" id="culture_container"></div>
+            <div class="container init_secret" id="departments_container"></div>
+            <div class="container init_secret" id="resources_container"></div>
+            <div class="container init_secret" id="С2_resources_container"></div>
+            <div class="container init_secret" id="events_container"></div>
+            <div class="container init_secret" id="offered_lecture_container"></div>
 
-        <div class="container init_secret" id="startups_container"></div>
+            <div class="container init_secret" id="knowledge_container">
+                <hr>
+                <div id="your_knowledge"
+                     title="Points that you spend to creation yourself.">
+                    Knowledge:
+                    <span id="knowledge_indicator">0</span>
+                </div>
+                <button class="btn btn-default" title="Exchange knowledge to volunteer, improve your prepare-to-actions and unlock learning in future." onclick="Player.shareKnowledge()">
+                    Share Your Knowledge
+                </button>
+            </div>
 
-        <div class="container init_secret" id="objectives_container"></div>
+            <div class="container init_secret" id="skills_container"></div>
 
-        <div class="container init_secret" id="reputations_container">
-            <hr>
-            Reputation:
-            <div class="flex-container-row" id="reputations"></div>
-        </div>
+            <div class="container init_secret" id="startups_container"></div>
 
-        <div class="container init_secret" id="dungeon_container">
-            <hr>
-            <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#dungeon_collapse"></button>
-            Dungeon
-            <div class="collapse in" id="dungeon_collapse">
-                <div id="dungeon" class="flex-container-column">
-                    <div class="flex-element flex-container-row">
-                        <div class="flex-element">Stamina: 0/0</div>
-                        <div class="flex-element">Poise: 0/0</div>
-                        <div class="flex-element">HP: 0/0</div>
-                        <div class="flex-element">MP: 0/0</div>
-                    </div>
-                    <div class="flex-element" id="dungeon_battlefield_container">
-                        ____P_______________g_g_g_B_______________________________________
-                    </div>
-                    <div class="flex-element flex-container-row">
-                        <div class="flex-element">
-                            Weapon_STAT: 0
-                            <button class="btn btn-default" onclick="">Up</button>
+            <div class="container init_secret" id="objectives_container"></div>
+
+            <div class="container init_secret" id="reputations_container">
+                <hr>
+                Reputation:
+                <div class="flex-container-row" id="reputations"></div>
+            </div>
+
+            <div class="container init_secret" id="dungeon_container">
+                <hr>
+                <button class="collapsar btn btn-default" data-toggle="collapse" data-target="#dungeon_collapse"></button>
+                Dungeon
+                <div class="collapse in" id="dungeon_collapse">
+                    <div id="dungeon" class="flex-container-column">
+                        <div class="flex-element flex-container-row">
+                            <div class="flex-element">Stamina: 0/0</div>
+                            <div class="flex-element">Poise: 0/0</div>
+                            <div class="flex-element">HP: 0/0</div>
+                            <div class="flex-element">MP: 0/0</div>
                         </div>
-                        <div class="flex-element">
-                            Armor_STAT: 0
-                            <button class="btn btn-default" onclick="">Up</button>
+                        <div class="flex-element" id="dungeon_battlefield_container">
+                            ____P_______________g_g_g_B_______________________________________
                         </div>
-                        <div class="flex-element">
-                            HP_STAT: 0
-                            <button class="btn btn-default" onclick="">Up</button>
+                        <div class="flex-element flex-container-row">
+                            <div class="flex-element">
+                                Weapon_STAT: 0
+                                <button class="btn btn-default" onclick="">Up</button>
+                            </div>
+                            <div class="flex-element">
+                                Armor_STAT: 0
+                                <button class="btn btn-default" onclick="">Up</button>
+                            </div>
+                            <div class="flex-element">
+                                HP_STAT: 0
+                                <button class="btn btn-default" onclick="">Up</button>
+                            </div>
+                            <div class="flex-element">
+                                MP_STAT: 0
+                                <button class="btn btn-default" onclick="">Up</button>
+                            </div>
                         </div>
-                        <div class="flex-element">
-                            MP_STAT: 0
-                            <button class="btn btn-default" onclick="">Up</button>
-                        </div>
-                    </div>
-                    <div class="flex-element flex-container-row">
-                        <div class="flex-element flex-container-column">
-                            <span>Weapon</span>
-                            <div>Sword</div>
-                            <div>Shield</div>
-                            <div>Bow</div>
-                            <div>Staff</div>
-                        </div>
-                        <div class="flex-element">
-                            <span>Armor</span>
-                            <div>Helm</div>
-                            <div>Chest</div>
-                            <div>Gloves</div>
-                            <div>Boots</div>
-                        </div>
-                        <div class="flex-element">
-                            <span>Shop</span>
-                            <div>HP Potion</div>
-                            <div>MP Potion</div>
-                            <div>Rage</div>
-                            <div>Firebomb</div>
-                        </div>
-                        <div class="flex-element">
-                            <span>Magic</span>
-                            <div>Heal</div>
-                            <div>Wave</div>
-                            <div>Rage</div>
-                            <div>Fireball</div>
+                        <div class="flex-element flex-container-row">
+                            <div class="flex-element flex-container-column">
+                                <span>Weapon</span>
+                                <div>Sword</div>
+                                <div>Shield</div>
+                                <div>Bow</div>
+                                <div>Staff</div>
+                            </div>
+                            <div class="flex-element">
+                                <span>Armor</span>
+                                <div>Helm</div>
+                                <div>Chest</div>
+                                <div>Gloves</div>
+                                <div>Boots</div>
+                            </div>
+                            <div class="flex-element">
+                                <span>Shop</span>
+                                <div>HP Potion</div>
+                                <div>MP Potion</div>
+                                <div>Rage</div>
+                                <div>Firebomb</div>
+                            </div>
+                            <div class="flex-element">
+                                <span>Magic</span>
+                                <div>Heal</div>
+                                <div>Wave</div>
+                                <div>Rage</div>
+                                <div>Fireball</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="container init_secret" id="space_container"></div>
+            <div class="container init_secret" id="rally_container"></div>
+            <div class="container init_secret" id="castle_container"></div>
+
+            <div class="container init_secret" id="badges_container"></div>
         </div>
 
-        <div class="container init_secret" id="space_container"></div>
-        <div class="container init_secret" id="rally_container"></div>
-        <div class="container init_secret" id="castle_container"></div>
+        <aside class="sidebar" id="log_panel_container">
+            <p>
+                Log Panel
+                <button onclick="LogPanel.clear()" class="btn btn-default">ClearLog</button>
 
-        <div class="container init_secret" id="badges_container"></div>
-
-        <hr>
-
-        <div class="reset_container container" id="reset_container">
-            <button onclick="if (!confirm('Are you sure to start next game? Your volunteers and lecturer come width you.')) return false; Player.reset();" id="reset_button" class="btn btn-default" title="Retired, my Lord?">Reset</button>
-            <button onclick="if (!confirm('Are you sure to start new game? All your progress will be erased.')) return false; Player.wipe();" id="wipe_button" class="btn btn-default" title="It is a mistake">Wipe</button>
-        </div>
-    </div>
-
-    <aside class="sidebar" id="log_panel_container">
-        <p>
-            Log Panel
-            <button onclick="LogPanel.clear()" class="btn btn-default">ClearLog</button>
-
-            <button id="log_panel_button" class="collapsar btn btn-default" data-toggle="collapse" data-target="#log_panel_collapse"
-                    onclick="LogPanel.hide()">
-                    
-            </button>
-        </p>
-        <div>Day: <span id="day_indicator">0</span></div>
-        <hr>
-        <div class="collapse in log-panel" id="log_panel_collapse">
-            <div id="log_panel_filters"></div>
+                <button id="log_panel_button" class="collapsar btn btn-default" data-toggle="collapse" data-target="#log_panel_collapse"
+                        onclick="LogPanel.hide()">
+                        
+                </button>
+            </p>
+            <div>Day: <span id="day_indicator">0</span></div>
             <hr>
-            <div id="log_message"></div>
-        </div>
-    </aside>
+            <div class="collapse in log-panel" id="log_panel_collapse">
+                <a href="#log_panel_filters" data-toggle="collapse">Log Settings</a>
+                <div id="log_panel_filters" class="collapse"></div>
+                <hr>
+                <div id="log_message"></div>
+            </div>
+        </aside>
 
-</div>
+    </div>
 
 
     <script language="JavaScript">
